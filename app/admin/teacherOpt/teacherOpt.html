@@ -1,0 +1,51 @@
+<md-content>
+  <md-subheader class="md-primary">
+    添加教师
+  </md-subheader>
+  <md-divider inset></md-divider>
+  <div layout="column" layout-align="space-between center">
+    <form>
+      <md-input-container class="md-block">
+        <label>姓名</label>
+        <input ng-model="userName" type="text" required>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>ID</label>
+        <input ng-model="userId" type="text" required>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>密码</label>
+        <input ng-model="password" type="password" required>
+      </md-input-container>
+      <md-input-container class='md-block'>
+        <label>确认密码</label>
+        <input ng-model="confirmPw" type="password" required>
+        <div ng-message="required">
+          {{flag}}
+        </div>
+      </md-input-container>
+      <div layout="column">
+        <md-button ng-click="createStd()" type="submit">确认</md-button>
+      </div>
+    </form>
+  </div>
+  <md-divider inset></md-divider>
+  <md-subheader class="md-primary">
+    教师列表
+  </md-subheader>
+  <!-- FIXME Combine teacher list and student list ? -->
+  <md-divider inset>
+    <div>
+      <table>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+      </tr>
+        <tr ng-repeat="teacher in teachers">
+          <td>{{teacher.account.name}}</td>
+          <td>{{teacher.account.uid}}</td>
+        </tr>
+    </table>
+    </div>
+  </md-divider>
+</md-content>

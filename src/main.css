@@ -1,0 +1,10 @@
+/* Temp style shell */
+
+table {
+    margin: 10px auto;
+    width: 94%
+}
+table, th, td {
+    border: 1px solid blue;
+    border-collapse: collapse;
+}

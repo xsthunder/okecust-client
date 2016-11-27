@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body ng-controller="ctrl">
+  <select ng-model="selectedName" ng-options="x for x in names">
+  </select>
+  {{selectedName}}
+  <script src="node_modules/angular/angular.js"></script>
+  <script>
+    angular.module('myApp', [])
+        .controller('ctrl', function ($scope, $log) {
+          $scope.names = [1, 2, 3, 4, 5];
+          $scope.$watch('selectedName', function () {
+            $log.info($scope.selectedName);
+          });
+        });
+  </script>
+</body>
+</html>

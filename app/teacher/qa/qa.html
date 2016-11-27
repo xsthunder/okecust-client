@@ -1,0 +1,17 @@
+<div layout="column">
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="item in QAitems" ng-click="selectQuiz(item)">
+        <h3>{{item.name}}</h3>
+    </md-list-item>
+  </md-list>
+  <md-button class="md-fab" ui-sref="teacher.qaAddDetail" id="fab">
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+</div>
+<style>
+  #fab {
+    position: fixed;
+    right: 3em;
+    bottom: 3em;
+  }
+</style>

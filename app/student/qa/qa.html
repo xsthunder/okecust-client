@@ -1,0 +1,69 @@
+<div layout="column" ng-show="!paperVisible && !questionVisible" style="height:100%">
+  <md-toolbar layout="row">
+    <div  class="md-toolbar-tools">
+      <md-select ng-model="courseSelected" placeholder="选择班级"> 
+        <md-option ng-repeat="course in courseList" ng-click="switchCourse($index)">{{ course.name }}</md-option>
+      </md-select>
+      <span>试卷列表</span>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-content style="overflow: auto">
+    <md-list flex>
+      <md-list-item class="md-3-line" ng-repeat="quiz in quizList" ng-click="switchPaper($index)">
+        <div class="md-list-item-text" layout="column" layout-padding>
+          <h3>{{ quiz.name }}</h3>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>
+<div layout="column" ng-show="paperVisible && !questionVisible" style="height:100%">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button ng-click="backToList()">返回</md-button>
+      <h2>
+        <span>试题列表</span>
+      </h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-content style="overflow: auto">
+    <md-list flex>
+      <md-list-item class="md-3-line" ng-repeat="question in questions" ng-click="switchQuestion($index)">
+        <div class="md-list-item-text" layout="column" layout-padding>
+          <h3>{{ "第" + ($index + 1) + "题" }}</h3>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>
+<div layout="column" ng-show="questionVisible" style="height:100%">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-raised md-primary md-hue-1" ng-click="preQuestion()">上一题</md-button>
+        <md-button class="md-raised md-primary md-hue-2" ng-click="nextQuestion()">下一题</md-button>
+        <span flex></span>
+        <md-button class="md-warn md-raised" ng-click="submitQuiz()">提交试卷</md-button>
+      </div>
+    </md-toolbar>
+    <md-content style="overflow: auto">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button ng-click="backToPaper()">返回</md-button>
+          <h2 flex>
+            <span>{{ "第" + (currentQuestion + 1) + "题"}}</span>
+          </h2>
+          <span flex></span>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <h3> {{ questions[currentQuestion].name }} </h3>
+        <md-radio-group ng-model="answers[currentQuestion]">
+          <md-radio-button ng-repeat="extra in questions[currentQuestion].extras" value= "{{ $index }}">
+            <h4>{{ extra }}</h4>
+          </md-radio-button>
+        </md-radio-group>
+      </div>
+    </md-content>
+</div>

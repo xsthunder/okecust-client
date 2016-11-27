@@ -1,0 +1,16 @@
+<div layout="column" style="height:100%">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span>班级列表</span>
+    </div>
+  </md-toolbar>
+  <md-content style="overflow: auto">
+    <md-list flex>
+      <md-list-item class="md-3-line" ng-repeat="course in courseList" ng-click="setCourse($index)">
+        <div class="md-list-item-text" layout="column" layout-padding>
+          <h3>{{ course.name }}</h3>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>

@@ -1,0 +1,30 @@
+<md-toolbar>
+  <h1 style="text-align: center">华理教学云平台 alpha</h1>
+</md-toolbar>
+<md-content>
+  <div layout="column" layout-align="space-between center">
+    <form>
+      <div ng-show="!showQR">
+      <md-input-container class="md-block">
+        <!-- Use floating label instead of placeholder -->
+        <label>用户名</label>
+        <input ng-model="username" type="text" required>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <!-- Use floating label instead of placeholder -->
+        <label>密码</label>
+        <input ng-model="password" type="password" required>
+        <div ng-message="required">
+          {{flag}}
+        </div>
+      </md-input-container>
+      </div>
+      <div layout="row">
+        <md-button ng-click="login()" class="md-raised" type="submit" id="loginBtn" ng-show="!showQR">登陆</md-button>
+        <md-button class="md-raised md-warn" ng-click="switchQR()">二维码</md-button>
+      </div>
+    </form>
+    <img src="app/login/qr.png" ng-show="showQR"/>
+  </div>
+</md-content>
+

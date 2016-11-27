@@ -1,0 +1,28 @@
+<md-content>
+  <md-subheader class="md-primary">
+    重置密码
+  </md-subheader>
+  <md-divider inset></md-divider>
+  <div layout="column" layout-align="space-between center">
+    <form>  
+      <md-input-container class="md-block">
+        <label>用户名</label>
+        <input ng-model="username" type="text" required>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>密码</label>
+        <input ng-model="password" type="password" required>
+      </md-input-container>
+      <md-input-container class='md-block'>
+        <label>确认密码</label>
+        <input ng-model="confirmPw" type="password" required>
+        <div ng-message="required">
+          {{flag}}
+        </div>
+      </md-input-container>
+      <div layout="column">
+        <md-button ng-click="resetPw()" type="submit">确认</md-button>
+      </div>
+    </form>
+  </div>
+</md-content>

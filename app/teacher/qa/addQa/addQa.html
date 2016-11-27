@@ -1,0 +1,19 @@
+<script type="text/ng-template" id="treeview.html">
+  <md-list-item>
+    <md-button class="material-icons" ng-click="toggleItems(item)" ng-disabled="!item.items.length">
+    {{buttonStatus(item)}}
+    </md-button>
+    <p>{{ item.title }}</p>
+    <md-button class="material-icons" ui-sref="teacher.qaAddDetail">
+      input
+    </md-button>
+  </md-list-item>
+  <md-list flex ng-if="item.items.length" ng-show="item.expanded" style="padding-left: 1em">
+    <div ng-repeat="item in item.items" ng-include="'treeview.html'"></div>
+  </md-list>
+</script>
+<md-content class="md-padding">
+  <md-list>
+    <div ng-repeat="item in items" ng-include="'treeview.html'"></div>
+  </md-list>
+</md-content>

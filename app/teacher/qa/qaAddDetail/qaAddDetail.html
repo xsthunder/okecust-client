@@ -1,0 +1,28 @@
+  <div  ng-repeat="question in questions">
+  <md-list>
+    <md-list-item layout="row">
+      {{question.name}}<br>
+      A.{{question.extras[0]}}<br>
+      B.{{question.extras[1]}}<br>
+      C.{{question.extras[2]}}<br>
+      D.{{question.extras[3]}}<br>
+    </md-list-item>
+    <md-checkbox aria-label="Checkbox" ng-click="questionSelected(question, selected)">
+    </md-checkbox>
+  </md-list>
+  <md-divider></md-divider>
+</div>
+  <md-input-container>
+    <label>试题名称</label>
+    <input ng-model="newQuizTitle">
+  </md-input-container>
+  <md-button ng-click="submit(newQuizTitle)">确定</md-button>
+  {{selected}}
+<style>
+  md-list {
+    padding: 2em;
+  }
+  md-checkbox {
+    float: right;
+  }
+</style>

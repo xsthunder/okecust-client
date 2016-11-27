@@ -1,0 +1,10 @@
+<md-content style="padding-top: 3em">
+  <div ng-repeat="report in reports">
+    {{report}}
+  </div>
+  <div ng-repeat="chart in charts">
+    <div google-chart chart="chart" style="height:600px; width:100%;"></div>
+  </div>
+</md-content>
+<style>
+</style>

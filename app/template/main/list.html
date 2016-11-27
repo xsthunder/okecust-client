@@ -1,0 +1,17 @@
+<md-content>
+  <md-list>
+    <md-list-item ng-click="null" ng-repeat="listItem in list">
+      {{listItem}}
+    </md-list-item>
+  </md-list>
+  <md-button class="md-fab" ng-click="click()" id="fab">
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+</md-content>
+<style>
+  #fab {
+    position: fixed;
+    right: 3em;
+    bottom: 3em;
+  }
+</style>

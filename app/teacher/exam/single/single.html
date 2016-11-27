@@ -1,0 +1,29 @@
+<md-content style="padding: 3em">
+  <div layout="column">
+    <md-input-container>
+      <label>题目</label>
+      <input ng-model="question.name">
+    </md-input-container>
+    <md-input-container>
+      <label>A</label>
+      <input ng-model="question.extras[0]">
+    </md-input-container>
+    <md-input-container>
+      <label>B</label>
+      <input ng-model="question.extras[1]">
+    </md-input-container>
+    <md-input-container>
+      <label>C</label>
+      <input ng-model="question.extras[2]">
+    </md-input-container>
+    <md-input-container>
+      <label>D</label>
+      <input ng-model="question.extras[3]">
+    </md-input-container>
+    <md-input-container>
+      <label>答案</label>
+      <input ng-model="answer">
+    </md-input-container>
+    <md-button ng-click="submit()">确认提交</md-button>
+  </div>
+</md-content>
