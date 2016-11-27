@@ -10,7 +10,6 @@
 
 angular.module('teacher.questionLibrary', [
     'ui.router',
-    'oc.lazyLoad',
     'account',
     'teacher',
     'teacher.questionLibrary.detail',

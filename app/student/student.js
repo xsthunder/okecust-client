@@ -3,13 +3,9 @@
  */
 angular.module('student', [
   'account',
-  'oc.lazyLoad',
   'ui.router',
   'student.qa',
   'student.class'
-//   'student.doc',
-//   'student.sign',
-//   'student.class'
   ])
   .factory('StudentConstants', function (Account, AppConstants) {
     var self = {};
@@ -147,32 +143,6 @@ angular.module('student', [
       });
     };
     return self;
-  })
-    .config(function ($ocLazyLoadProvider) {
-    $ocLazyLoadProvider.config({
-      modules: [{
-        debug: true,
-        name: 'student.qa',
-        files: ['app/student/qa/qa.js']
-      }, {
-        debug: true,
-        name: 'student.doc',
-        files: ['app/student/doc/doc.js']
-      }, {
-        debug: true,
-        name: 'student.person',
-        files: ['app/student/person/person.js']
-      }, {
-        debug: true,
-        name: 'student.sign',
-        files: ['app/student/sign/sign.js']
-      }, {
-        debug: true,
-        name: 'student.class',
-        files: ['app/student/class/class.factory.js']
-      }
-      ]
-    })
   })
   .config(function ($stateProvider) {
     $stateProvider

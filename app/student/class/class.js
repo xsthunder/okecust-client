@@ -20,5 +20,5 @@ angular.module('student.class', ['ui.router'])
       var id = $scope.courseList[idx]._id;
       studentFactory.setCurrentCourse(id);
     }
-  })
+  });
    

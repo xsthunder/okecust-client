@@ -3,7 +3,6 @@
  */
 angular.module('teacher.quizModel', [
     'ui.router',
-    'oc.lazyLoad',
     'account',
     'teacher',
     'teacher.quizModel.detail',
@@ -90,18 +89,6 @@ angular.module('teacher.quizModel', [
         });
     };
     return self;
-}).config(function ($ocLazyLoadProvider) {
-    $ocLazyLoadProvider.config({
-        modules: [{
-            debug: true,
-            name: 'teacher.quizModel.detail',
-            files: ['app/teacher/quizModel/detail/quizModelDetail.js']
-        }, {
-            debug: true,
-            name: 'teacher.quizModel.post',
-            files: ['app/teacher/quizModel/post/quizModelPost.js']
-        }]
-    })
 }).config(function ($stateProvider) {
     $stateProvider.state('teacher.quizModel', {
         url: '/quizModel',

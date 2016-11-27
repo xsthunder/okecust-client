@@ -3,7 +3,6 @@
  */
 angular.module('teacher.questionLibrary', [
     'ui.router',
-    'oc.lazyLoad',
     'account',
     'teacher',
     'teacher.questionLibrary.detail',
@@ -105,18 +104,6 @@ angular.module('teacher.questionLibrary', [
         });
     };
     return self;
-}).config(function ($ocLazyLoadProvider) {
-    $ocLazyLoadProvider.config({
-        modules: [{
-            debug: true,
-            name: 'teacher.questionLibrary.detail',
-            files: ['app/teacher/questionLibrary/detail/questionLibraryDetail.js']
-        }, {
-            debug: true,
-            name: 'teacher.questionLibrary.post',
-            files: ['app/teacher/questionLibrary/post/questionLibraryPost.js']
-        }]
-    })
 }).config(function ($stateProvider) {
     $stateProvider.state('teacher.questionLibrary', {
         url: '/questionLibrary',

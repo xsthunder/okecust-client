@@ -4,17 +4,7 @@
 angular.module('student.qa', [
   'account',
   'ui.router',
-  'oc.lazyLoad',
 ])
-// .config(function($ocLazyLoadProvider){
-//   $ocLazyLoadProvider.config({
-//       modules: [{
-//         debug: true,
-//         name: 'student.qa.paper',
-//         files: ['app/student/qa/paper/paper.js']
-//       }]
-//     })
-// })
 .factory('studentQuizFactory', function (Account, $http, $log, StudentConstants) {
   var quizList;
   var currentQuiz;
@@ -164,14 +154,7 @@ angular.module('student.qa', [
   $stateProvider.state('student.qa', {
     url: '/qa',
     templateUrl: 'app/student/qa/qa.html',
-    controller: 'qaCtrl',
-    // resolve: {
-    //   lazy: function($ocLazyLoad) {
-    //     return $ocLazyLoad.load([
-    //       'student.qa.paper'
-    //     ]);
-    //   }
-    // }
+    controller: 'qaCtrl'
   })
 })
 .controller('qaCtrl', function($scope, $mdSidenav, $location, Account, $mdToast, $mdDialog,
