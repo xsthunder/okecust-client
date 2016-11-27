@@ -150,16 +150,6 @@ angular.module('student', [
         url: '/student',
         templateUrl: 'app/student/student.html',
         controller: 'studentCtrl',
-        resolve: {
-          lazy: function ($ocLazyLoad) {
-            return $ocLazyLoad.load([
-              'student.class',
-              'student.sign',
-              'student.person',
-              'student.qa',
-              'student.doc']);
-          }
-        }
       })
     })
     .controller('studentCtrl', function ($scope, $mdSidenav, $location, Account, studentFactory, $log) {
