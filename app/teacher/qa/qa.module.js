@@ -4,11 +4,10 @@
 (function () {
   angular.module('teacher.qa', [
     'ui.router',
-    'teacher.qa.addQa',
     'teacher.qa.qaList',
     'teacher.qa.report',
     'teacher.qa.qaPost',
-    'teacher.qa.qaAddDetail',
-    'teacher.quiz'
+    'teacher.quiz',
+    'teacher.qa.add'
   ]);
 })();

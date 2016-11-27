@@ -34,12 +34,9 @@ angular.module('teacher')
         self.setCurrentCourse = function (value) {
             $cookies.putObject('currentCourse', value);
             currentCourse = value;
-            console.log(currentCourse);
-            $log.info('set', value);
         };
         self.getCurrentCourse = function () {
             currentCourse = $cookies.getObject('currentCourse');
-            $log.info('cookie', currentCourse);
             return currentCourse;
         };
         return self;

@@ -14,8 +14,22 @@
       .state('teacher.doc', teacherDocRoute)
       .state('teacher.class', teacherClassRoute)
       .state('teacher.qa', teacherQaRoute)
-      .state('teacher.docAdd', docAddRoute);
+      .state('teacher.docAdd', docAddRoute)
+      .state('teacher.qaAdd', qaAdd);
   }
+  var qaAdd =  {
+    url : '/qa/add',
+    views : {
+      'header' : {
+        templateUrl : 'app/template/header/back.html',
+        controller: headerBackCtrl('出题')
+      },
+      'main': {
+        templateUrl : 'app/teacher/qa/add/add.html',
+        controller: 'teacherQaAddCtrl'
+      }
+    }
+  };
   var teacherQaRoute = {
     url: '/qa',
     views: {

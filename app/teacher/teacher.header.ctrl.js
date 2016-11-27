@@ -11,7 +11,6 @@
     var old_course;
       $scope.selectedCourse = teacherFactory.getCurrentCourse();
         $scope.$watch('selectedCourse', function (newValue) {
-            $log.info('newValue', newValue);
             teacherFactory.setCurrentCourse(newValue);
             if(empty_course===1) {
                 //location.reload();
