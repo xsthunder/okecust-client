@@ -92,9 +92,10 @@
       self.flushQuestionLibraryQuestion(libraryID, callback);
     };
     /**
-     * Create a single question or several question.
+     * Create a single question or several question into library.
      * Questions are not deletable or editable.
      *
+     * @param libraryID{String} Library ID.
      * @param questions{Object|Array} Instances of questions.
      * @param callback{Function} Callback.
      *
@@ -130,8 +131,8 @@
      }]
      */
     // Parameter `questions` could be a question object or questions array.
-    self.createQuestions = function (questions, callback) {
-      $http.post(TeacherConstants.URL_QUESTIONS, questions, {
+    self.createQuestions = function (libraryID, questions, callback) {
+      $http.post(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID + '/questions', questions, {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         callback(null, res.data);
