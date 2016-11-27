@@ -25,12 +25,14 @@
   <script src="node_modules/angular-google-chart/ng-google-chart.js"></script>
   <script src="app.js"></script>
   <!-- inject:js -->
-  <script src="app/teacher/quizModel/post/quizModelPost.js"></script>
   <script src="app/teacher/quizModel/detail/quizModelDetail.js"></script>
+  <script src="app/teacher/quizModel/post/quizModelPost.js"></script>
   <script src="app/teacher/quiz/post/quizPost.js"></script>
   <script src="app/teacher/quiz/detail/quizDetail.js"></script>
   <script src="app/teacher/questionLibrary/post/questionLibraryPost.js"></script>
-  <script src="app/teacher/questionLibrary/detail/questionLibraryDetail.js"></script>
+  <script src="app/teacher/questionLibrary/detail/detail.module.js"></script>
+  <script src="app/teacher/questionLibrary/detail/detail.factory.js"></script>
+  <script src="app/teacher/questionLibrary/detail/detail.ctrl.js"></script>
   <script src="app/teacher/qa/qaReport/qa.report.module.js"></script>
   <script src="app/teacher/qa/qaReport/qa.report.ctrl.js"></script>
   <script src="app/teacher/qa/qaPost/qaPost.js"></script>
@@ -41,13 +43,13 @@
   <script src="app/teacher/qa/add/qa.add.ctrl.js"></script>
   <script src="app/teacher/nameList/add/add.module.js"></script>
   <script src="app/teacher/nameList/add/add.ctrl.js"></script>
+  <script src="app/teacher/doc/add/doc.add.module.js"></script>
+  <script src="app/teacher/doc/add/doc.add.ctrl.js"></script>
   <script src="app/teacher/exam/single/single.module.js"></script>
   <script src="app/teacher/exam/single/single.factory.js"></script>
   <script src="app/teacher/exam/single/single.ctrl.js"></script>
   <script src="app/teacher/class/post/coursePost.js"></script>
   <script src="app/teacher/class/detail/courseDetail.js"></script>
-  <script src="app/teacher/doc/add/doc.add.module.js"></script>
-  <script src="app/teacher/doc/add/doc.add.ctrl.js"></script>
   <script src="app/teacher/tempFactory/questions.js"></script>
   <script src="app/teacher/quizModel/quizModel.js"></script>
   <script src="app/teacher/quiz/quiz.js"></script>
@@ -60,6 +62,8 @@
   <script src="app/teacher/nameList/nameList.module.js"></script>
   <script src="app/teacher/nameList/nameList.route.js"></script>
   <script src="app/teacher/nameList/nameList.ctrl.js"></script>
+  <script src="app/teacher/doc/doc.module.js"></script>
+  <script src="app/teacher/doc/doc.ctrl.js"></script>
   <script src="app/teacher/exam/exam.module.js"></script>
   <script src="app/teacher/exam/exam.route.js"></script>
   <script src="app/teacher/exam/exam.ctrl.js"></script>
@@ -67,13 +71,11 @@
   <script src="app/teacher/class/class.factory.js"></script>
   <script src="app/teacher/teacher.module.js"></script>
   <script src="app/teacher/class/class.ctrl.js"></script>
-  <script src="app/teacher/doc/doc.module.js"></script>
-  <script src="app/teacher/doc/doc.ctrl.js"></script>
   <script src="app/student/sign/sign.js"></script>
   <script src="app/student/qa/qa.js"></script>
-  <script src="app/student/doc/doc.js"></script>
   <script src="app/student/person/person.js"></script>
   <script src="app/student/class/class.js"></script>
+  <script src="app/student/doc/doc.js"></script>
   <script src="app/layout/header/header.module.js"></script>
   <script src="app/layout/header/header.factory.js"></script>
   <script src="app/layout/header/header.ctrl.js"></script>
@@ -84,8 +86,8 @@
   <script src="app/teacher/teacher.main.ctrl.js"></script>
   <script src="app/teacher/teacher.header.ctrl.js"></script>
   <script src="app/teacher/teacher.factory.js"></script>
-  <script src="app/login/login.js"></script>
   <script src="app/student/student.js"></script>
+  <script src="app/login/login.js"></script>
   <script src="app/helper/help.js"></script>
   <script src="app/admin/admin.js"></script>
   <script src="app/account/account.js"></script>

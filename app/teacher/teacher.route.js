@@ -15,9 +15,23 @@
       .state('teacher.class', teacherClassRoute)
       .state('teacher.qa', teacherQaRoute)
       .state('teacher.docAdd', docAddRoute)
-      .state('teacher.qaAdd', qaAdd);
+      .state('teacher.qaAdd', qaAddRoute)
+      .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
   }
-  var qaAdd =  {
+  var questionLibraryDetailRoute = {
+    url: '/questionLibrary/detail',
+    views: {
+      'header': {
+        templateUrl: 'app/layout/header/header2.html',
+        controller: 'teacherHeaderCtrl'
+      },
+      'main': {
+        templateUrl: 'app/teacher/questionLibrary/detail/questionLibraryDetail.html',
+        controller: 'teacherQuestionLibraryDetailCtrl'
+      }
+    }
+  };
+  var qaAddRoute =  {
     url : '/qa/add',
     views : {
       'header' : {
