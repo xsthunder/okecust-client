@@ -37,7 +37,15 @@ angular.module('teacher')
         };
         self.getCurrentCourse = function () {
             currentCourse = $cookies.getObject('currentCourse');
-            return currentCourse;
+            /*
+            **FIXME 需要更新请求代码
+            * 虽然解决了最开始什么也不出来（break）了的问题，但还是会出现一个500错误。
+            * by xsthunder
+             */
+            if(currentCourse===undefined)return function () {
+                _id:0
+            };
+            else return currentCourse;
         };
         return self;
     });
