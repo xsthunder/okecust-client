@@ -1,0 +1,24 @@
+<md-content>
+    <!--TODO remove the spaces-->
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <md-list>
+            <div ng-repeat="student in students"  >
+                <md-list-item layout="column" style="align-items:initial;">
+                    <div>
+                        <span style="font-size: 18px;color: #333;margin: 0px;">{{student.uid}}</span>
+                        <span style="font-size: 18px;color: #666;margin: 0px;">{{student.name}}</span>
+                        <md-icon class="material-icons" style="display: inline;" ng-click="btnRemoveStudent(student)" title="删除此学生">
+                        delete
+                    </md-icon>
+                    </div>
+                </md-list-item>
+            </div>
+        </md-list>
+        <md-button class="md-fab" ui-sref="teacher.nameListAdd" id="fab" title="添加学生名单">
+            <md-icon class="material-icons">add</md-icon>
+        </md-button>
+    </div>
+</md-content>

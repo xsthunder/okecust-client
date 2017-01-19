@@ -1,7 +1,12 @@
 <div layout="column">
+  <md-divider></md-divider>
   <md-list>
-    <md-list-item class="md-2-line" ng-repeat="item in QAitems" ng-click="selectQuiz(item)">
-        <h3>{{item.name}}</h3>
+    <md-list-item style="align-items:initial;" layout="column"  ng-repeat="item in QAitems" >
+      <div>
+        <span  ng-click="selectQuiz(item)" style="font-size: 25px;color: #333;margin: 0px;">{{item.name}}</span>
+        <md-icon class="material-icons" style="display: inline;" ng-click="btnRemoveQuiz(item)" title="删除此问答">delete</md-icon>
+      </div>
+
     </md-list-item>
   </md-list>
   <md-button class="md-fab" ui-sref="teacher.qaAdd" id="fab">

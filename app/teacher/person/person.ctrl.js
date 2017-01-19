@@ -7,6 +7,7 @@
     var vm = this;
     vm.logout = function () {
       Account.deleteCredit();
+      location.reload();
       $location.path('/login');
     }
   }

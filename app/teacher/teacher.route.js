@@ -61,8 +61,8 @@
     url: '/class',
     views: {
       'header': {
-        templateUrl: 'app/teacher/teacher.header.html',
-        controller: 'teacherHeaderCtrl'
+          templateUrl: 'app/template/header/back.click.html',
+          controller: headerBackClickCtrl('管理班级', 'teacher.qa')
       },
       'main': {
         templateUrl: 'app/teacher/class/class.html',
@@ -91,7 +91,7 @@
         controller: 'teacherHeaderCtrl'
       },
       'main': {
-        templateUrl: 'app/template/main/list.html',
+        templateUrl: 'app/teacher/nameList/nameList.html',
         controller: 'nameListCtrl'
       }
     }
@@ -105,8 +105,10 @@
     url: '/exam',
     views: {
       'header': {
-        templateUrl: 'app/template/header/back.click.html',
-        controller: headerBackClickCtrl('添加题目', 'teacher.qa')
+          templateUrl: 'app/teacher/teacher.header.html',
+          controller: 'teacherHeaderCtrl'
+        //templateUrl: 'app/template/header/back.click.html',
+        //controller: headerBackClickCtrl('添加题目', 'teacher.qa')
       },
       'main': {
         templateUrl: 'app/teacher/exam/exam.html',
@@ -118,8 +120,8 @@
     url: '/person',
     views: {
       'header': {
-        templateUrl: 'app/teacher/teacher.header.html',
-        controller: 'teacherHeaderCtrl'
+          templateUrl: 'app/template/header/back.click.html',
+          controller: headerBackClickCtrl('个人', 'teacher.qa')
       },
       'main': {
         templateUrl: 'app/teacher/person/person.html',
