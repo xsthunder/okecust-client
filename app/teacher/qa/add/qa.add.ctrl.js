@@ -45,6 +45,22 @@
           });
       }
     });
+      //FIXME 去重复
+      var showAlert = function(title,message) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+              $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#popupContainer')))
+                  .clickOutsideToClose(true)
+                  .title(title)
+                  .textContent(message)
+                  .ariaLabel('Alert Dialog Demo')
+                  .ok('明白')
+          );
+      };
+
 
     //获取选择条目部分
     var sss;
@@ -65,6 +81,9 @@
       teacherQuizFactory.createNewQuiz(teacherFactory.getCurrentCourse()._id, {'name': title, 'questions': sss}, function (error, data) {
         $log.log(error);
         $log.log(data);
+
+        if(error)return showAlert("新增小测验","添加失败，请检查重试");
+        else return showAlert("新增小测验","添加成功");
       });
     };
   }
