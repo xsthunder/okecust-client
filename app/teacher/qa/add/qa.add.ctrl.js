@@ -18,27 +18,34 @@
         }
       });
     }
-    var library = qaAddDetailFactory;
+
     var id1 = '581f3306d3a9869000a3d862'; //计算机基础id
     var courseId = teacherFactory.getCurrentCourse()._id;
 
     //id1 = '581f32edd3a9869000a3d861';
     var id2 = '725efd44e34c9ea8730645c90454fd4a'; //线代id
-    TeacherCourse.getCorrespondingLibrary(courseId, function (error, res) {
+    TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
       if (error) {
         alert('error');
       } else {
-        $log.info(res);
-        library._id = res._id;
+        //$log.info("in requriing libiray id");
+        //$log.info(res);
+        var library=res;
+        $scope.questions = {};
+          // $scope.questions=res.questions
+        //$log.info(+library._id )
+          qaAddDetailFactory.getQuestionLibraryQuestion(library._id, function (err, questions) {
+              if(err) {
+                  // $scope.questions = err.questions;
+                  return alert('本课程: '+err);
+              }
+              //$log.info("question :"+library._id+library.name);
+              //console.log(questions);
+              $scope.questions = questions;
+          });
       }
     });
-    qaAddDetailFactory.getQuestionLibraryQuestion(library._id, function (err, questions) {
-      if(err) {
-        return alert('some error: '+err);
-      }
-      //console.log(questions);
-      $scope.questions = questions;
-    });
+
     //获取选择条目部分
     var sss;
     $scope.selected = [];
@@ -55,7 +62,7 @@
       $log.log('init submit');
       $log.log(title);
       $log.log('sss' + sss);
-      teacherQuizFactory.createNewQuiz(courseId, {'name': title, 'questions': sss}, function (error, data) {
+      teacherQuizFactory.createNewQuiz(teacherFactory.getCurrentCourse()._id, {'name': title, 'questions': sss}, function (error, data) {
         $log.log(error);
         $log.log(data);
       });

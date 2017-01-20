@@ -3,14 +3,39 @@
  */
 (function () {
     angular.module('teacher.qa')
-        .controller('teacher.qa.ctrl', function ($scope, teacherQuizFactory, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
+        .controller('teacher.qa.ctrl', function ($scope,$mdDialog, teacherQuizFactory, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
+
+
+            var showAlert = function(title,message) {
+                // Appending dialog to document.body to cover sidenav in docs app
+                // Modal dialogs should fully cover application
+                // to prevent interaction outside of dialog
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .parent(angular.element(document.querySelector('#popupContainer')))
+                        .clickOutsideToClose(true)
+                        .title(title)
+                        .textContent(message)
+                        .ariaLabel('Alert Dialog Demo')
+                        .ok('明白')
+                );
+            };
+
+
+
             var freshData = function () {
                 TeacherCourse.getQuizListFromCourse(teacherFactory.getCurrentCourse()._id, function (error, res) {
                     if (!error) {
                         $scope.QAitems = res;
+                        $scope.showFab=true;
+                    }
+                    else {
+
+                        $scope.showFab=false;
                     }
                 });
             };
+            $scope.showFab=true;
             TeacherHeaderFactory.setOnSelectedListener(freshData);
             freshData();
             $scope.selectQuiz = function (quiz) {
@@ -18,12 +43,33 @@
                 $state.go('teacher.qaReport')
             };
             $scope.btnRemoveQuiz=function (quiz) {
-                if(!confirm('Remove this quiz: '+quiz.name)){return;}
-                teacherQuizFactory.removeQuiz(quiz._id,function (error,res) {
-                    if(error){return alert("删除失败")}
-                    freshData();
-                    return alert("成功删除课程："+quiz.name);
-                })
+
+                var confirm = $mdDialog.confirm()
+                    .title("删除这个小测验")
+                    .textContent("小测验名称："+quiz.name)
+                    .ariaLabel('Lucky day')
+                    .ok('确定')
+                    .cancel('取消');
+
+                $mdDialog.show(confirm).then(function() {
+                    teacherQuizFactory.removeQuiz(quiz._id,function (error,res) {
+                        if(error){return showAlert("删除失败")}
+                        freshData();
+                        return showAlert("成功","成功删除小测验："+quiz.name);
+                    })
+                }, function() {
+
+                });
+
+
+
+
             };
         });
+
+
+
+
+
+
 })();

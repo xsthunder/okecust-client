@@ -24,7 +24,6 @@
                 if (0 > index) {return alert('Unavailable Answer!');}
                 question.answers[index] = true;
                 $log.log($scope.answer[0] - 'A', question);
-                return;
                 TeacherQuestionLibraryDetail.createQuestions(libId, question, function (error, res) {
                     if (error) {
                         return alert(error);

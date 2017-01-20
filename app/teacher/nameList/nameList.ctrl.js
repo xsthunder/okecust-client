@@ -27,6 +27,7 @@
 
         teacherFactory.getCourseList(function (error, res) {
             if (!error) $log.info(res);
+            $scope.showFab=false;
         });
         var freshData = function () {
             TeacherCourse.getCourseStudents(teacherFactory.getCurrentCourse()._id, function (error, res) {
@@ -36,19 +37,33 @@
                 }
                 $log.info(res);
                 $scope.students = res;
+                $scope.showFab=true;
             });
         };
         TeacherHeaderFactory.setOnSelectedListener(freshData);
         $scope.btnRemoveStudent = function (student) {
             var studentIDs = [student.uid];
-            if(!confirm('Remove this student: '+student.name)){return;}
-            TeacherCourse.removeStudentsFromCourse(teacherFactory.getCurrentCourse()._id, studentIDs, function (error, res) {
-                if (error) {
-                    return showAlert("失败","删除失败");
-                }
-                alert("成功","成功删除学生：" + studentIDs);
-                freshData();
+
+
+
+            var confirm = $mdDialog.confirm()
+                .title('删除一名学生')
+                .textContent('学生姓名:'+student.name+"  学号："+studentIDs)
+                .ariaLabel('Lucky day')
+                .ok('确定')
+                .cancel('取消');
+
+            $mdDialog.show(confirm).then(function() {
+                TeacherCourse.removeStudentsFromCourse(teacherFactory.getCurrentCourse()._id, studentIDs, function (error, res) {
+                    if (error) {
+                        return showAlert("失败","删除失败");
+                    }
+                    showAlert("成功","成功删除学生：" + studentIDs);
+                    freshData();
+                });
+            }, function() {
             });
+
         };
         freshData();
 

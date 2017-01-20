@@ -37,9 +37,10 @@
     };
 
     self.getQuestionLibraryQuestion = function (libraryID, callback) {
-      if (questionLibraryQuestions) {
-        return callback(null, questionLibraryQuestions);
-      }
+      //FIXME 谁乱缓存导致列表更新不了。。。
+      // if (questionLibraryQuestions) {
+      //   return callback(null, questionLibraryQuestions);
+      // }
       self.flushQuestionLibraryQuestion(libraryID, callback);
     };
     return self;
