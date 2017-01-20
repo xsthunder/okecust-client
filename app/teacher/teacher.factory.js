@@ -47,9 +47,13 @@ angular.module('teacher')
             });
         };
         self.getCourseList = function (callback) {
-            if (courseList) {
-                return callback(null, courseList);
-            }
+            //FIXME 可能被误删代码
+            //去掉之后成功在class.post中更新全域的课程列表
+            // if (courseList) {
+            //     console.log("in tearcher factory, courseList: " +courseList);
+            //     return callback(null, courseList);
+            //
+            // }
             self.flushCourseList(callback);
         };
         self.setCurrentCourse = function (value) {

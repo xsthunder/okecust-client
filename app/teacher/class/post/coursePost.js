@@ -18,7 +18,37 @@ angular.module('teacher.course.post', [
             }
         }
     })
-}).controller('teacherCoursePostCtrl', function ($scope, TeacherCourse) {
+}).controller('teacherCoursePostCtrl', function ($scope,$mdDialog, TeacherCourse,teacherFactory) {
+
+    //尝试冒泡
+    var change = function (name) {
+        console.log("childCtr1", name);
+        $scope.$emit("Ctr1NameChange", name);
+    };//success
+    var add = function (name) {
+        console.log("childAddCtr1", name);
+        $scope.$emit("Ctr1NameAdd", name);
+    };//fail
+
+    var showAlert = function(title,message) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+            $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title(title)
+                .textContent(message)
+                .ariaLabel('Alert Dialog Demo')
+                .ok('明白')
+        );
+    };
+
+
+
+
+
     var TARGET_UPDATE = 'update';
     var TARGET_CREATE = 'create';
     var target = TARGET_CREATE;
@@ -28,19 +58,33 @@ angular.module('teacher.course.post', [
     $scope.btnNewCourse = function () {
         if (TARGET_CREATE === target) {
             TeacherCourse.createNewCourse($scope.course, function (err, course) {
-                if (err) {return alert('Failed to create course: ' + err.data);}
+                if (err) {return showAlert('失败','未能创建课程，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                alert('Course created!');
+                // teacherFactory.getCourseList(function (err, courses) {
+                //     $scope.courses = courses;
+                // });
+                showAlert('成功','创建成功!');
+
+                //冒泡
+                add("add course");
+
                 history.back();
             });
         } else {
             TeacherCourse.updateCourse($scope.course, function (err, course) {
-                if (err) {return alert('Failed to update course: ' + err.data);}
+                if (err) {return showAlert('错误','未能更新课程信息，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                alert('Course updated!');
+                showAlert('成功','已更新课程信息');
                 // FIXME ? whether go-to detail page.
+
+
+                //冒泡
+                change("update course");//success
+
+
                 history.back();
             });
         }
     };
+
 });
