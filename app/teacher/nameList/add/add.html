@@ -1,8 +1,18 @@
-<md-content style="padding-top: 3em">
-  <textarea ng-model="nameList">
 
-  </textarea>
-  <md-button ng-click="submit()">
-    确认提交
-  </md-button>
+<br>
+
+<md-content style="padding-top: 3em;" layout="column" layout-padding layout-align="center none">
+
+  <md-input-container class="md-block">
+    <label>添加名单</label>
+    <textarea style="" ng-model="nameList" rows="5" md-select-on-focus></textarea>
+  </md-input-container>
 </md-content>
+<md-content layout="column" layout-align="center center">
+    <md-button class="md-raised md-primary" ng-click="submit()">
+        确认提交
+    </md-button>
+</md-content>
+
+
+
