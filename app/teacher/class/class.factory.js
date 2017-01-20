@@ -28,7 +28,9 @@ angular.module('teacher.class')
         self.createNewCourse = function (course, callback) {
             $http.post(TeacherConstants.URL_COURSES, {
                 name: course.name,
-                desc: course.desc
+                description: course.description,
+                email:course.email,
+                tel:course.tel
             }, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
@@ -41,7 +43,9 @@ angular.module('teacher.class')
             TeacherCourseConstants.updateCourseId(course._id);
             $http.patch(TeacherCourseConstants.URL_COURSE, {
                 name: course.name,
-                desc: course.desc
+                description: course.description,
+                email:course.email,
+                tel:course.tel
             }, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {

@@ -23,13 +23,20 @@
             };
             return self;
         })
-        .controller('teacherHeaderCtrl', function ($scope, teacherFactory, TeacherHeaderFactory, $log) {
+        .controller('teacherHeaderCtrl', function ($scope,Account, $location,teacherFactory, TeacherHeaderFactory, $log) {
                 self.freshData = function () {
 
                     teacherFactory.getCourseList(function (err, courses) {
-                        if(err)return alert("无法获取课程列表");
+
+                        if(err) {
+                            if(err.status==400){
+                                return alert("登录信息有误请尝试刷新，或重新登录");
+                            }
+                            console.log(err);
+                            return alert("无法获取课程列表，请刷新重试");
+                        }
                         $scope.courses = courses;
-                        console.log("已经获取菜单中，获取课程列表")
+                        console.log("已经获取菜单中，获取课程列表");
                         console.log(courses);
                     });
                 };

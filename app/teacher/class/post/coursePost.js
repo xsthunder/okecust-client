@@ -53,10 +53,13 @@ angular.module('teacher.course.post', [
     var TARGET_CREATE = 'create';
     var target = TARGET_CREATE;
     $scope.course = TeacherCourse.getActiveCourse();
-    if ($scope.course._id) {target = TARGET_UPDATE;}
-    $scope.targetText = TARGET_CREATE === target ? 'Create Course' : 'Update Course';
+    if($scope.course===undefined)target=TARGET_CREATE;
+    else if($scope.course._id) {target = TARGET_UPDATE;}
+    $scope.targetText = TARGET_CREATE === target ? '创建课程' : '更新课程信息';
     $scope.btnNewCourse = function () {
         if (TARGET_CREATE === target) {
+            console.log("check create info");
+            console.log($scope.course);
             TeacherCourse.createNewCourse($scope.course, function (err, course) {
                 if (err) {return showAlert('失败','未能创建课程，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
@@ -74,6 +77,8 @@ angular.module('teacher.course.post', [
             TeacherCourse.updateCourse($scope.course, function (err, course) {
                 if (err) {return showAlert('错误','未能更新课程信息，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
+                console.log("check create info");
+                console.log($scope.course);
                 showAlert('成功','已更新课程信息');
                 // FIXME ? whether go-to detail page.
 

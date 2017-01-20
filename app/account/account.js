@@ -23,6 +23,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                     password: password
                 })
                 .then(function (res) {
+                    console.log("account.js uid="+res.data.uid);
                     $cookies.put('uid', res.data.uid);
                     callback(null, res.data);
                 }, function (res) {
@@ -44,6 +45,8 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
             return $cookies.get('token') ? $cookies.get('token') : '';
         };
         self.getUid = function () {
+            console.log($cookies.get('uid')+"uid");
+            if(!$cookies.get('uid'))location.reload();
             return $cookies.get('uid');
         };
         var profile;

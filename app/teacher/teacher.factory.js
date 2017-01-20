@@ -11,7 +11,7 @@ angular.module('teacher')
         self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
         return self;
     })
-  .factory('teacherFactory', function ($mdDialog,Account, $http, $log, TeacherConstants, $cookies) {
+  .factory('teacherFactory', function ($mdDialog,Account, $http, $log,$location, TeacherConstants, $cookies) {
         var courseList;
         var currentCourse;
         var self = {};
@@ -37,6 +37,9 @@ angular.module('teacher')
       };
 
       self.flushCourseList = function (callback) {
+
+            console.log(TeacherConstants.URL_COURSES);
+            if(!TeacherConstants.URL_COURSES)$location.reload();
             $http.get(TeacherConstants.URL_COURSES, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
@@ -47,6 +50,7 @@ angular.module('teacher')
             });
         };
         self.getCourseList = function (callback) {
+
             //FIXME 可能被误删代码
             //去掉之后成功在class.post中更新全域的课程列表
             // if (courseList) {
