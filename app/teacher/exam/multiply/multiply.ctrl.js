@@ -31,8 +31,8 @@
             type: 1,
             name: ""
         };
-        $scope.splitName = /（\d{1,2}）/;
-        $scope.splitOption = /[A-Z]./;
+        $scope.splitName = "（\\d{1,2}）";
+        $scope.splitOption = "[A-Z].";
         $scope.splitNameNum = 20;
         $scope.splitOptionNum = 5;
 
@@ -42,8 +42,8 @@
             var splitNameNum = parseInt($scope.splitNameNum);
             var splitOptionNum = parseInt($scope.splitOptionNum);
             var text = $scope.text;
-            var splitName = $scope.splitName
-            var splitOption = $scope.splitOption;
+            var splitName = new RegExp ($scope.splitName,'g');
+            var splitOption = new RegExp ($scope.splitOption,'g');
             console.log("init split/");
 
             if ($scope.splitName === "" || $scope.splitName === undefined ||
@@ -89,6 +89,7 @@
 
 
         $scope.btnRemoveContent = function (index) {
+            console.log("rmContent:"+index);
             $scope.contents.splice(index,1);
             console.log($scope.contents);
         };

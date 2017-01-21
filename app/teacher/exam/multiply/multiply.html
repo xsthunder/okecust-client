@@ -42,7 +42,7 @@
     </div>
     <md-content ng-repeat="questionInstance in contents "  ng-init="contentIndex = $index">
     <md-content layout="row">
-        <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent(contentIndex)" title="删除这一题">
+        <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一题">
             delete
         </md-icon>
     <md-input-container  flex-gt-xs>
@@ -58,7 +58,7 @@
             <md-input-container  flex-gt-xs >
                 <input ng-model="questionInstance.extras[extraIndex]" aria-label="'tryrandom'+extraIndex+contentIndex">
             </md-input-container>
-            <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveExtra(contentIndex,extraIndex)" title="删除这一栏">
+            <md-icon class="material-icons md-secondary" style="display: inline;" ng-show="false" ng-click="btnRemoveExtra(contentIndex,extraIndex)" title="删除这一栏">
                 delete
             </md-icon>
         </md-list-item>
