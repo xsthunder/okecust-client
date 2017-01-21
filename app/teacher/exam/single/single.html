@@ -1,32 +1,69 @@
-<md-content layout-padding>
-  <div layout="column">
-    <md-input-container>
-      <label>题目</label>
-      <input ng-model="question.name">
-    </md-input-container>
-    <md-input-container>
-      <label>A</label>
-      <input ng-model="question.extras[0]">
-      <md-checkbox ng-model="question.answers[0]">
-        {{ }}
-      </md-checkbox>
-    </md-input-container>
-    <md-input-container>
-      <label>B</label>
-      <input ng-model="question.extras[1]">
-    </md-input-container>
-    <md-input-container>
-      <label>C</label>
-      <input ng-model="question.extras[2]">
-    </md-input-container>
-    <md-input-container>
-      <label>D</label>
-      <input ng-model="question.extras[3]">
-    </md-input-container>
-    <md-input-container>
-      <label>答案</label>
-      <input ng-model="answer">
-    </md-input-container>
-    <md-button ng-click="submit()">确认提交</md-button>
-  </div>
+<!--<md-content layout-padding>-->
+  <!--<div layout="column">-->
+    <!--<md-input-container>-->
+      <!--<label>题目</label>-->
+      <!--<input ng-model="question.name">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+      <!--<label>A</label>-->
+      <!--<input ng-model="question.extras[0]">-->
+      <!--<md-checkbox ng-model="question.answers[0]">-->
+        <!--{{ }}-->
+      <!--</md-checkbox>-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+      <!--<label>B</label>-->
+      <!--<input ng-model="question.extras[1]">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+      <!--<label>C</label>-->
+      <!--<input ng-model="question.extras[2]">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+      <!--<label>D</label>-->
+      <!--<input ng-model="question.extras[3]">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+      <!--<label>答案</label>-->
+      <!--<input ng-model="answer">-->
+    <!--</md-input-container>-->
+    <!--<md-button ng-click="submit()">确认提交</md-button>-->
+  <!--</div>-->
+<!--</md-content>-->
+
+<form name="userForm">
+  <div layout-gt-xs="column">
+<md-content layout-padding layout-align="center none"   layout-gt-xs="column">
+
+
+  <md-switch class="md-primary" md-no-ink aria-label="{{questionType[questionInstance.type]}}" ng-model="type" ng-click="switchType()">
+    {{"当前题目类型："+questionType[questionInstance.type]}}
+  </md-switch>
+  <md-input-container  flex-gt-xs>
+    <label>题目</label>
+    <textarea ng-model="questionInstance.name" rows="5" md-select-on-focus></textarea>
+  </md-input-container>
 </md-content>
+  <md-content layout-padding  class="md-block" layout="column" >
+<md-content  layout-align="center center" layout="row" ng-repeat="x in contents track by $index">
+<md-checkbox ng-model="x.answer" ng-disabled="!type">{{$index}}{{x.extras}}
+</md-checkbox>
+  <md-input-container  flex-gt-xs>
+    <input ng-model="x.extras">
+  </md-input-container>
+  <md-icon class="material-icons" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一栏">
+    delete
+  </md-icon>
+</md-content>
+  </md-content>
+
+    <md-button class="md-fab" id="fab" title="添加一栏" ng-click="btnNewContent()">
+      <md-icon class="material-icons">add</md-icon>
+    </md-button>
+  </div>
+  <md-content layout="column" layout-align="center center">
+    <md-button class="md-raised md-primary" ng-click="submit()">
+      确认提交
+    </md-button>
+  </md-content>
+  </form >
