@@ -59,11 +59,18 @@
             console.log(text);
             var questions = text.split(splitName, splitNameNum);
             console.log(questions);
+
+
+            function trim(str){
+                return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
+            }
+
+
             for (var i = 0; i < questions.length; i++) {
                 var question = questions[i].split(splitOption, splitOptionNum);
                 var content =  {
                     type: 1,
-                    name: question[0],
+                    name: trim(question[0]),
                     answers: [],
                     extras: []
                 };
@@ -74,7 +81,7 @@
                     console.log(i+"init content:");console.log(content);
                     console.log(j+"init question");console.log(question);
                     content.answers.push(false);
-                    content.extras.push(question[j]);
+                    content.extras.push(trim(question[j]));
                 }
                 contents.push(content);
 
