@@ -1,13 +1,13 @@
-<div layout="column">
+<div >
   <md-divider></md-divider>
   <md-list>
-    <md-list-item style="align-items:initial;" layout="column"  ng-repeat="item in QAitems" >
-      <div>
-        <span  ng-click="selectQuiz(item)" style="font-size: 25px;color: #333;margin: 0px;">{{item.name}}</span>
-        <md-icon class="material-icons" style="display: inline;" ng-click="btnRemoveQuiz(item)" title="删除此问答">delete</md-icon>
-      </div>
+    <md-list-item class="md-title" ng-click="selectQuiz(item)" title="查看小测验结果"  layout="row"  ng-repeat="item in QAitems"  >
 
+        {{item.name}}
+
+      <md-icon   class="md-secondary material-icons"  ng-click="btnRemoveQuiz(item)" title="删除此问答">delete</md-icon>
     </md-list-item>
+
   </md-list>
   <!--<input type="checkbox" ng-model="showFab">-->
   <md-button ng-show="showFab" class="md-fab" ui-sref="teacher.qaAdd" id="fab">

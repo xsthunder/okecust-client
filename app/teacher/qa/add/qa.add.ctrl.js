@@ -41,7 +41,40 @@
               }
               //$log.info("question :"+library._id+library.name);
               //console.log(questions);
-              $scope.questions = questions;
+              $scope.questions= [];
+
+              console.log(questions);
+              var i;
+              var j;
+              //return ;
+              for( i = 0; i <　questions.length;i++){
+                var alphaList="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                var content=questions[i];
+                console.log("content:");
+                console.log(content);
+                //return ;
+                if(content.type==1){
+                  content.name+="       - 选择题";
+                  for(j = 0 ;j <content.extras.length&&j<alphaList.length;j++){
+                    content.extras[j]=alphaList[j]+'. '+content.extras[j];
+                    if(content.answers[j])content.extras[j]+="        - 正确答案";
+                    if(j===content.extras.length-1&&j===alphaList.length-1){
+                      content.extras[j]+="选项数目超过设定范围，后续选项不予显示";
+
+                    }
+                  }
+                }
+                else if(content.type==2){
+
+                  content.name+="   - 填空题";
+                  content.extras=[];
+                  for(j =0 ; j< content.answers.length;j++){
+                    content.extras[j]="第"+(j+1)+"个空："+content.answers[j];
+                  }
+                }
+                  $scope.questions.push(content);
+              }
+
           });
       }
     });
