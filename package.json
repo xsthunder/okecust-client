@@ -15,7 +15,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
-    "gulp-inject": "^4.1.0"
+    "gulp-inject": "^4.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,6 +24,9 @@
     "type": "git",
     "url": "https://git.sinacloud.com/okecust"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "xsthunder-yyecust-fiser95-kingNT",
+  "license": "MIT",
+  "keywords": [
+    "AngularJS/Material"
+  ]
 }
