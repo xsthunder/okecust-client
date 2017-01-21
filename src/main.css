@@ -8,3 +8,8 @@ table, th, td {
     border: 1px solid blue;
     border-collapse: collapse;
 }
+#fab {
+    position: fixed;
+    right: 3em;
+    bottom: 3em;
+}
