@@ -1,0 +1,79 @@
+
+<form name="userForm">
+    <div layout-gt-xs="column">
+        <md-content layout-padding layout-align="center none"   layout-gt-xs="row">
+            <md-input-container  flex-gt-xs >
+                <label>题目分隔符表达式</label>
+                <input ng-model="splitName" required >
+            </md-input-container>
+            <md-input-container  flex-gt-xs >
+                <label>选项分割表达式</label>
+                <input ng-model="splitOption" required >
+            </md-input-container>
+            <md-input-container  flex-gt-xs >
+                <label>最大题目数</label>
+                <input required type="number" ng-model="splitNameNum" min="1"  max="200"  >
+            </md-input-container>
+            <md-input-container  flex-gt-xs >
+                <label>每一题最大选项数</label>
+                <input required type="number" ng-model="splitOptionNum" min="1"  max="10"  >
+            </md-input-container>
+        </md-content>
+        <md-content layout-padding layout-align="center none"   layout-gt-xs="row">
+
+
+
+
+
+
+        </md-content>
+        <md-input-container  flex-gt-xs>
+            <label>题目</label>
+            <textarea required ng-model="text" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+
+        <md-content layout="column" layout-align="center center">
+
+        <md-button class="md-raised md-primary" ng-click="split()">
+            生成题目
+        </md-button>
+        </md-content>
+
+    </div>
+    <md-content ng-repeat="questionInstance in contents "  ng-init="contentIndex = $index">
+    <md-content layout="row">
+        <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent(contentIndex)" title="删除这一题">
+            delete
+        </md-icon>
+    <md-input-container  flex-gt-xs>
+        <label>题目</label>
+        <textarea required ng-model="questionInstance.name" rows="2" md-select-on-focus></textarea>
+    </md-input-container>
+    </md-content>
+
+    <md-list layout-padding  class="md-block" layout="column" >
+        <md-list-item  layout="row" ng-repeat="x in questionInstance.answers track by $index" ng-init="extraIndex = $index" layout-align="center center">
+            <md-checkbox ng-model="questionInstance.answers[extraIndex]"  layout-align="center center" title="设为正确答案">
+            </md-checkbox>
+            <md-input-container  flex-gt-xs >
+                <input ng-model="questionInstance.extras[extraIndex]" aria-label="'tryrandom'+extraIndex+contentIndex">
+            </md-input-container>
+            <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveExtra(contentIndex,extraIndex)" title="删除这一栏">
+                delete
+            </md-icon>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+    </md-content>
+
+
+
+
+    <md-content layout="column" layout-align="center center">
+
+        <md-button class="md-raised md-primary" ng-click="submit()">
+            确认提交
+        </md-button>
+    </md-content>
+
+</form >

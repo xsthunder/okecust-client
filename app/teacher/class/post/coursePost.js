@@ -58,6 +58,7 @@ angular.module('teacher.course.post', [
     $scope.targetText = TARGET_CREATE === target ? '创建课程' : '更新课程信息';
     $scope.btnNewCourse = function () {
         if (TARGET_CREATE === target) {
+            if($scope.course.name===""||$scope.course.name===undefined)return showAlert("错误","课程名不能为空");
             console.log("check create info");
             console.log($scope.course);
             TeacherCourse.createNewCourse($scope.course, function (err, course) {

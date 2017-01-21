@@ -7,6 +7,7 @@
         'account',
         'ui.router',
         'ngMaterial',
+        'ngAria',
         'teacher.doc',
         'teacher.person',
         'teacher.qa',

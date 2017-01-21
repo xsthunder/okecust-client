@@ -1,0 +1,18 @@
+
+  <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="question in questions ">
+    <div flex-xs flex-gt-xs layout="column" >
+      <md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{question.name}}</span>
+            <div ng-repeat="extra in question.extras">
+              {{extra}}
+            </div>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>

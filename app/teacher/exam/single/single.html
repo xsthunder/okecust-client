@@ -32,23 +32,25 @@
 <!--</md-content>-->
 
 <form name="userForm">
+<md-content flex="initial">
+  <md-switch class="md-primary" md-no-ink aria-label="{{questionType[questionInstance.type]}}" ng-model="type" ng-click="switchType()" layout-align="center center" title="切换题目类型" 	>
+    {{"当前题目类型："+questionType[questionInstance.type]}}
+  </md-switch>
+</md-content>
   <div layout-gt-xs="column">
 <md-content layout-padding layout-align="center none"   layout-gt-xs="column">
 
 
-  <md-switch class="md-primary" md-no-ink aria-label="{{questionType[questionInstance.type]}}" ng-model="type" ng-click="switchType()">
-    {{"当前题目类型："+questionType[questionInstance.type]}}
-  </md-switch>
   <md-input-container  flex-gt-xs>
     <label>题目</label>
-    <textarea ng-model="questionInstance.name" rows="5" md-select-on-focus></textarea>
+    <textarea  required ng-model="questionInstance.name" rows="5" md-select-on-focus></textarea>
   </md-input-container>
 </md-content>
   <md-list layout-padding  class="md-block" layout="column" >
 <md-list-item  layout="row" ng-repeat="x in contents track by $index" layout-align="center center">
-<md-checkbox ng-model="x.answer" ng-disabled="!type" layout-align="center center" title="设为正确答案">
+<md-checkbox aria-label="check" ng-model="x.answer" ng-disabled="!type" layout-align="center center" title="设为正确答案">
 </md-checkbox>
-  <md-input-container  flex-gt-xs >
+  <md-input-container   flex-gt-xs >
     <input ng-model="x.extras">
   </md-input-container>
   <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一栏">

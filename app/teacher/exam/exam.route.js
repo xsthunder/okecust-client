@@ -10,13 +10,15 @@
           templateUrl: 'app/teacher/exam/single/single.html',
           controller: 'singleCtrl'
         })
-        .state('teacher.exam.2', {
-          url: '/2',
-          templateUrl: 'app/teacher/exam/2.html'
+        .state('teacher.exam.multiply', {
+          url: '/multiply',
+          templateUrl: 'app/teacher/exam/multiply/multiply.html',
+            controller:'multiplyCtrl'
         })
-        .state('teacher.exam.3', {
-          url: '/3',
-          templateUrl: 'app/teacher/exam/3.html'
+        .state('teacher.exam.lookup', {
+          url: '/lookup',
+          templateUrl: 'app/teacher/exam/lookup/lookup.html',
+            controller:'lookupCtrl'
         })
     })
 })();

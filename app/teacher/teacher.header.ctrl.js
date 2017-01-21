@@ -23,17 +23,17 @@
             };
             return self;
         })
-        .controller('teacherHeaderCtrl', function ($scope,Account, $location,teacherFactory, TeacherHeaderFactory, $log) {
+        .controller('teacherHeaderCtrl', function ($scope,$mdDialog,Account, $location,teacherFactory, TeacherHeaderFactory, $log) {
                 self.freshData = function () {
 
                     teacherFactory.getCourseList(function (err, courses) {
 
                         if(err) {
                             if(err.status==400){
-                                return alert("登录信息有误请尝试刷新，或重新登录");
+                                return showAlert("登录信息有误请尝试刷新，或重新登录");
                             }
                             console.log(err);
-                            return alert("无法获取课程列表，请刷新重试");
+                            return showAlert("无法获取课程列表，请刷新重试");
                         }
                         $scope.courses = courses;
                         console.log("已经获取菜单中，获取课程列表");
@@ -67,6 +67,20 @@
 
                 self.freshData();
 
+            var showAlert = function(title,message) {
+                // Appending dialog to document.body to cover sidenav in docs app
+                // Modal dialogs should fully cover application
+                // to prevent interaction outside of dialog
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .parent(angular.element(document.querySelector('#popupContainer')))
+                        .clickOutsideToClose(true)
+                        .title(title)
+                        .textContent(message)
+                        .ariaLabel('Alert Dialog Demo')
+                        .ok('明白')
+                );
+            };
                 var empty_course = 1;
                 var old_course;
 

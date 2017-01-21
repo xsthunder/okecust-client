@@ -22,6 +22,7 @@
     $log.info('nameListAddCtrl init');
     $scope.submit = function () {
       var nameList = $scope.nameList;
+      if(nameList===""||nameList===undefined)return;
       var arr = nameList.split('\n');
       var nameListArr = [];
       for (var i = 0; i < arr.length; i++) {

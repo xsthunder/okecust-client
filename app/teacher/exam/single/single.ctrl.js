@@ -51,29 +51,7 @@
         };
 
         $scope.btnRemoveContent = function (index) {
-            var removeElementFromArray = function (array, index) {
-                try {
-                    console.log("remove index:" + index + "from array");
-                    console.log(array);
-                    var newArray = [];
-                    if (array.length < index)return array;
-                    for (var i = 0; i < array.length; i++) {
-                        if (index === i) {
-                        }
-                        else {
-                            newArray.push(array[i]);
-                        }
-                    }
-                    console.log(newArray);
-                    return newArray;
-                } catch (err) {
-                    console.log(err);
-                    return array;
-
-                }
-            };
-
-            $scope.contents = removeElementFromArray($scope.contents, index);
+            $scope.contents.splice( index,1);
         };
         $scope.btnNewContent = function () {
             $scope.contents.push({

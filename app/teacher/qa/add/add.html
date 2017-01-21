@@ -1,31 +1,43 @@
+
 <br>
 <br>
-<md-content  >
-  <div  ng-repeat="question in questions " >
-    <md-list >
-      <md-list-item layout="column" layout-align="none start" >
-        {{question.name}}<br>
-        <div ng-repeat="extra in question.extras">
-          {{extra}}
-        </div>
-      </md-list-item>
-      <md-checkbox aria-label="Checkbox" ng-click="questionSelected(question, selected)">
-      </md-checkbox>
-    </md-list>
-    <md-divider></md-divider>
-  </div>
+<br>
+<md-content  class="md-padding" layout-xs="column" layout="row" ng-repeat="question in questions track by $index">
+    <div  flex-gt-xs  layout="column">
+
+      <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
+        <md-card-title >
+          <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]" ng-click="cardClick($index)" >
+        </md-checkbox>
+          <md-card-title-text>
+            <span class="md-headline">{{question.name}}</span>
+            <div ng-repeat="extra in question.extras">
+              {{extra}}
+            </div>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        </md-content>
+
+      </md-card>
+
+    </div>
+  </md-content>
   <md-input-container>
     <label>试题名称</label>
-    <input ng-model="newQuizTitle">
+    <input required ng-model="newQuizTitle">
   </md-input-container>
   <md-button ng-click="submit(newQuizTitle)" class="md-raised md-primary">确定</md-button>
-  {{selected}}
 </md-content>
+<div ng-show="false">
+  {{questionSet}}
+</div>
 <style>
   md-list {
     padding: 2em;
   }
   md-checkbox {
-    float: right;
   }
 </style>

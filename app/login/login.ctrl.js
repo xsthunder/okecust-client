@@ -5,14 +5,29 @@
   angular.module('login')
     .controller('loginCtrl', ctrl);
   function ctrl($scope, $location, Account, $log, $state) {
-    $scope.username = '';
+      var showAlert = function (title, message) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+              $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#popupContainer')))
+                  .clickOutsideToClose(true)
+                  .title(title)
+                  .textContent(message)
+                  .ariaLabel('Alert Dialog Demo')
+                  .ok('明白')
+          );
+      };
+
+      $scope.username = '';
     $scope.password = '';
     $scope.login = function () {
       if ('' === $scope.username || '' === $scope.password) {
-        return alert('not available input');
+        return showAlert('错误',"输入不能为空");
       }
       Account.login($scope.username, $scope.password, function (err, res) {
-        if (null !== err) {return alert('Failed to login, check your id and password! ' + err.status);}
+        if (null !== err) {return alert("无法登陆",'请检查网络或输入信息，错误信息：' + err.status);}
         Account.setCredit(res);
         var type = res.type;
         if (type == 7) {
