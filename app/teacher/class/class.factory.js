@@ -182,9 +182,9 @@ angular.module('teacher.class')
             $http.get(TeacherCourseConstants.URL_COURSE + '/library', {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
-                callback(null, res.data);
+                callback(false, res.data);
             }, function (res) {
-                callback(res);
+                callback(true,res);
             });
         };
 

@@ -8,7 +8,7 @@
         $log.info('this is exam single ctrl');
 
         //FIXME 去重复
-        var showAlert = function(title,message) {
+        var showAlert = function (title, message) {
             // Appending dialog to document.body to cover sidenav in docs app
             // Modal dialogs should fully cover application
             // to prevent interaction outside of dialog
@@ -22,8 +22,6 @@
                     .ok('明白')
             );
         };
-
-
 
 
         var Instance = {
@@ -58,7 +56,7 @@
                     console.log("remove index:" + index + "from array");
                     console.log(array);
                     var newArray = [];
-                    if (array.length < index)return array
+                    if (array.length < index)return array;
                     for (var i = 0; i < array.length; i++) {
                         if (index === i) {
                         }
@@ -87,44 +85,59 @@
 
 
         var libId;
-        TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
-            $log.info(res);
-            libId = res._id;
-            // var question = {
-            //     type: 1,
-            //     extras: [],
-            //     answers: [false, false, false, false]
-            // };
-
-
-            $scope.submit = function () {
-                var question = $scope.questionInstance;
-                question.extras = [];
-                question.answers = [];
-                if (question.type === 1) {//选择题
-                    for (var i = 0; i < $scope.contents.length; i++) {
-                        question.extras.push($scope.contents[i].extras);
-                        question.answers.push($scope.contents[i].answer);
+        $scope.submit = function () {
+            TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
+                if (error) {
+                    if (res._id === undefined) {
+                        return showAlert("错误", "没有选择课程");
+                    }
+                    else {
+                        return showAlert("错误", "无法获取课程id,请刷新重试");
                     }
                 }
-                else if (question.type === 2) {
-                    for (var i = 0; i < $scope.contents.length; i++) {
-                        question.answers.push($scope.contents[i].extras);
+                $log.info(res);
+                libId = res._id;
+
+                // var question = {
+                //     type: 1,
+                //     extras: [],
+                //     answers: [false, false, false, false]
+                // };
+
+
+                var submitToServer = function () {
+
+                    var question = $scope.questionInstance;
+                    if (question.name === "")return showAlert("错误", "题目不能为空");
+                    question.extras = [];
+                    question.answers = [];
+                    var i;
+                    if (question.type === 1) {//选择题
+                        for (i = 0; i < $scope.contents.length; i++) {
+                            question.extras.push($scope.contents[i].extras);
+                            question.answers.push($scope.contents[i].answer);
+                        }
                     }
-                }
-
-                console.log(question);
-
-                TeacherQuestionLibraryDetail.createQuestions(libId, question, function (error, res) {
-                    if (error) {
-                        console.log(error);
-                        return showAlert("添加题目失败","请检查网络或刷新后重试");
+                    else if (question.type === 2) {
+                        for (i = 0; i < $scope.contents.length; i++) {
+                            question.answers.push($scope.contents[i].extras);
+                        }
                     }
-                    $log.info(res);
-                    return showAlert("成功添加题目" ,"添加到\""+ teacherFactory.getCurrentCourse().name + "\"");
 
-                })
-            }
-        });
+                    console.log(question);
+
+                    TeacherQuestionLibraryDetail.createQuestions(libId, question, function (error, res) {
+                        if (error) {
+                            console.log(error);
+                            return showAlert("添加题目失败", "请检查网络或刷新后重试");
+                        }
+                        $log.info(res);
+                        return showAlert("成功添加题目", "添加到\"" + teacherFactory.getCurrentCourse().name + "\"");
+
+                    })
+                };
+                submitToServer();
+            });
+        }
     }
 })();

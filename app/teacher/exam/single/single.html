@@ -44,18 +44,18 @@
     <textarea ng-model="questionInstance.name" rows="5" md-select-on-focus></textarea>
   </md-input-container>
 </md-content>
-  <md-content layout-padding  class="md-block" layout="column" >
-<md-content  layout-align="center center" layout="row" ng-repeat="x in contents track by $index">
-<md-checkbox ng-model="x.answer" ng-disabled="!type">{{$index}}{{x.extras}}
+  <md-list layout-padding  class="md-block" layout="column" >
+<md-list-item  layout="row" ng-repeat="x in contents track by $index" layout-align="center center">
+<md-checkbox ng-model="x.answer" ng-disabled="!type" layout-align="center center" title="设为正确答案">
 </md-checkbox>
-  <md-input-container  flex-gt-xs>
+  <md-input-container  flex-gt-xs >
     <input ng-model="x.extras">
   </md-input-container>
-  <md-icon class="material-icons" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一栏">
+  <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一栏">
     delete
   </md-icon>
-</md-content>
-  </md-content>
+</md-list-item>
+  </md-list>
 
     <md-button class="md-fab" id="fab" title="添加一栏" ng-click="btnNewContent()">
       <md-icon class="material-icons">add</md-icon>

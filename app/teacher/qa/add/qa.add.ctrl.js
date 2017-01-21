@@ -111,6 +111,7 @@
       $log.log('init submit');
       $log.log(title);
       $log.log('sss' + sss);
+      if(title===""||title===undefined)return showAlert("错误","小测试标题不能为空");
       teacherQuizFactory.createNewQuiz(teacherFactory.getCurrentCourse()._id, {'name': title, 'questions': sss}, function (error, data) {
         $log.log(error);
         $log.log(data);
