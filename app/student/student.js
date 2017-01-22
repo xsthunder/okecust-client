@@ -10,7 +10,7 @@ angular.module('student', [
     'student.doc',
     'student.sign'
   ])
-  .factory('StudentConstants', function (Account, AppConstants) {
+  .factory('StudentConstants', function (Account, AppConstants,TeacherConstants) {
     var self = {};
     self.URL_BASE = AppConstants.URL_BASE + '/student-side/' + Account.getUid();
     self.URL_COURSES = self.URL_BASE + '/courses';
@@ -19,13 +19,28 @@ angular.module('student', [
     self.URL_QUIZ = self.URL_QUIZZES + '/:quizID';
     self.URL_ACHIEVEMENTS = self.URL_BASE + '/achievements';
     self.URL_ACHIEVEMENT = self.URL_ACHIEVEMENTS + '/:achievementID';
-    return self;
+      self.freshStudentConstant=function () {
+          console.log(self.URL_BASE);
+          self.URL_BASE = AppConstants.URL_BASE + '/student-side/' + Account.getUid();
+          self.URL_COURSES = self.URL_BASE + '/courses';
+          self.URL_COURSE = self.URL_COURSES + '/:courseId';
+          self.URL_QUIZZES = self.URL_BASE + '/quizzes';
+          self.URL_QUIZ = self.URL_QUIZZES + '/:quizID';
+          self.URL_ACHIEVEMENTS = self.URL_BASE + '/achievements';
+          self.URL_ACHIEVEMENT = self.URL_ACHIEVEMENTS + '/:achievementID';
+          console.log(self.URL_BASE);
+
+
+      };
+
+          return self;
   })
   .factory('studentFactory', function (Account, $http, $log, StudentConstants) {
     var courseList;
     var currentCourse;
     var self = {};
     self.flushCourseList = function (callback) {
+
       $http.get(StudentConstants.URL_COURSES, {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
@@ -36,10 +51,17 @@ angular.module('student', [
       });
     };
     self.getCourseList = function (callback) {
+        if(Account.getFreshTeacherConstantsFlag()){
+            StudentConstants.freshStudentConstant();
+            courseList=0;
+        }
       if (courseList) {
+          console.log('sec1');
         return callback(null, courseList);
       }
       self.flushCourseList(callback);
+        console.log('sec2');
+
     };
     self.setCurrentCourse = function (value) {
       currentCourse = value;

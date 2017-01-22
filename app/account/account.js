@@ -40,6 +40,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.getFreshTeacherConstantsFlag=function () {
              if($cookies.get('freshTeacherConstantsFlag')===undefined||
                  $cookies.get('freshTeacherConstantsFlag')==='yes'){
+                 $cookies.put('freshTeacherConstantsFlag','no');
                  return  true;
              }
              else return false;
