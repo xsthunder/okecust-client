@@ -5,7 +5,7 @@ angular
         'admin',
         'login',
         'student',
-        'teacher',
+        'teacher'
     ])
     .config(function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/teacher');
