@@ -1,10 +1,10 @@
- <md-toolbar>
-    <div class="md-toolbar-tools" md-scroll-shrink>
+ <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools" >
       <md-button ng-click="toggleList()">
         <md-icon class="material-icons">menu</md-icon>
       </md-button>
-      <md-select ng-model="selectedCourse" ng-model-options="{trackBy: '$value._id'}" aria-label="className">
-        <md-option ng-value="course" ng-repeat="course in courses">{{ course.name }}</md-option>
+      <md-select  ng-model="selectedCourse" ng-model-options="{trackBy: '$value._id'}" aria-label="className">
+        <md-option   ng-value="course" ng-repeat="course in courses">{{ course.name }}</md-option>
       </md-select>
     </div>
   </md-toolbar>

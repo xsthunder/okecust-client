@@ -37,11 +37,11 @@
     {{"当前题目类型："+questionType[questionInstance.type]}}
   </md-switch>
 </md-content>
-  <div layout-gt-xs="column">
-<md-content layout-padding layout-align="center none"   layout-gt-xs="column">
+  <div layout="column">
+<md-content flex="grow" layout-padding layout-align="center none"   layout="column">
 
 
-  <md-input-container  flex-gt-xs>
+  <md-input-container  >
     <label>题目</label>
     <textarea  required ng-model="questionInstance.name" rows="5" md-select-on-focus></textarea>
   </md-input-container>

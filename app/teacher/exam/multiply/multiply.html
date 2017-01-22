@@ -1,6 +1,6 @@
 
 <form name="userForm">
-    <div layout-gt-xs="column">
+    <div layout="column">
         <md-content layout-padding layout-align="center none"   layout-gt-xs="row">
             <md-input-container  flex-gt-xs >
                 <label>题目分隔符表达式</label>
@@ -45,7 +45,7 @@
         <md-icon class="material-icons md-secondary" style="display: inline;" ng-click="btnRemoveContent($index)" title="删除这一题">
             delete
         </md-icon>
-    <md-input-container  flex-gt-xs>
+    <md-input-container flex="grow" >
         <label>题目</label>
         <textarea required ng-model="questionInstance.name" rows="2" md-select-on-focus></textarea>
     </md-input-container>
@@ -55,7 +55,7 @@
         <md-list-item  layout="row" ng-repeat="x in questionInstance.answers track by $index" ng-init="extraIndex = $index" layout-align="center center">
             <md-checkbox ng-model="questionInstance.answers[extraIndex]"  layout-align="center center" title="设为正确答案">
             </md-checkbox>
-            <md-input-container  flex-gt-xs >
+            <md-input-container  >
                 <input ng-model="questionInstance.extras[extraIndex]" aria-label="'tryrandom'+extraIndex+contentIndex">
             </md-input-container>
             <md-icon class="material-icons md-secondary" style="display: inline;" ng-show="false" ng-click="btnRemoveExtra(contentIndex,extraIndex)" title="删除这一栏">

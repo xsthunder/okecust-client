@@ -100,6 +100,7 @@
     url: '/teacher',
     templateUrl: 'app/teacher/teacher.html',
     controller: 'teacherCtrl'
+
   };
   var teacherExamRoute = {
     url: '/exam',
@@ -120,8 +121,11 @@
     url: '/person',
     views: {
       'header': {
-          templateUrl: 'app/template/header/back.click.html',
-          controller: headerBackClickCtrl('个人', 'teacher.qa')
+          templateUrl: 'app/teacher/teacher.header.html',
+          controller: function ($scope) {
+
+              $scope.courses=[{name:'请先点击左侧选择功能'}];
+          }
       },
       'main': {
         templateUrl: 'app/teacher/person/person.html',
