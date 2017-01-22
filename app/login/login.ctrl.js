@@ -36,7 +36,7 @@
           $log.info('student');
           $state.go('student');
         } else if (type == 2) {
-          $location.path('/teacher/qa');
+          $location.path('/teacher/person');
         }
       });
     };

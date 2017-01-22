@@ -2,8 +2,8 @@
 <br>
 <br>
 <br>
-<md-content  class="md-padding" layout-xs="column" layout="row" ng-repeat="question in questions track by $index">
-    <div  flex-gt-xs  layout="column">
+<md-content  class="md-padding"  ng-repeat="question in questions track by $index">
+    <div   layout="column">
 
       <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
         <md-card-title >
@@ -15,11 +15,7 @@
               {{extra}}
             </div>
           </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media"></div>
-          </md-card-title-media>
         </md-card-title>
-        </md-content>
 
       </md-card>
 

@@ -1,8 +1,9 @@
-<md-content>
+<md-content layout-padding >
     <!--TODO remove the spaces-->
     <br/>
     <br/>
     <br/>
+    <md-divider></md-divider>
     <div>
         <md-list>
                 <md-list-item class="md-title" ng-repeat="student in students" title="删除此学生" ng-click="btnRemoveStudent(student)" layout="row" style="align-items:initial;">
@@ -15,8 +16,11 @@
                     </md-icon>
                 </md-list-item>
         </md-list>
-        <md-button ng-show="showFab" class="md-fab" ui-sref="teacher.nameListAdd" id="fab" title="添加学生名单">
-            <md-icon class="material-icons">add</md-icon>
-        </md-button>
+
     </div>
+    <md-divider></md-divider>
+
 </md-content>
+<md-button ng-show="showFab" class="md-fab" ui-sref="teacher.nameListAdd" id="fab" title="添加学生名单">
+    <md-icon class="material-icons">add</md-icon>
+</md-button>

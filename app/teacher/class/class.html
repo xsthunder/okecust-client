@@ -4,6 +4,7 @@
   <br/>
   <br/>
   <div>
+    <md-divider></md-divider>
     <md-list>
       <div ng-repeat="course in courses">
         <md-list-item class="md-title" layout="row" ng-click="selectCourse(course)" title="查看课程信息" ui-sref="teacher.courseDetail">
@@ -19,5 +20,6 @@
     <md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">
       <md-icon class="material-icons">add</md-icon>
     </md-button>
+    <md-divider>  </md-divider>
   </div>
 </md-content>

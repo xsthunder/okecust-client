@@ -15,28 +15,29 @@
   <!--</div>-->
 <br>
 <md-content  layout-padding>
-  <md-content style="padding-top: 3em;" layout-gt-sm="column"  layout-align="center none">
-<br>
-      <md-input-container class="md-block" flex-gt-sm>
-          <label>课程名称</label>
-          <input required ng-model="course.name">
-      </md-input-container>
+    <md-content style="padding-top: 3em;">
+        <br>
+        <md-input-container class="md-block"
+        <label>课程名称</label>
+        <input  ng-model="course.name" required>
+        </md-input-container>
 
+        <div layout="row" layout-xs="column">
+            <md-input-container class="md-block" flex="auto">
+                <label>联系电话</label>
+                <input ng-model="course.tel">
+            </md-input-container>
+            <md-input-container class="md-block" flex="auto">
+                <label>邮件地址</label>
+                <input ng-model="course.email">
+            </md-input-container>
+        </div>
+        <md-input-container class="md-block" ng-show="false">
+            <label>学生人数（不可用）</label>
+            <input ng-model="course.students" disabled>
+        </md-input-container>
 
-      <md-input-container class="md-block" flex-gt-sm>
-          <label>联系电话</label>
-          <input ng-model="course.tel">
-      </md-input-container>
-      <md-input-container class="md-block" flex-gt-sm>
-          <label>邮件地址</label>
-          <input ng-model="course.email">
-      </md-input-container>
-      <md-input-container class="md-block" flex-gt-sm >
-          <label>学生人数（不可用）</label>
-          <input ng-model="course.students" disabled>
-      </md-input-container>
-
-      <md-input-container class="md-block">
+        <md-input-container class="md-block">
           <label>课程描述</label>
           <textarea style="" ng-model="course.description" rows="5" md-select-on-focus></textarea>
       </md-input-container>

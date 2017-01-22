@@ -1,7 +1,7 @@
 <br>
 <br>
 <br>
-<div >
+<div layout-padding>
   <md-divider></md-divider>
   <md-list>
     <md-list-item class="md-title" ng-click="selectQuiz(item)" title="查看小测验结果"  layout="row"  ng-repeat="item in QAitems"  >
@@ -13,7 +13,10 @@
 
   </md-list>
   <!--<input type="checkbox" ng-model="showFab">-->
-  <md-button ng-show="showFab" class="md-fab" ui-sref="teacher.qaAdd" id="fab">
-    <md-icon class="material-icons">add</md-icon>
-  </md-button>
+
+  <md-divider></md-divider>
+
 </div>
+<md-button ng-show="showFab" class="md-fab" ui-sref="teacher.qaAdd" id="fab" title="新增小测验">
+  <md-icon class="material-icons">add</md-icon>
+</md-button>
