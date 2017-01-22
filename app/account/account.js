@@ -40,6 +40,9 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.deleteCredit = function () {
             $cookies.put('token', '');
             $cookies.put('type', '');
+            $cookies.putObject('currentCourse',function () {
+                _id=0;
+            })
         };
         self.getToken = function () {
             return $cookies.get('token') ? $cookies.get('token') : '';
