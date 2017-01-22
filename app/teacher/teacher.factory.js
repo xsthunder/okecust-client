@@ -39,7 +39,7 @@ angular.module('teacher')
       self.flushCourseList = function (callback) {
 
             console.log(TeacherConstants.URL_COURSES);
-            if(!TeacherConstants.URL_COURSES)$location.reload();
+            if(!TeacherConstants.URL_COURSES)$location.path('/login');
             $http.get(TeacherConstants.URL_COURSES, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
@@ -63,9 +63,13 @@ angular.module('teacher')
         self.setCurrentCourse = function (value) {
             $cookies.putObject('currentCourse', value);
             currentCourse = value;
+            console.log("setting cureent courses");
+            console.log(value);
         };
         self.getCurrentCourse = function () {
             currentCourse = $cookies.getObject('currentCourse');
+            console.log("requied cureent courses");
+            console.log(currentCourse);
 
 
             /*

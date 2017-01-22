@@ -66,6 +66,7 @@
                 console.log("parent", msg);
                 $scope.$broadcast("Ctr1NameAddFromParrent", msg);
             });//fail
+        $state.go('teacher.qaReport');
     }
 
 

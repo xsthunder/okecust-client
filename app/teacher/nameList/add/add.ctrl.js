@@ -37,7 +37,7 @@
       $log.info(nameListArr);
       TeacherCourse.addStudentsIntoCourse(teacherFactory.getCurrentCourse()._id, nameListArr, function (error, res) {
         $log.info(res);
-        if(error){return showAlert('错误',"添加名单失败"); }
+        if(error){return showAlert('错误',"添加名单失败,重试"+error.status); }
         showAlert("成功","成功添加\""+res.scoresCreated+"\"名学生到\""+teacherFactory.getCurrentCourse().name+"\"");
       })
 
