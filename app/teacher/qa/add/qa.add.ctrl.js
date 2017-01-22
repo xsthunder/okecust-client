@@ -24,7 +24,7 @@
           qaAddDetailFactory.getQuestionLibraryQuestion(library._id, function (err, questions) {
               if(err) {
                   // $scope.questions = err.questions;
-                  return alert('本课程: '+err);
+                  return showAlert('错误','无法获得“'+library.name+"”的题目，可能是没有题目");
               }
               //$log.info("question :"+library._id+library.name);
               //console.log(questions);

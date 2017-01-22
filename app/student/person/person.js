@@ -6,12 +6,15 @@ angular.module('student.person', ['ui.router', 'account'])
   $stateProvider.state('student.person', {
     url: '/person',
     templateUrl: 'app/student/person/person.html',
-    controller: 'personCtrl'
+    controller: function ($scope, $location, Account) {
+        console.log('init student ctrl');
+        $scope.logout = function () {
+            console.log('要推出了');
+            Account.deleteCredit();
+            $location.path('/login');
+        };
+
+    }
   })
-})
-    .controller('personCtrl', function ($scope, $location, deleteCredit) {
-      $scope.logout = function () {
-        deleteCredit();
-        $location.path('/login');
-      };
-    });
+});
+    // .controller('personCtrl', );

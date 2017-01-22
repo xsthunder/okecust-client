@@ -24,7 +24,7 @@
      * Flush question-library detail.
      */
     self.flushQuestionLibrary = function (libraryID, callback) {
-      $http.get(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID, {
+      $http.get(TeacherConstants.URL_LIBRARIES + '/' + libraryID, {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         questionLibrary = res.data;
@@ -73,7 +73,7 @@
      * Flush question-library questions detail.
      */
     self.flushQuestionLibraryQuestion = function (libraryID, callback) {
-      $http.get(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID + '/questions', {
+      $http.get(TeacherConstants.URL_LIBRARIES + '/' + libraryID + '/questions', {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         questionLibraryQuestions = res.data;
@@ -132,7 +132,7 @@
      */
     // Parameter `questions` could be a question object or questions array.
     self.createQuestions = function (libraryID, questions, callback) {
-      $http.post(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID + '/questions', questions, {
+      $http.post(TeacherConstants.URL_LIBRARIES + '/' + libraryID + '/questions', questions, {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         callback(null, res.data);

@@ -22,33 +22,13 @@ angular.module('teacher.quiz.detail', [
 })
   .factory('TeacherQuizDetail', function ($http, Account, TeacherConstants, TeacherQuizConstants) {
     var self = {};
-    /**
-     * Quiz object.
-     {
-       "_id": "581ea8d4d521a4e976b60805",
-       "lTime": "2016-11-06T08:59:48.840Z",
-       "cTime": "2016-11-06T03:51:48.348Z",
-       "author": "250",
-       "courseID": "57d23f6fb273076009686486",
-       "name": "线性代数-第二章",
-       "__v": 1,
-       "questions": [
-         "57cbdd38f3ae1d4b4f1126dd",
-         "57f92006ff19051e5b81b4c1",
-         "57e7f625c2a982ff466c6c0d"
-       ],
-       "time": {
-         "from": 1478404032544,
-         "duration": 3600000
-       }
-     }
-     */
+
     var quiz;
     /**
      * Flush quiz detail.
      */
     self.flushQuiz = function (quizID, callback) {
-        $http.get(TeacherQuizConstants.URL_QUIZZES + '/' + quizID, {
+        $http.get(TeacherConstants.URL_QUIZZES + '/' + quizID, {
             headers: {'x-token': Account.getToken()}
         }).then(function (res) {
             quiz = res.data;
@@ -97,7 +77,7 @@ angular.module('teacher.quiz.detail', [
      * Flush quiz questions detail.
      */
     self.flushQuizQuestion = function (quizID, callback) {
-        $http.get(TeacherQuizConstants.URL_QUIZZES + '/' + quizID + '/questions', {
+        $http.get(TeacherConstants.URL_QUIZZES + '/' + quizID + '/questions', {
             headers: {'x-token': Account.getToken()}
         }).then(function (res) {
             quizQuestions = res.data;

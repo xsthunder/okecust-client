@@ -5,7 +5,10 @@ angular.module('student', [
   'account',
   'ui.router',
   'student.qa',
-  'student.class'
+  'student.class',
+    'student.person',
+    'student.doc',
+    'student.sign'
   ])
   .factory('StudentConstants', function (Account, AppConstants) {
     var self = {};

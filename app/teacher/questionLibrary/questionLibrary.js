@@ -9,9 +9,8 @@ angular.module('teacher.questionLibrary', [
     'teacher.questionLibrary.post'
 ]).factory('TeacherQuestionLibraryConstants', function (TeacherConstants) {
     var self = {};
-    self.URL_LIBRARIES = TeacherConstants.URL_BASE + '/libraries';
     self.updateQuestionLibraryId = function (questionLibraryId) {
-        self.URL_LIBRARY = self.URL_LIBRARIES + '/' + questionLibraryId;
+        self.URL_LIBRARY = TeacherConstants.URL_LIBRARIES + '/' + questionLibraryId;
         self.URL_LIBRARY_QUESTIONS = self.URL_LIBRARY + '/questions';
     };
     self.updateQuestionLibraryId('');
@@ -33,7 +32,7 @@ angular.module('teacher.questionLibrary', [
     };
     var questionLibraryList;
     self.flushQuestionLibraryList = function (callback) {
-        $http.get(TeacherQuestionLibraryConstants.URL_LIBRARIES, {
+        $http.get(TeacherConstants.URL_LIBRARIES, {
             headers: {'x-token': Account.getToken()}
         }).then(function (res) {
             questionLibraryList = res.data;

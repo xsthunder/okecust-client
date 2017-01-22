@@ -4,7 +4,7 @@
 (function () {
   angular.module('login')
     .controller('loginCtrl', ctrl);
-  function ctrl($scope, $location, Account, $log, $state) {
+  function ctrl($scope,$mdDialog, $location, Account, $log, $state) {
       var showAlert = function (title, message) {
           // Appending dialog to document.body to cover sidenav in docs app
           // Modal dialogs should fully cover application
@@ -27,7 +27,7 @@
         return showAlert('错误',"输入不能为空");
       }
       Account.login($scope.username, $scope.password, function (err, res) {
-        if (null !== err) {return alert("无法登陆",'请检查网络或输入信息，错误信息：' + err.status);}
+        if (null !== err) {return showAlert("无法登陆",'请检查账号或密码');}
         Account.setCredit(res);
         var type = res.type;
         if (type == 7) {

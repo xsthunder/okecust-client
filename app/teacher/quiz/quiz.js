@@ -10,9 +10,8 @@ angular.module('teacher.quiz', [
   //?
   .factory('TeacherQuizConstants', function (TeacherConstants) {
     var self = {};
-    self.URL_QUIZZES = TeacherConstants.URL_BASE + '/quizzes';
     self.updateQuizId = function (quizId) {
-        self.URL_MODEL = self.URL_QUIZZES + '/' + quizId;
+        self.URL_MODEL = TeacherConstants.URL_QUIZZES + '/' + quizId;
         self.URL_MODEL_QUESTIONS = self.URL_MODEL + '/questions';
     };
     self.updateQuizId('');
@@ -37,7 +36,7 @@ angular.module('teacher.quiz', [
     };
     var quizList;
     self.flushQuizList = function (callback) {
-        $http.get(TeacherQuizConstants.URL_QUIZZES, {
+        $http.get(TeacherConstants.URL_QUIZZES, {
             headers: {'x-token': Account.getToken()}
         }).then(function (res) {
             quizList = res.data;

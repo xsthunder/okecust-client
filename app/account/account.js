@@ -10,7 +10,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.URL_PROFILE = base + '/profile';
         return self;
     })
-    .factory('Account', function ($http, $cookies, md5, AccountConstants) {
+    .factory('Account', function ($http, $cookies, md5,AccountConstants) {
         var self = {};
         var hash = self.hash = function (uid, password) {
             return md5.createHash('hash-it-happily-' + uid + '$' + password);
@@ -23,16 +23,26 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                     password: password
                 })
                 .then(function (res) {
-                    console.log("account.js uid="+res.data.uid);
+                    console.log("account.js uid=" + res.data.uid);
                     $cookies.put('uid', res.data.uid);
                     callback(null, res.data);
                 }, function (res) {
-                  callback(true, res);
+                    callback(true, res);
                 });
         };
         self.setCredit = function (data) {
             $cookies.put('token', data.token);
             $cookies.put('type', data.type);
+            $cookies.put('uid', data.type);
+            $cookies.put('freshTeacherConstantsFlag','yes');
+
+        };
+        self.getFreshTeacherConstantsFlag=function () {
+             if($cookies.get('freshTeacherConstantsFlag')===undefined||
+                 $cookies.get('freshTeacherConstantsFlag')==='yes'){
+                 return  true;
+             }
+             else return false;
         };
         self.checkCredit = function (type) {
             return $cookies.get('type') == type;
@@ -40,30 +50,36 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.deleteCredit = function () {
             $cookies.put('token', '');
             $cookies.put('type', '');
-            $cookies.putObject('currentCourse',function () {
-                _id=0;
+            $cookies.put('uid', '');
+            $cookies.put('freshTeacherConstantsFlag','yes');
+            $cookies.putObject('currentCourse', function () {
+                _id = 0;
             })
         };
         self.getToken = function () {
             return $cookies.get('token') ? $cookies.get('token') : '';
         };
         self.getUid = function () {
-            console.log($cookies.get('uid')+"uid");
-            if(!$cookies.get('uid'))location.reload();
+            console.log($cookies.get('uid') + "uid");
+            if (!$cookies.get('uid')) location.reload();
             return $cookies.get('uid');
         };
         var profile;
         self.getProfile = function (callback) {
-            if (profile) {return callback(null, profile);}
-            $http.get(AccountConstants.URL_PROFILE, {
-                headers: {'x-token': self.getToken()}
-            }).then(function (res) {
-                profile = res.data;
-                $cookies.put('uid', profile.uid);
-                callback(null, profile);
-            }, function (res) {
-                callback(res);
-            })
+            if(profile===undefined||profile.uid!==self.getUid()){
+                $http.get(AccountConstants.URL_PROFILE, {
+                    headers: {'x-token': self.getToken()}
+                }).then(function (res) {
+                    profile = res.data;
+                    $cookies.put('uid', profile.uid);
+                    callback(null, profile);
+                }, function (res) {
+                    callback(res);
+                })
+            }
+            else{
+                return callback(null, profile);
+            }
         };
         return self;
     });

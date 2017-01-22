@@ -4,12 +4,12 @@
 (function () {
   angular.module('teacher.qa.add')
     .factory('qaAddDetailFactory', fact);
-  function fact($http, Account, TeacherQuestionLibraryConstants, $log) {
+  function fact($http, Account, TeacherConstants, $log) {
     $log.log('factory init');
     var self = {};
     var questionLibrary;
     self.flushQuestionLibrary = function (libraryID, callback) {
-      $http.get(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID, {
+      $http.get(TeacherConstants.URL_LIBRARIES + '/' + libraryID, {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         questionLibrary = res.data;
@@ -26,7 +26,7 @@
     };
     var questionLibraryQuestions;
     self.flushQuestionLibraryQuestion = function (libraryID, callback) {
-      $http.get(TeacherQuestionLibraryConstants.URL_LIBRARIES + '/' + libraryID + '/questions', {
+      $http.get(TeacherConstants.URL_LIBRARIES + '/' + libraryID + '/questions', {
         headers: {'x-token': Account.getToken()}
       }).then(function (res) {
         questionLibraryQuestions = res.data;

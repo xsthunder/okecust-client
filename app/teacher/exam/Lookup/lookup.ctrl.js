@@ -9,7 +9,7 @@
       var freshData=function() {
           TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
               if (error) {
-                  alert('error');
+                  showAlert('错误','没有题库');
               } else {
                   //$log.info("in requriing libiray id");
                   //$log.info(res);

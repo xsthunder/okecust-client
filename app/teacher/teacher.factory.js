@@ -9,6 +9,21 @@ angular.module('teacher')
         self.URL_QUESTIONS = self.URL_BASE + '/questions';
         self.URL_COURSE = self.URL_COURSES + '/:courseId';
         self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
+        self.URL_LIBRARIES = self.URL_BASE + '/libraries';
+        self.URL_QUIZZES = self.URL_BASE + '/quizzes';
+
+
+        self.freshTeacherConstant=function () {
+            self.URL_BASE = AppConstants.URL_BASE + '/teacher-side/'+Account.getUid();
+            self.URL_COURSES = self.URL_BASE + '/courses';
+            self.URL_QUESTIONS = self.URL_BASE + '/questions';
+            self.URL_COURSE = self.URL_COURSES + '/:courseId';
+            self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
+            self.URL_LIBRARIES = self.URL_BASE + '/libraries';
+            self.URL_QUIZZES = self.URL_BASE + '/quizzes';
+
+
+        };
         return self;
     })
   .factory('teacherFactory', function ($mdDialog,Account, $http, $log,$location, TeacherConstants, $cookies) {
@@ -37,7 +52,9 @@ angular.module('teacher')
       };
 
       self.flushCourseList = function (callback) {
-
+          if(Account.getFreshTeacherConstantsFlag()){
+              TeacherConstants.freshTeacherConstant();
+          }
             console.log(TeacherConstants.URL_COURSES);
             if(!TeacherConstants.URL_COURSES)$location.path('/login');
             $http.get(TeacherConstants.URL_COURSES, {
@@ -46,7 +63,7 @@ angular.module('teacher')
                 courseList = res.data;
                 callback(null, courseList);
             }, function (res) {
-                callback(res);
+                callback(true,res);
             });
         };
         self.getCourseList = function (callback) {
