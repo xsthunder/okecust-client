@@ -9,6 +9,7 @@
                     return showAlert('错误', '获取课程列表失败，请重试.');
                 }
                 $scope.courses = courses;
+                console.log(courses);
             };
             teacherFactory.getCourseList(onDataCallback);
             $scope.selectCourse = function (course) {
@@ -42,7 +43,7 @@
                                 $scope.$emit("Ctr1RemoveChange", name);
                             };
                             change("remove course");//success
-                            showAlert('成功', 'Course deleted!');
+                            showAlert('成功', '删除了一门课程');
                         });
 
                     }, function () {
