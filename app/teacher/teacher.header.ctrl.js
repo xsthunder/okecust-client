@@ -40,31 +40,6 @@
                         console.log(courses);
                     });
                 };
-
-
-                $scope.$on("Ctr1NameChangeFromParrent",
-
-                    function (event, msg) {
-                        console.log("childCtr2", msg);
-                        $scope.ctr1Name = msg;
-                        self.freshData();
-                    });
-                $scope.$on("Ctr1NameRemoveFromParrent",
-
-                    function (event, msg) {
-                        console.log("childCtr2,remove", msg);
-                        $scope.ctr1Name = msg;
-                        self.freshData();
-                    });
-                $scope.$on("Ctr1NameAddFromParrent",
-
-                    function (event, msg) {
-                        console.log("childCtr2,add", msg);
-                        $scope.ctr1Name = msg;
-                        self.freshData();
-                    });
-
-
                 self.freshData();
 
             var showAlert = function(title,message) {

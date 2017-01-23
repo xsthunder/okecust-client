@@ -18,18 +18,9 @@ angular.module('teacher.course.post', [
             }
         }
     })
-}).controller('teacherCoursePostCtrl', function ($scope,$mdDialog, TeacherCourse,teacherFactory) {
+}).controller('teacherCoursePostCtrl', function ($scope,$state,$mdDialog, TeacherCourse,teacherFactory) {
 
     //尝试冒泡
-    var change = function (name) {
-        console.log("childCtr1", name);
-        $scope.$emit("Ctr1NameChange", name);
-    };//success
-    var add = function (name) {
-        console.log("childAddCtr1", name);
-        $scope.$emit("Ctr1NameAdd", name);
-    };//fail
-
     var showAlert = function(title,message) {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -64,31 +55,29 @@ angular.module('teacher.course.post', [
             TeacherCourse.createNewCourse($scope.course, function (err, course) {
                 if (err) {return showAlert('失败','未能创建课程，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                // teacherFactory.getCourseList(function (err, courses) {
-                //     $scope.courses = courses;
-                // });
                 showAlert('成功','创建成功!');
+                teacherFactory.flushCourseList(function () {
+                    $state.go('teacher.class');
+
+                });
 
                 //冒泡
-                add("add course");
 
-                history.back();
             });
         } else {
             TeacherCourse.updateCourse($scope.course, function (err, course) {
                 if (err) {return showAlert('错误','未能更新课程信息，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                console.log("check create info");
-                console.log($scope.course);
                 showAlert('成功','已更新课程信息');
                 // FIXME ? whether go-to detail page.
+                teacherFactory.flushCourseList(function () {
+                    $state.go('teacher.class');
+                });
 
 
                 //冒泡
-                change("update course");//success
 
 
-                history.back();
             });
         }
     };

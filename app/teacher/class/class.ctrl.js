@@ -38,6 +38,8 @@
                                 return showAlert('失败', '删除失败: ' + err.data);
                             }
                             teacherFactory.flushCourseList(onDataCallback);
+                            $cookies.put('freshCoursesFlag','yes');
+
                             var change = function (name) {
                                 console.log("childRemoveCtr1", name);
                                 $scope.$emit("Ctr1RemoveChange", name);

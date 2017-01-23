@@ -60,21 +60,22 @@ angular.module('teacher')
             $http.get(TeacherConstants.URL_COURSES, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
+                console.log('resh coursfe list');
                 courseList = res.data;
                 callback(null, courseList);
             }, function (res) {
-                callback(true,res);
+                callback(res);
             });
         };
         self.getCourseList = function (callback) {
-
-            //FIXME 可能被误删代码
-            //去掉之后成功在class.post中更新全域的课程列表
-            // if (courseList) {
-            //     console.log("in tearcher factory, courseList: " +courseList);
-            //     return callback(null, courseList);
-            //
+            // var freshCoursesFlag = $cookies.get('freshCoursesFlag');
+            // if(freshCoursesFlag=='yes'){
+            //     self.flushCourseList(callback);
             // }
+            if (courseList) {
+                console.log("in tearcher factory, courseList: " +courseList);
+                return callback(null, courseList);
+            }
             self.flushCourseList(callback);
         };
         self.setCurrentCourse = function (value) {
