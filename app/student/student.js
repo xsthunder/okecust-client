@@ -217,7 +217,7 @@ angular.module('student', [
         if(err == null) {
           $scope.studentName = res.name;
         }
-        else alert("error");
+        else Account.showAlert('错误',"error");
       })
     })
     // .factory('stdFactory', function(){

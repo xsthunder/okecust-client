@@ -209,7 +209,7 @@ angular.module('student.qa', [
                 //   studentFactory.setCurrentCourse(id);
                 // }
             }
-            else alert('error');
+            else Account.showAlert('错误','无法获得课程列表');
         });
         $scope.switchPaper = function (idx) {
             $scope.paperVisible = true;
@@ -234,7 +234,7 @@ angular.module('student.qa', [
                             }
                         }
                 else
-                    alert("error");
+                            Account.showAlert('无法上传结果',"请重试");
                 }
                 )
         }
@@ -255,16 +255,24 @@ $scope.switchQuestion = function (index) {
     $scope.currentQuestion = index;
 };
 $scope.submitQuiz = function () {
-    var c = confirm('确认交卷吗？（只能提交一次）');
-    if (!c) {
-        return;
-    }
+    var confirm = $mdDialog.confirm()
+        .title('确认交卷吗？')
+        .textContent('只能提交一次')
+        .ariaLabel('Lucky day')
+        .ok('确定')
+        .cancel('取消');
+
+    $mdDialog.show(confirm).then(function() {
+        studentAchievementFactory.submitAchievementDetail($scope.achID, $scope.answer, function (err, res) {
+            if (err == null) Account.showAlert('成功','提交成功');
+            else Account.showAlert('错误','已经提交过');
+        })
+        console.log($scope.answer)
+    }, function() {
+    });
 
 
-    studentAchievementFactory.submitAchievementDetail($scope.achID, $scope.answer, function (err, res) {
-        if (err == null) alert('提交成功');
-        else alert('已经提交过');
-    })
-    console.log($scope.answer)
+
+
 }
 })

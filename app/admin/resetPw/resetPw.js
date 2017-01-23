@@ -16,12 +16,12 @@ angular.module('admin.resetPw', ['ui.router', 'account'])
                 }, {
                     headers: {'x-token': Account.getToken()}
                 }).then(function (res) {
-                    alert('Updated password!');
+                    Account.showAlert('Updated password!');
                     //$scope.username = '';
                     $scope.password = '';
                     $scope.confirmPw = '';
                 }, function (res) {
-                    alert('Failed to update password!');
+                    Account.showAlert('Failed to update password!');
                 })
             }
         }

@@ -35,7 +35,7 @@ angular.module('admin.studentOpt', ['account', 'helper', 'ui.router'])
         };
         return factory;
     })
-    .controller('AdminStudentCtrl', function ($scope, AdminStudent) {
+    .controller('AdminStudentCtrl', function (Account,$scope, AdminStudent) {
         $scope.userName = '';
         $scope.userId = '';
         $scope.password = '';
@@ -47,12 +47,12 @@ angular.module('admin.studentOpt', ['account', 'helper', 'ui.router'])
         $scope.createStd = function () {
             if ($scope.password != $scope.confirmPw) {return $scope.flag = '密码输入不一致';}
             AdminStudent.createStudent($scope.userId, $scope.userName, $scope.password, function (err, data) {
-                if (err) {return alert('Failed to add student: ' + err.status + '(' + err.data + ')');}
+                if (err) {return Account.showAlert("错误",'Failed to add student: ' + err.status + '(' + err.data + ')');}
                 AdminStudent.getStudentList(function (err, students) {
                     if (err) {return console.error(err);}
                     $scope.students = students;
                 });
-                alert('Added student ' + $scope.userName + ' with uid: ' + $scope.userId);
+                Account.showAlert('错误','Added student ' + $scope.userName + ' with uid: ' + $scope.userId);
                 $scope.userName = '';
                 $scope.userId = '';
                 $scope.password = '';

@@ -10,11 +10,29 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.URL_PROFILE = base + '/profile';
         return self;
     })
-    .factory('Account', function ($http, $cookies, md5,AccountConstants) {
+    .factory('Account', function ($http, $cookies,$mdDialog, md5,AccountConstants) {
+
+
+
         var self = {};
         var hash = self.hash = function (uid, password) {
             return md5.createHash('hash-it-happily-' + uid + '$' + password);
         };
+        self.showAlert = function(title,message) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            // Modal dialogs should fully cover application
+            // to prevent interaction outside of dialog
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title(title)
+                    .textContent(message)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('明白')
+            );
+        };
+
         self.login = function (username, password, callback) {
             password = hash(username, password);
             $http

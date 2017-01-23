@@ -97,11 +97,11 @@ angular.module('teacher.quiz.detail', [
     };
     return self;
 })
-  .controller('teacherQuizDetailCtrl', function ($scope, TeacherQuiz, TeacherQuizDetail) {
+  .controller('teacherQuizDetailCtrl', function ($scope, Account,TeacherQuiz, TeacherQuizDetail) {
     var quiz = TeacherQuiz.getActiveQuiz();
     console.log(quiz);
     TeacherQuizDetail.getQuizQuestion(quiz._id, function (err, questions) {
-        if(err){return alert('some error: '+err);}
+        if(err){return Account.showAlert('成功','some error: '+err);}
         console.log(questions);
     })
 });

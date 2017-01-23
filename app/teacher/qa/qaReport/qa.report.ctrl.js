@@ -10,13 +10,13 @@
     header.title = '测试报告';
   }
 
-  function mainCtrl($scope,$cookies, teacherQuizFactory, $log, teacherQaFactory) {
+  function mainCtrl($scope,Account, teacherQuizFactory, $log, teacherQaFactory) {
     $log.log(teacherQuizFactory.nowQuiz);
     try {
         var quizId = teacherQuizFactory.nowQuiz._id;
     }
     catch (err){
-      alert('生成数据失败，请返回重来并耐心等候');
+        Account.showAlert('生成数据失败，请返回重来并耐心等候');
       return;
     }
     teacherQaFactory.getQuizReport(quizId, function (error, res) {

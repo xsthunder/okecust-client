@@ -18,7 +18,7 @@ angular.module('teacher.quiz.post', [
             }
         }
     })
-}).controller('teacherQuizPostCtrl', function ($scope, TeacherQuiz) {
+}).controller('teacherQuizPostCtrl', function ($scope, Account,TeacherQuiz) {
     var TARGET_UPDATE = 'update';
     var TARGET_CREATE = 'create';
     var target = TARGET_CREATE;
@@ -28,16 +28,16 @@ angular.module('teacher.quiz.post', [
     $scope.btnNewQuiz = function () {
         if (TARGET_CREATE === target) {
             TeacherQuiz.createNewQuiz($scope.quiz, function (err, quiz) {
-                if (err) {return alert('Failed to create quiz: ' + err.data);}
+                if (err) {return Account.showAlert('失败','Failed to create quiz: ' + err.data);}
                 $scope.quiz = quiz;
-                alert('Quiz created!');
+                alert('成功','Quiz created!');
                 history.back();
             });
         } else {
             TeacherQuiz.updateQuiz($scope.quiz, function (err, quiz) {
-                if (err) {return alert('Failed to update quiz: ' + err.data);}
+                if (err) {return Account.showAlert('失败','Failed to update quiz: ' + err.data);}
                 $scope.quiz = quiz;
-                alert('Quiz updated!');
+                Account.showAlert('成功','Quiz updated!');
                 // FIXME ? whether to go-to detail page.
                 history.back();
             });

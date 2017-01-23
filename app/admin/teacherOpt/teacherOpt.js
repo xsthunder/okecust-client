@@ -35,14 +35,14 @@ angular.module('admin.teacherOpt', ['ui.router'])
         };
         return factory;
     })
-    .controller('AdminTeacherCtrl', function ($scope, AdminTeacher) {
+    .controller('AdminTeacherCtrl', function (Account,$scope, AdminTeacher) {
         $scope.userName = '';
         $scope.userId = '';
         $scope.password = '';
         $scope.confirmPw = '';
         var flushData = function () {
             AdminTeacher.getTeacherList(function (err, teachers) {
-                if (err) {return alert(err.data);}
+                if (err) {return Account.showAlert('错误',err.data);}
                 $scope.teachers = teachers;
             });
         };
@@ -50,9 +50,9 @@ angular.module('admin.teacherOpt', ['ui.router'])
         $scope.createStd = function () {
             if ($scope.password != $scope.confirmPw) {return $scope.flag = '密码输入不一致';}
             AdminTeacher.createTeacher($scope.userId, $scope.userName, $scope.password, function (err, teacher) {
-                if (err) {return alert('Failed to add teacher: ' + err.status + '(' + err.data + ')');}
+                if (err) {return Account.showAlert('错误','Failed to add teacher: ' + err.status + '(' + err.data + ')');}
                 $scope.teachers.push(teacher);
-                alert('Added teacher ' + $scope.userName + ' with uid: ' + $scope.userId);
+                Account.showAlert('成功','Added teacher ' + $scope.userName + ' with uid: ' + $scope.userId);
                 flushData();
                 $scope.userName = '';
                 $scope.userId = '';
