@@ -2,7 +2,7 @@
   <div ng-repeat="report in reports">
     {{report}}
   </div>
-  <div ng-repeat="chart in charts">
+  <div ng-repeat="chart in charts track by $index">
     <div google-chart chart="chart" style="height:600px; width:100%;"></div>
   </div>
 </md-content>

@@ -186,23 +186,28 @@ angular.module('student', [
                sref:'student.class',
                content:'班级',
                icon:'class'
-           },{
-               sref:'student.doc',
-               content:'课件',
-               icon:'description'
-           },{
-               sref:'student.person',
-               content:'个人',
-               icon:'person'
-           },{
+           }
+           // ,{
+           //     sref:'student.doc',
+           //     content:'课件',
+           //     icon:'description'
+           // }
+
+           ,{
                sref:'student.qa',
                content:'问答',
                icon:'help'
-           },{
-               sref:'student.sign',
-               content:'签到',
-               icon:'fingerprint'
            }
+            ,{
+                sref:'student.person',
+                content:'个人',
+                icon:'person'
+            }
+           // , {
+           //     sref:'student.sign',
+           //     content:'签到',
+           //     icon:'fingerprint'
+           // }
        ];
       var toggle = function () {
         $mdSidenav('left').toggle();

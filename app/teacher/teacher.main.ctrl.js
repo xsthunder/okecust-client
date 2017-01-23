@@ -32,11 +32,13 @@
                 sref: 'teacher.exam',
                 content: '题库',
                 icon: 'folder'
-            }, {
-                sref: 'teacher.doc',
-                content: '课件',
-                icon: 'description'
-            }, {
+            }
+            // , {
+            //     sref: 'teacher.doc',
+            //     content: '课件',
+            //     icon: 'description'
+            // }
+            , {
                 sref: 'teacher.person',
                 content: '个人',
                 icon: 'person'

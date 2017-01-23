@@ -10,9 +10,15 @@
     header.title = '测试报告';
   }
 
-  function mainCtrl($scope, teacherQuizFactory, $log, teacherQaFactory) {
+  function mainCtrl($scope,$cookies, teacherQuizFactory, $log, teacherQaFactory) {
     $log.log(teacherQuizFactory.nowQuiz);
-    var quizId = teacherQuizFactory.nowQuiz._id;
+    try {
+        var quizId = teacherQuizFactory.nowQuiz._id;
+    }
+    catch (err){
+      alert('生成数据失败，请返回重来并耐心等候');
+      return;
+    }
     teacherQaFactory.getQuizReport(quizId, function (error, res) {
       if (!error) {
         $log.log(res.reports);
@@ -30,16 +36,22 @@
         chart.data = {
           "cols": [
             {id: '1', label: '题号', type: 'string'},
-            {id: '2', label: '回答人数', type: 'number'}],
-          "rows": [
-            {c: [{v: 'A'}, {v: report[0]}]},
-            {c: [{v: 'B'}, {v: report[1]}]},
-            {c: [{v: 'C'}, {v: report[2]}]},
-            {c: [{v: 'D'}, {v: report[3]}]},
-          ]
+            {id: '2', label: '回答人数', type: 'number'}]
+          // "rows": [
+          //   {c: [{v: 'A'}, {v: report[0]}]},
+          //   {c: [{v: 'B'}, {v: report[1]}]},
+          //   {c: [{v: 'C'}, {v: report[2]}]},
+          //   {c: [{v: 'D'}, {v: report[3]}]},
+          // ]
         };
+          chart.data.rows=[];
+        for(var j =0 ;j<report.length;j++){
+            chart.data.rows.push(
+              {c: [{v: String.fromCharCode('A'.charCodeAt(0)+j)}, {v: report[j]}]}
+          )
+        }
         chart.options = {
-          'title': ''
+          'title': ('第'+(i+1)+'题报告')
         };
         charts.push(chart);
       }

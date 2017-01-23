@@ -99,6 +99,7 @@
                     else if (question.type === 2) {
                         for (i = 0; i < $scope.contents.length; i++) {
                             question.answers.push($scope.contents[i].extras);
+                            question.extras.push('第'+(i+1)+'个空');
                         }
                     }
 

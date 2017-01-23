@@ -2,7 +2,7 @@
   <md-toolbar layout="row">
     <div  class="md-toolbar-tools">
       <md-select ng-model="courseSelected" placeholder="选择班级"> 
-        <md-option ng-repeat="course in courseList" ng-click="switchCourse($index)">{{ course.name }}</md-option>
+        <md-option ng-repeat="course in courseList" ng-click="switchCourse($index)" >{{ course.name }}</md-option>
       </md-select>
       <span>试卷列表</span>
       <span flex></span>
@@ -10,7 +10,7 @@
   </md-toolbar>
   <md-content style="overflow: auto">
     <md-list flex>
-      <md-list-item class="md-3-line" ng-repeat="quiz in quizList" ng-click="switchPaper($index)">
+      <md-list-item class="md-3-line" ng-repeat="quiz in quizList" ng-click="switchPaper($index)" ng-init="outerindex=$index">
         <div class="md-list-item-text" layout="column" layout-padding>
           <h3>{{ quiz.name }}</h3>
         </div>
@@ -59,11 +59,21 @@
       </md-toolbar>
       <div layout-padding>
         <h3> {{ questions[currentQuestion].name }} </h3>
-        <md-radio-group ng-model="answers[currentQuestion]">
-          <md-radio-button ng-repeat="extra in questions[currentQuestion].extras" value= "{{ $index }}">
-            <h4>{{ extra }}</h4>
-          </md-radio-button>
-        </md-radio-group>
+        <!--<md-radio-group ng-model="answers[currentQuestion]">-->
+          <!--<md-radio-button ng-repeat="extra in questions[currentQuestion].extras" value= "{{ $index }}">-->
+            <!--<h4>{{ extra }}</h4>-->
+          <!--</md-radio-button>-->
+        <!--</md-radio-group>-->
+        <div  layout="column">
+          <md-checkbox ng-show="questions[currentQuestion].type==1" aria-label="check"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  layout-align="center center" title="设为正确答案">
+          {{extra}}
+          </md-checkbox>
+          <md-input-container  ng-show="questions[currentQuestion].type==2"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  flex >
+            <label>{{extra}}</label>
+            <input ng-model="answer[currentQuestion][$index]">
+          </md-input-container>
+        </div>
+
       </div>
     </md-content>
 </div>
