@@ -4,8 +4,7 @@
       <md-select ng-model="courseSelected" placeholder="选择班级"> 
         <md-option ng-repeat="course in courseList" ng-click="switchCourse($index)" >{{ course.name }}</md-option>
       </md-select>
-      <span>试卷列表</span>
-      <span flex></span>
+      <span h2 flex="noshrink">试卷列表</span>
     </div>
   </md-toolbar>
   <md-content style="overflow: auto">
@@ -49,12 +48,11 @@
     </md-toolbar>
     <md-content style="overflow: auto">
       <md-toolbar>
-        <div class="md-toolbar-tools">
+        <div class="md-toolbar-tools" layout="row">
           <md-button ng-click="backToPaper()">返回</md-button>
-          <h2 flex>
-            <span>{{ "第" + (currentQuestion + 1) + "题"+"（共"+questions.length+"题）" }}</span>
+          <h2 flex="noshrink">
+            <span >{{ "第" + (currentQuestion + 1) + "题"+"（共"+questions.length+"题）" }}</span>
           </h2>
-          <span flex></span>
         </div>
       </md-toolbar>
       <div layout-padding>
