@@ -1,7 +1,11 @@
-<md-content style="padding-top: 3em">
-  <div ng-repeat="report in reports">
-    {{report}}
-  </div>
+<br>
+<br>
+<br>
+
+<md-content flex layout="column" layout-padding>
+  <!--<div ng-repeat="report in reports">-->
+    <!--{{report}}-->
+  <!--</div>-->
   <div layout-align="initial initial" flex layout="column" ng-repeat="chart in charts track by $index">
     <div  google-chart chart="chart" style="height:600px; width:100%;"></div>
   </div>
