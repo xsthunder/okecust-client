@@ -51,7 +51,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.setCredit = function (data) {
             $cookies.put('token', data.token);
             $cookies.put('type', data.type);
-            $cookies.put('uid', data.type);
+            $cookies.put('uid', data.uid);
             $cookies.put('freshTeacherConstantsFlag','yes');
 
         };

@@ -3,7 +3,8 @@
  */
 (function () {
     angular.module('teacher')
-        .controller('teacherClassesCtrl', function ($scope, $mdDialog, teacherFactory, TeacherCourse) {
+        .controller('teacherClassesCtrl', function ($scope,$state, $mdDialog, teacherFactory, TeacherCourse) {
+
             var onDataCallback = function (err, courses) {
                 if (err) {
                     return showAlert('错误', '获取课程列表失败，请重试.');
@@ -16,18 +17,49 @@
                 teacherFactory.setCurrentCourse(course);
             };
             $scope.btnTargetNewCourse = function () {
-                TeacherCourse.setActiveCourse({name: ''});
+                teacherFactory.setActiveCourse({name: ''});
             };
             $scope.btnUpdateCourse = function (course) {
-                TeacherCourse.setActiveCourse(course);
+                teacherFactory.setActiveCourse(course);
             };
-            $scope.btnRemoveCourse = function (course) {
 
-                    // Appending dialog to document.body to cover sidenav in docs app
+
+            //two new btn
+            console.log('init class crtl')
+            $scope.btnNameList=function (course) {
+                console.log('btnNameListl');
+                teacherFactory.setCurrentCourse(course);
+                $state.go('teacher.nameList');
+
+            };
+            $scope.btnExam=function (course) {
+                console.log('btnExam');
+                teacherFactory.setCurrentCourse(course);
+                $state.go('teacher.exam');
+            };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $scope.btnRemoveCourse = function (course) {
+                console.log('btnRemove');
+
+
+                // Appending dialog to document.body to cover sidenav in docs app
                     var confirm = $mdDialog.confirm()
                         .title('删除一个课程吗?')
                         .textContent('课程名称：'+course.name)
-                        .ariaLabel('萌萌的程序员')
+                        .ariaLabel('程序员')
                         .ok('确定')
                         .cancel('取消');
 

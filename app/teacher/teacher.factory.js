@@ -72,17 +72,22 @@ angular.module('teacher')
             // if(freshCoursesFlag=='yes'){
             //     self.flushCourseList(callback);
             // }
+
             if (courseList) {
                 console.log("in tearcher factory, courseList: " +courseList);
+
                 return callback(null, courseList);
             }
             self.flushCourseList(callback);
         };
         self.setCurrentCourse = function (value) {
+
             $cookies.putObject('currentCourse', value);
             currentCourse = value;
             console.log("setting cureent courses");
+            console.log("value");
             console.log(value);
+            console.log("valueend");
         };
         self.getCurrentCourse = function () {
             currentCourse = $cookies.getObject('currentCourse');

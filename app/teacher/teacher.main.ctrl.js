@@ -50,25 +50,25 @@
         //$state.go('teacher.qa');
 
         //    尝试用冒泡的方式刷新课程菜单列表
-        $scope.$on("Ctr1NameChange",
-
-            function (event, msg) {
-                console.log("parent", msg);
-                $scope.$broadcast("Ctr1NameChangeFromParrent", msg);
-            });
-        $scope.$on("Ctr1RemoveChange",
-
-            function (event, msg) {
-                console.log("parent", msg);
-                $scope.$broadcast("Ctr1NameRemoveFromParrent", msg);
-            });//success
-        $scope.$on("Ctr1NameAdd",
-
-            function (event, msg) {
-                console.log("parent", msg);
-                $scope.$broadcast("Ctr1NameAddFromParrent", msg);
-            });//fail
-         // $state.go('teacher.person');
+        // $scope.$on("Ctr1NameChange",
+        //
+        //     function (event, msg) {
+        //         console.log("parent", msg);
+        //         $scope.$broadcast("Ctr1NameChangeFromParrent", msg);
+        //     });
+        // $scope.$on("Ctr1RemoveChange",
+        //
+        //     function (event, msg) {
+        //         console.log("parent", msg);
+        //         $scope.$broadcast("Ctr1NameRemoveFromParrent", msg);
+        //     });//success
+        // $scope.$on("Ctr1NameAdd",
+        //
+        //     function (event, msg) {
+        //         console.log("parent", msg);
+        //         $scope.$broadcast("Ctr1NameAddFromParrent", msg);
+        //     });//fail
+        //  // $state.go('teacher.person');
     }
 
 

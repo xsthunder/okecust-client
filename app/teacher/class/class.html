@@ -1,25 +1,70 @@
-<md-content>
-  <!--TODO remove the spaces-->
-  <br/>
-  <br/>
-  <br/>
-  <div>
-    <md-divider></md-divider>
-    <md-list>
-      <div ng-repeat="course in courses">
-        <md-list-item class="md-title" layout="row" ng-click="selectCourse(course)" title="查看课程信息" ui-sref="teacher.courseDetail">
-            {{course.name}}
-          <md-icon class="md-secondary material-icons" ng-click="btnUpdateCourse(course)" ui-sref="teacher.coursePost"
-                   title="修改课程信息">edit
-          </md-icon>
-          <md-icon class="md-secondary material-icons" ng-click="btnRemoveCourse(course)" title="删除课程">
-            delete
-          </md-icon>
-      </div>
-    </md-list>
-    <md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">
-      <md-icon class="material-icons">add</md-icon>
-    </md-button>
-    <md-divider>  </md-divider>
+<!--<md-content>-->
+  <!--&lt;!&ndash;TODO remove the spaces&ndash;&gt;-->
+  <!--<br/>-->
+  <!--<br/>-->
+  <!--<br/>-->
+  <!--<div>-->
+    <!--<md-divider></md-divider>-->
+    <!--<md-list>-->
+      <!--<div ng-repeat="course in courses">-->
+        <!--<md-list-item class="md-title" layout="row" ng-click="selectCourse(course)" title="查看课程信息" ui-sref="teacher.courseDetail">-->
+            <!--{{course.name}}-->
+          <!--<md-icon class="md-secondary material-icons" ng-click="btnUpdateCourse(course)" ui-sref="teacher.coursePost"-->
+                   <!--title="修改课程信息">edit-->
+          <!--</md-icon>-->
+          <!--<md-icon class="md-secondary material-icons" ng-click="btnRemoveCourse(course)" title="删除课程">-->
+            <!--delete-->
+          <!--</md-icon>-->
+      <!--</div>-->
+    <!--</md-list>-->
+    <!--<md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">-->
+      <!--<md-icon class="material-icons">add</md-icon>-->
+    <!--</md-button>-->
+    <!--<md-divider>  </md-divider>-->
+  <!--</div>-->
+<!--</md-content>-->
+<br/>
+<br/>
+<br/>
+<md-content class="md-padding" layout="column" >
+  <div ng-repeat="course in courses" flex-xs flex-gt-xs="50" layout="column">
+    <md-card md-theme="default">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{course.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <div>
+          <md-button ng-click="btnNameList(course)">
+            <md-icon class="md-secondary material-icons" title="修改课程信息">people
+            </md-icon>
+            <span>nl</span>
+          </md-button>
+          <md-button ng-click="btnExam(course)">
+            <md-icon class="md-secondary material-icons" title="修改课程信息">folder
+            </md-icon>
+            <span>pl</span>
+          </md-button>
+        </div>
+        <div>
+          <md-button ng-click="btnUpdateCourse(course)">
+            <md-icon class="md-secondary material-icons" title="修改课程信息">edit
+            </md-icon>
+            <span>edit</span>
+          </md-button>
+          <md-button ng-click="btnRemoveCourse(course)">
+            <md-icon class="md-secondary material-icons"  title="删除课程">
+              delete
+            </md-icon>
+            <span>del</span>
+          </md-button>
+        </div>
+      </md-card-actions>
+
+    </md-card>
   </div>
 </md-content>
+<md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">
+<md-icon class="material-icons">add</md-icon>
+</md-button>
