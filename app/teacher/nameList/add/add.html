@@ -8,11 +8,16 @@
     <textarea required  style="" ng-model="nameList" rows="5" md-select-on-focus title="添加名单"></textarea>
   </md-input-container>
 </md-content>
+<md-input class="md-block">
+    <label>选择一个xlsx文件（第一行列、第二列姓名）: </label>
+    <input type="file" id="xlsx"/>
+</md-input>
+
+
+
 <md-content layout="column" layout-align="center center">
     <md-button class="md-raised md-primary" ng-click="submit()">
         确认提交
     </md-button>
 </md-content>
-
-
 

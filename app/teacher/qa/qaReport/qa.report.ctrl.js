@@ -16,17 +16,20 @@
         var quizId = teacherQuizFactory.nowQuiz._id;
     }
     catch (err){
-        Account.showAlert('生成数据失败，请返回重来并耐心等候');
+        Account.showAlert('生成数据失败，请再试并耐心等候');
       return;
     }
     teacherQaFactory.getQuizReport(quizId, function (error, res) {
       if (!error) {
         $log.log(res.reports);
         $scope.reports = res.reports;
-        $scope.charts = getCharts(res.reports)
+        $scope.status=false;
+        $scope.charts = getCharts(res.reports,function () {
+            // $scope.status=true;
+        })
       }
     });
-    function getCharts(reports) {
+    function getCharts(reports,callback) {
       var charts = [];
       $log.log(reports);
       for (var i = 0; i < reports.length; i++) {
@@ -55,6 +58,7 @@
         };
         charts.push(chart);
       }
+      callback();
       return charts;
     }
 

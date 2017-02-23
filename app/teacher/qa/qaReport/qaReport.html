@@ -6,6 +6,8 @@
   <!--<div ng-repeat="report in reports">-->
     <!--{{report}}-->
   <!--</div>-->
+  <p ng-hide="status">正在生成数据，请耐心等候</p>
+  <md-progress-linear ng-hide="status" md-mode="indeterminate"></md-progress-linear>
   <div layout-align="initial initial" flex layout="column" ng-repeat="chart in charts track by $index">
     <div  google-chart chart="chart" style="height:600px; width:100%;"></div>
   </div>
