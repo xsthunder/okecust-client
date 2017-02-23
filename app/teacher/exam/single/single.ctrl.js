@@ -30,17 +30,27 @@
             $scope.questionInstance.type = $scope.type ? 2 : 1;
             $scope.showCheckbox=true;
 
-
+            console.log($scope.contents);
             function checkNon(age) {
-                return !age;
+                console.log(age);
+                console.log(!age.extras=="");
+                return (!age.extras=="");
             }
             if($scope.questionInstance.type===2){
-                $scope.contents=$scope.contents.every(checkNon);
+
+                $scope.contents=$scope.contents.filter(checkNon);
+                console.log($scope.contents);
             }
             else {
-                $scope.contents=contents;
+                while($scope.contents.length<4){
+                    $scope.contents.push({
+                        answer: false,
+                        extras: ""
+                        }
+                    )
+                }
             }
-            if(!$scope.contents) {
+            if($scope.contents.length===undefined||$scope.contents.length===0) {
                 $scope.contents=[];
                 console.log($scope.contents);
                 $scope.contents.push({
@@ -48,7 +58,10 @@
                     extras: ""
                 });
             }
+            console.log($scope.contents);
+
             console.log($scope.questionInstance.type);
+
         };
 
         $scope.btnRemoveContent = function (index) {

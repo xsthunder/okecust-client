@@ -5,20 +5,7 @@
   angular.module('teacher.nameList.add')
     .controller('nameListAddCtrl', ctrl);
   function ctrl($scope, $log,$mdDialog, headerFactory, TeacherCourse, teacherFactory) {
-      var showAlert = function(title,message) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          // Modal dialogs should fully cover application
-          // to prevent interaction outside of dialog
-          $mdDialog.show(
-              $mdDialog.alert()
-                  .parent(angular.element(document.querySelector('#popupContainer')))
-                  .clickOutsideToClose(true)
-                  .title(title)
-                  .textContent(message)
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('明白')
-          );
-      };
+      var showAlert = teacherFactory.showToast;
     $log.info('nameListAddCtrl init');
     $scope.submit = function () {
       var nameList = $scope.nameList;

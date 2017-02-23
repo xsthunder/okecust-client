@@ -4,6 +4,7 @@
 (function () {
   angular.module('teacher.exam')
     .controller('teacherExamCtrl', ctrl);
-  function ctrl($log, $scope) {
+  function ctrl($log, $scope,$state) {
+    $state.go("teacher.exam.single")
   }
 })();
