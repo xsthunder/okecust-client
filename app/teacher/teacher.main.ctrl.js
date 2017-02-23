@@ -48,7 +48,6 @@
             // $state.go('teacher.class');
             $mdSidenav('left').toggle();
         };
-        console.log($state);
        if($state.current.name=="teacher") $state.go('teacher.class');
 
         //    尝试用冒泡的方式刷新课程菜单列表

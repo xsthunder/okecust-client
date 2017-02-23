@@ -17,6 +17,12 @@
             .state('teacher.docAdd', docAddRoute)
             .state('teacher.qaAdd', qaAddRoute)
             .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
+            .state("otherwise", {
+                url: "*path",
+                controller:function ($state) {
+                    $state.go('teacher.class');
+                }
+            });
     }
 
     var questionLibraryDetailRoute = {
@@ -100,7 +106,9 @@
     var teacherRoute = {
         url: '/teacher',
         templateUrl: 'app/teacher/teacher.html',
-        controller: 'teacherCtrl'
+        controller: 'teacherCtrl',
+        // abstract:true
+
 
     };
     var teacherExamRoute = {
