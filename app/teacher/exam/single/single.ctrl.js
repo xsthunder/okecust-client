@@ -4,25 +4,11 @@
 (function () {
     angular.module('teacher.exam.single')
         .controller('singleCtrl', ctrl);
-    function ctrl(singleFactory, $log, $scope, $mdDialog,TeacherCourse, teacherFactory, TeacherQuestionLibraryDetail) {
+    function ctrl(singleFactory, $log, $scope,$state ,$mdDialog,TeacherCourse, teacherFactory, TeacherQuestionLibraryDetail) {
         $log.info('this is exam single ctrl');
 
         //FIXME 去重复
-        var showAlert = function (title, message) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            // Modal dialogs should fully cover application
-            // to prevent interaction outside of dialog
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .parent(angular.element(document.querySelector('#popupContainer')))
-                    .clickOutsideToClose(true)
-                    .title(title)
-                    .textContent(message)
-                    .ariaLabel('Alert Dialog Demo')
-                    .ok('明白')
-            );
-        };
-
+        var showAlert = teacherFactory.showToast;
 
         var Instance = {
             type: 1,
@@ -39,14 +25,29 @@
         $scope.questionInstance = Instance;
         $scope.contents = contents;
         $scope.type = true;
-        $scope.questionType = [
-            "",
-            "选择题",
-            "填空题"
-        ];
 
         $scope.switchType = function () {
             $scope.questionInstance.type = $scope.type ? 2 : 1;
+            $scope.showCheckbox=true;
+
+
+            function checkNon(age) {
+                return !age;
+            }
+            if($scope.questionInstance.type===2){
+                $scope.contents=$scope.contents.every(checkNon);
+            }
+            else {
+                $scope.contents=contents;
+            }
+            if(!$scope.contents) {
+                $scope.contents=[];
+                console.log($scope.contents);
+                $scope.contents.push({
+                    answer: false,
+                    extras: ""
+                });
+            }
             console.log($scope.questionInstance.type);
         };
 
@@ -61,8 +62,12 @@
             // console.log(Instance.contents.length());
         };
 
-
+        $scope.String=String;
+        $scope.showCheckbox=true;
         var libId;
+        $scope.chooseCorrect=function () {
+            if($scope.type)$scope.showCheckbox=false;
+        };
         $scope.submit = function () {
             TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
                 if (error) {
@@ -111,7 +116,8 @@
                             return showAlert("添加题目失败", "请检查网络或刷新后重试");
                         }
                         $log.info(res);
-                        return showAlert("成功添加题目", "添加到\"" + teacherFactory.getCurrentCourse().name + "\"");
+                        showAlert("成功添加题目", "添加到\"" + teacherFactory.getCurrentCourse().name + "\"");
+                        $state.go('teacher.exam.lookup');
 
                     })
                 };

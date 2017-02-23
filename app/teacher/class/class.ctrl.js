@@ -3,7 +3,7 @@
  */
 (function () {
     angular.module('teacher')
-        .controller('teacherClassesCtrl', function ($scope,$state, $mdDialog, teacherFactory, TeacherCourse) {
+        .controller('teacherClassesCtrl', function ($scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
 
             var onDataCallback = function (err, courses) {
                 if (err) {
@@ -17,10 +17,11 @@
                 teacherFactory.setCurrentCourse(course);
             };
             $scope.btnTargetNewCourse = function () {
-                teacherFactory.setActiveCourse({name: ''});
-            };
+                TeacherCourse.setActiveCourse({name: ''});
+        };
             $scope.btnUpdateCourse = function (course) {
-                teacherFactory.setActiveCourse(course);
+                TeacherCourse.setActiveCourse(course);
+                $state.go('teacher.coursePost');
             };
 
 
@@ -37,23 +38,14 @@
                 teacherFactory.setCurrentCourse(course);
                 $state.go('teacher.exam');
             };
-
-
-
-
-
-
-
-
-
-
-
-
-
+            $scope.btnQa=function (course) {
+                console.log('btnQa');
+                teacherFactory.setCurrentCourse(course);
+                $state.go('teacher.qa');
+            };
 
             $scope.btnRemoveCourse = function (course) {
                 console.log('btnRemove');
-
 
                 // Appending dialog to document.body to cover sidenav in docs app
                     var confirm = $mdDialog.confirm()
@@ -62,12 +54,11 @@
                         .ariaLabel('程序员')
                         .ok('确定')
                         .cancel('取消');
-
                     $mdDialog.show(confirm).then(function () {
 
                         TeacherCourse.removeCourse(course._id, function (err, course) {
                             if (err) {
-                                return showAlert('失败', '删除失败: ' + err.data);
+                                return teacherFactory.showToast('失败', '删除失败: ' + err.data);
                             }
                             teacherFactory.flushCourseList(onDataCallback);
                             $cookies.put('freshCoursesFlag','yes');
@@ -77,7 +68,7 @@
                                 $scope.$emit("Ctr1RemoveChange", name);
                             };
                             change("remove course");//success
-                            showAlert('成功', '删除了一门课程');
+                            teacherFactory.showToast('成功', '删除了一门课程');
                         });
 
                     }, function () {
@@ -86,7 +77,7 @@
 
 
             };
-            //$scope.showCourseMenu = true;
+            $scope.showCourseMenu = true;
             var showAlert = function (title, message) {
                 // Appending dialog to document.body to cover sidenav in docs app
                 // Modal dialogs should fully cover application

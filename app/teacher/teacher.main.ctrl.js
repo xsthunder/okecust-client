@@ -45,6 +45,7 @@
             }
         ];
         $scope.toggleList = function () {
+            // $state.go('teacher.class');
             $mdSidenav('left').toggle();
         };
         //$state.go('teacher.qa');

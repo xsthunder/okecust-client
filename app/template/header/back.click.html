@@ -1,19 +1,29 @@
-<md-toolbar >
-  <div class="md-toolbar-tools">
-    <md-button ng-click="click()">
-      <md-icon class="material-icons">keyboard_backspace</md-icon>
-    </md-button>
-    <h1 flex="noshrink">
-      {{title}}
-    </h1>
-  </div>
+<md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+        <!--<md-button ng-click="click()">-->
+        <!--<md-icon class="material-icons">keyboard_backspace</md-icon>-->
+        <!--</md-button>-->
+        <h1 flex="noshrink">
+            {{title}}
+        </h1>
+        <md-button ng-click="updatePwd()">
+            <md-icon class="md-secondary material-icons">build</md-icon>
+            <span>修改密码</span>
+        </md-button>
+        <md-button ng-click="logout()">
+            <md-icon class="md-secondary material-icons">power_settings_new</md-icon>
+            <span>登出</span>
+        </md-button>
+
+    </div>
 </md-toolbar>
 
+
 <style>
-  md-toolbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
+    md-toolbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
 </style>

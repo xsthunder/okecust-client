@@ -49,13 +49,13 @@ angular.module('teacher.course.post', [
     $scope.targetText = TARGET_CREATE === target ? '创建课程' : '更新课程信息';
     $scope.btnNewCourse = function () {
         if (TARGET_CREATE === target) {
-            if($scope.course.name===""||$scope.course.name===undefined)return showAlert("错误","课程名不能为空");
+            if($scope.course.name===""||$scope.course.name===undefined)return teacherFactory.showToast("错误","课程名不能为空");
             console.log("check create info");
             console.log($scope.course);
             TeacherCourse.createNewCourse($scope.course, function (err, course) {
-                if (err) {return showAlert('失败','未能创建课程，请重试，错误信息: ' + err.data);}
+                if (err) {return teacherFactory.showToast('失败','未能创建课程，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                showAlert('成功','创建成功!');
+                teacherFactory.showToast('成功','创建成功!');
                 teacherFactory.flushCourseList(function () {
                     $state.go('teacher.class');
 
@@ -66,9 +66,9 @@ angular.module('teacher.course.post', [
             });
         } else {
             TeacherCourse.updateCourse($scope.course, function (err, course) {
-                if (err) {return showAlert('错误','未能更新课程信息，请重试，错误信息: ' + err.data);}
+                if (err) {return teacherFactory.showToast('错误','未能更新课程信息，请重试，错误信息: ' + err.data);}
                 $scope.course = course;
-                showAlert('成功','已更新课程信息');
+                teacherFactory.showToast('成功','已更新课程信息');
                 // FIXME ? whether go-to detail page.
                 teacherFactory.flushCourseList(function () {
                     $state.go('teacher.class');

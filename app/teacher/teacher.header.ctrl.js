@@ -23,7 +23,7 @@
             };
             return self;
         })
-        .controller('teacherHeaderCtrl', function ($scope, $mdDialog, Account, $location, teacherFactory, TeacherHeaderFactory, $log) {
+        .controller('teacherHeaderCtrl', function ($scope,$state, $mdDialog, Account, $location, teacherFactory, TeacherHeaderFactory, $log) {
                 self.freshData = function () {
 
                     teacherFactory.getCourseList(function (err, courses) {
@@ -41,6 +41,10 @@
                     });
                 };
                 self.freshData();
+                $scope.backToClass=function () {
+                    console.log("backToClass/,");
+                    $state.go('teacher.class');
+                };
 
                 var showAlert = function (title, message) {
                     // Appending dialog to document.body to cover sidenav in docs app
