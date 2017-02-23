@@ -10,28 +10,47 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.URL_PROFILE = base + '/profile';
         return self;
     })
-    .factory('Account', function ($http, $cookies,$mdDialog, md5,AccountConstants) {
-
-
-
+    .factory('Account', function ($http, $cookies,$mdDialog,$mdToast, md5,AccountConstants) {
         var self = {};
+
+        var last = {
+            bottom: false,
+            top: true,
+            left: false,
+            right: true
+        };
+        var toastPosition = angular.extend({},last);
+        var getToastPosition = function() {
+            sanitizePosition();
+
+            return Object.keys(toastPosition)
+                .filter(function(pos) { return toastPosition[pos]; })
+                .join(' ');
+        };
+        function sanitizePosition() {
+            var current = toastPosition;
+
+            if ( current.bottom && last.top ) current.top = false;
+            if ( current.top && last.bottom ) current.bottom = false;
+            if ( current.right && last.left ) current.left = false;
+            if ( current.left && last.right ) current.right = false;
+
+            last = angular.extend({},current);
+        }
+        self.showToast = function (title, message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position(getToastPosition())
+                    .hideDelay(3000)
+            );
+        };
+
+
         var hash = self.hash = function (uid, password) {
             return md5.createHash('hash-it-happily-' + uid + '$' + password);
         };
-        self.showAlert = function(title,message) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            // Modal dialogs should fully cover application
-            // to prevent interaction outside of dialog
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .parent(angular.element(document.querySelector('#popupContainer')))
-                    .clickOutsideToClose(true)
-                    .title(title)
-                    .textContent(message)
-                    .ariaLabel('Alert Dialog Demo')
-                    .ok('明白')
-            );
-        };
+        self.showAlert =self.showToast;
 
         self.login = function (username, password, callback) {
             password = hash(username, password);

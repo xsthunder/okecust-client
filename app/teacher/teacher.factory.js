@@ -36,6 +36,7 @@ angular.module('teacher')
        * FIXME help me remove this repeated code
        * @param callback
        */
+      self.showToast=Account.showToast;
       var showAlert = function(title,message) {
           // Appending dialog to document.body to cover sidenav in docs app
           // Modal dialogs should fully cover application
@@ -113,37 +114,6 @@ angular.module('teacher')
 
 
         };
-      var last = {
-          bottom: false,
-          top: true,
-          left: false,
-          right: true
-      };
-      var toastPosition = angular.extend({},last);
-      var getToastPosition = function() {
-          sanitizePosition();
 
-          return Object.keys(toastPosition)
-              .filter(function(pos) { return toastPosition[pos]; })
-              .join(' ');
-      };
-      function sanitizePosition() {
-          var current = toastPosition;
-
-          if ( current.bottom && last.top ) current.top = false;
-          if ( current.top && last.bottom ) current.bottom = false;
-          if ( current.right && last.left ) current.left = false;
-          if ( current.left && last.right ) current.right = false;
-
-          last = angular.extend({},current);
-      }
-      self.showToast = function (title, message) {
-          $mdToast.show(
-              $mdToast.simple()
-                  .textContent(message)
-                  .position(getToastPosition())
-                  .hideDelay(3000)
-          );
-      }
         return self;
     });

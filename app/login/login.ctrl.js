@@ -5,20 +5,7 @@
   angular.module('login')
     .controller('loginCtrl', ctrl);
   function ctrl($scope,$mdDialog, $location, Account, $log, $state) {
-      var showAlert = function (title, message) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          // Modal dialogs should fully cover application
-          // to prevent interaction outside of dialog
-          $mdDialog.show(
-              $mdDialog.alert()
-                  .parent(angular.element(document.querySelector('#popupContainer')))
-                  .clickOutsideToClose(true)
-                  .title(title)
-                  .textContent(message)
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('明白')
-          );
-      };
+      var showAlert = Account.showToast;
 
       $scope.username = '';
     $scope.password = '';
@@ -30,6 +17,13 @@
         if (null !== err) {return showAlert("无法登陆",'请检查账号或密码');}
         Account.setCredit(res);
         var type = res.type;
+        console.log(res);
+          Account.getProfile(function (err, profile) {
+              if (err) {
+                  return $log.error(err);
+              }
+              Account.showToast('chengong','欢迎'+profile.name+'老师');
+          });
         if (type == 7) {
           $location.path('/admin');
         } else if (type == 1) {
