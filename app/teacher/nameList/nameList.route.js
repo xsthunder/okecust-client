@@ -14,7 +14,7 @@
       'header': {
         templateUrl: 'app/layout/header/header.html',
         controller: function ($scope) {
-            $scope.title='添加名单';
+            $scope.title='添加学生';
         }
       },
       'main': {

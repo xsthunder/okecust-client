@@ -27,9 +27,7 @@
 
 
             //two new btn
-            console.log('init class crtl')
             $scope.btnNameList=function (course) {
-                return showAlert('','');
                 console.log('btnNameListl');
                 teacherFactory.setCurrentCourse(course);
                 $state.go('teacher.nameList');

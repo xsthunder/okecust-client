@@ -1,7 +1,7 @@
  <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools" >
       <md-button ng-click="backToClass()">
-        <md-icon class="material-icons">home</md-icon>
+        <md-icon class="material-icons">home</md-icon>菜单
       </md-button>
       <md-select  ng-model="selectedCourse" ng-model-options="{trackBy: '$value._id'}" aria-label="className">
         <md-option   ng-value="course" ng-repeat="course in courses">{{ course.name }}</md-option>

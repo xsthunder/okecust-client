@@ -10,7 +10,12 @@ angular.module('teacher.course.post', [
         views: {
             'header': {
                 templateUrl: 'app/layout/header/header2.html',
-                controller: 'teacherHeaderCtrl'
+                controller: function ($scope,TeacherCourse) {
+
+                    course = TeacherCourse.getActiveCourse();
+                    console.log(course);
+                     $scope.title = course===undefined?'创建课程' : '更新课程信息';
+                }
             },
             'main': {
                 templateUrl: 'app/teacher/class/post/coursePost.html',
@@ -46,7 +51,7 @@ angular.module('teacher.course.post', [
     $scope.course = TeacherCourse.getActiveCourse();
     if($scope.course===undefined)target=TARGET_CREATE;
     else if($scope.course._id) {target = TARGET_UPDATE;}
-    $scope.targetText = TARGET_CREATE === target ? '创建课程' : '更新课程信息';
+    $scope.title=$scope.targetText = TARGET_CREATE === target ? '创建课程' : '更新课程信息';
     $scope.btnNewCourse = function () {
         if (TARGET_CREATE === target) {
             if($scope.course.name===""||$scope.course.name===undefined)return teacherFactory.showToast("错误","课程名不能为空");
