@@ -1,20 +1,24 @@
-  <div ui-view="header"></div>
-  <div>
-    <md-sidenav md-component-id="left">
-      <md-toolbar class="md-hue-2">
-        <span id="teacher.name"><h1 class="md-toolbar-tools">欢迎{{name}}老师</h1></span>
-      </md-toolbar>
-      <div style="margin-top: 4em">
-        <md-list ng-repeat="it in items">
-          <md-list-item ui-sref={{it.sref}} ng-click="toggleList()">
-            <h1 class="md-title">
-              <md-icon class="material-icons">{{it.icon}}</md-icon>
-              {{it.content}}
-            </h1>
-          </md-list-item>
-        </md-list>
-      </div>
-    </md-sidenav>
-  </div>
-  <div ui-view="main"  style=""></div>
-  <div ui-view="footer"></div>
+<body >
+  <md-content layout="column" layout-fill >
+  <div ui-view="header" style="height: 57px"></div>
+  <!--<div>-->
+    <!--<md-sidenav md-component-id="left">-->
+      <!--<md-toolbar class="md-hue-2">-->
+        <!--<span id="teacher.name"><h1 class="md-toolbar-tools">欢迎{{name}}老师</h1></span>-->
+      <!--</md-toolbar>-->
+      <!--<div style="margin-top: 4em">-->
+        <!--<md-list ng-repeat="it in items">-->
+          <!--<md-list-item ui-sref={{it.sref}} ng-click="toggleList()">-->
+            <!--<h1 class="md-title">-->
+              <!--<md-icon class="material-icons">{{it.icon}}</md-icon>-->
+              <!--{{it.content}}-->
+            <!--</h1>-->
+          <!--</md-list-item>-->
+        <!--</md-list>-->
+      <!--</div>-->
+    <!--</md-sidenav>-->
+  <!--</div>-->
+    <div ui-view="main"  style="height: auto"></div>
+  <!--<div ui-view="footer"></div>-->
+  </md-content>
+</body>
