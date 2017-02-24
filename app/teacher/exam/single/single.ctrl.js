@@ -69,6 +69,7 @@
             $scope.contents.splice(index, 1);
         };
         $scope.btnNewContent = function () {
+            if($scope.contents.length>6)return showAlert('','项数超出限制，不能再增加');
             $scope.contents.push({
                 answer: false,
                 extras: ""

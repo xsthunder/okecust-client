@@ -1,8 +1,8 @@
 <br>
 <br>
 <br>
-<md-content >
-    <div ng-repeat="each in nameList track by $index" layout="row" layout-padding>
+<md-content layout-padding>
+    <div ng-repeat="each in nameList track by $index" layout="row" flex="100" flex-gt-xs="50" layout-padding>
         <md-input-container class="md-block" flex="auto">
             <label>学号</label>
             <input ng-model="each.id">
