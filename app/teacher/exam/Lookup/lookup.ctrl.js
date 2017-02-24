@@ -4,8 +4,11 @@
 (function () {
   angular.module('teacher.exam.lookup')
     .controller('lookupCtrl', ctrl);
-  function ctrl($scope, $mdDialog,TeacherHeaderFactory , teacherFactory, qaAddDetailFactory, teacherQuizFactory, $log, TeacherCourse) {
+  function ctrl($scope,$state,TeacherHeaderFactory , teacherFactory, qaAddDetailFactory, teacherQuizFactory, $log, TeacherCourse) {
     $log.info('lookuptrl init');
+    $scope.gotoQa=function () {
+        $state.go('teacher.qaAdd');
+    };
     var showAlert=teacherFactory.showToast;
       var freshData=function() {
           TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
