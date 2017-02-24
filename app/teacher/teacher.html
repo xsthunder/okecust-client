@@ -1,6 +1,6 @@
 <body >
-  <md-content layout="column" layout-fill >
-  <div ui-view="header" style="height: 57px"></div>
+  <md-content layout="column" style="overflow-y: hidden;" >
+  <div ui-view="header" id="Theader" style="height: 57px"></div>
   <!--<div>-->
     <!--<md-sidenav md-component-id="left">-->
       <!--<md-toolbar class="md-hue-2">-->
@@ -18,7 +18,14 @@
       <!--</div>-->
     <!--</md-sidenav>-->
   <!--</div>-->
-    <div ui-view="main"  style="height: auto"></div>
+    <div ui-view="main" id="Tmain" layout-fill style="overflow-y: auto;height: 50%;width: 100%" ></div>
   <!--<div ui-view="footer"></div>-->
   </md-content>
+  <script>
+      $("#Tmain").height(document.documentElement.clientHeight-57);
+      $(window).resize(function(){
+          $("#Tmain").height(document.documentElement.clientHeight-57);
+      });
+  </script>
+
 </body>
