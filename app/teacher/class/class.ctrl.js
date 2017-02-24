@@ -9,7 +9,7 @@
                 if (err) {
                     if(err.status==400){
                         showAlert('cuowu','登录信息有误');
-                        $state.go('login');
+                        //$state.go('login');
                     }
                     return showAlert('错误', '获取课程列表失败，请重试.');
                 }

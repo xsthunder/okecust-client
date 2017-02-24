@@ -19,8 +19,8 @@
             .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
             .state("otherwise", {
                 url: "*path",
-                controller:function ($state) {
-                    $state.go('teacher.class');
+                controller: function ($state) {
+                    $state.go('login');
                 }
             });
     }
@@ -176,7 +176,7 @@
     }
 
     function headerBackClickCtrl(title, back) {
-        return function ($scope, $state,Account, $location) {
+        return function ($scope, $state, Account, $location) {
             $scope.title = title;
             $scope.logout = function () {
                 Account.deleteCredit();

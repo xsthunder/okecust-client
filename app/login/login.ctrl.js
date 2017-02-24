@@ -24,7 +24,7 @@
                     if (err) {
                         return $log.error(err);
                     }
-                    Account.showToast('chengong', '欢迎' + profile.name+(type==1?'同学':'老师'));
+                    Account.showToast('chengong', '欢迎' + profile.name + (type == 1 ? '同学' : '老师'));
                 });
                 if (type == 7) {
                     $location.path('/admin');
