@@ -4,7 +4,7 @@
 (function () {
     angular.module('teacher.exam.single')
         .controller('singleCtrl', ctrl);
-    function ctrl(singleFactory, $log, $scope,$state ,$mdDialog,TeacherCourse, teacherFactory, TeacherQuestionLibraryDetail) {
+    function ctrl(singleFactory, $log, $scope, $state, $mdDialog, TeacherCourse, teacherFactory, TeacherQuestionLibraryDetail) {
         $log.info('this is exam single ctrl');
 
         //FIXME 去重复
@@ -28,30 +28,31 @@
 
         $scope.switchType = function () {
             $scope.questionInstance.type = $scope.type ? 2 : 1;
-            $scope.showCheckbox=true;
+            $scope.showCheckbox = true;
 
             console.log($scope.contents);
             function checkNon(age) {
                 console.log(age);
-                console.log(!age.extras=="");
-                return (!age.extras=="");
+                console.log(!age.extras == "");
+                return (!age.extras == "");
             }
-            if($scope.questionInstance.type===2){
 
-                $scope.contents=$scope.contents.filter(checkNon);
+            if ($scope.questionInstance.type === 2) {
+
+                $scope.contents = $scope.contents.filter(checkNon);
                 console.log($scope.contents);
             }
             else {
-                while($scope.contents.length<4){
+                while ($scope.contents.length < 4) {
                     $scope.contents.push({
-                        answer: false,
-                        extras: ""
+                            answer: false,
+                            extras: ""
                         }
                     )
                 }
             }
-            if($scope.contents.length===undefined||$scope.contents.length===0) {
-                $scope.contents=[];
+            if ($scope.contents.length === undefined || $scope.contents.length === 0) {
+                $scope.contents = [];
                 console.log($scope.contents);
                 $scope.contents.push({
                     answer: false,
@@ -65,7 +66,7 @@
         };
 
         $scope.btnRemoveContent = function (index) {
-            $scope.contents.splice( index,1);
+            $scope.contents.splice(index, 1);
         };
         $scope.btnNewContent = function () {
             $scope.contents.push({
@@ -75,11 +76,11 @@
             // console.log(Instance.contents.length());
         };
 
-        $scope.String=String;
-        $scope.showCheckbox=true;
+        $scope.String = String;
+        $scope.showCheckbox = true;
         var libId;
-        $scope.chooseCorrect=function () {
-            if($scope.type)$scope.showCheckbox=false;
+        $scope.chooseCorrect = function () {
+            if ($scope.type) $scope.showCheckbox = false;
         };
         $scope.submit = function () {
             TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
@@ -109,15 +110,22 @@
                     question.answers = [];
                     var i;
                     if (question.type === 1) {//选择题
+                        var flag = false;
                         for (i = 0; i < $scope.contents.length; i++) {
                             question.extras.push($scope.contents[i].extras);
                             question.answers.push($scope.contents[i].answer);
                         }
+                        console.log(!question.answers.every(function (B) {
+                            if (!B)return true;
+                        }));
+                        if (question.answers.every(function (B) {
+                                if (!B)return true;
+                            }))return showAlert('shibai', '添加失败，请选择至少一个正确答案');
                     }
                     else if (question.type === 2) {
                         for (i = 0; i < $scope.contents.length; i++) {
                             question.answers.push($scope.contents[i].extras);
-                            question.extras.push('第'+(i+1)+'个空');
+                            question.extras.push('第' + (i + 1) + '个空');
                         }
                     }
 

@@ -4,13 +4,14 @@
 (function () {
     angular.module('teacher')
         .controller('teacherClassesCtrl', function ($scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
-
+            var showAlert=teacherFactory.showToast;
             var onDataCallback = function (err, courses) {
                 if (err) {
                     return showAlert('错误', '获取课程列表失败，请重试.');
                 }
                 $scope.courses = courses;
                 console.log(courses);
+                if(courses.length==0)return showAlert('meiyou','暂时还没有课程');
             };
             teacherFactory.getCourseList(onDataCallback);
             $scope.selectCourse = function (course) {
@@ -76,21 +77,6 @@
                     });
 
 
-            };
-            $scope.showCourseMenu = true;
-            var showAlert = function (title, message) {
-                // Appending dialog to document.body to cover sidenav in docs app
-                // Modal dialogs should fully cover application
-                // to prevent interaction outside of dialog
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        .parent(angular.element(document.querySelector('#popupContainer')))
-                        .clickOutsideToClose(true)
-                        .title(title)
-                        .textContent(message)
-                        .ariaLabel('Alert Dialog Demo')
-                        .ok('明白')
-                );
             };
         });
 })();

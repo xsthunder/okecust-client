@@ -14,10 +14,10 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         var self = {};
 
         var last = {
-            bottom: false,
-            top: true,
-            left: false,
-            right: true
+            bottom: true,
+            top: false,
+            left: true,
+            right: false
         };
         var toastPosition = angular.extend({},last);
         var getToastPosition = function() {

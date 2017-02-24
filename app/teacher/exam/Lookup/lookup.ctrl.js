@@ -6,6 +6,7 @@
     .controller('lookupCtrl', ctrl);
   function ctrl($scope, $mdDialog,TeacherHeaderFactory , teacherFactory, qaAddDetailFactory, teacherQuizFactory, $log, TeacherCourse) {
     $log.info('lookuptrl init');
+    var showAlert=teacherFactory.showToast;
       var freshData=function() {
           TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
               if (error) {
@@ -30,6 +31,7 @@
                       var i;
                       var j;
                       //return ;
+                      if(questions.length==0)return showAlert('aa','本课程还没有题目');
                       for (i = 0; i < questions.length; i++) {
                           var alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                           var content = questions[i];
@@ -37,7 +39,7 @@
                           console.log(content);
                           //return ;
                           if (content.type == 1) {
-                              content.name += "       - 选择题";
+                              // content.name += "       - 选择题";
                               for (j = 0; j < content.extras.length && j < alphaList.length; j++) {
                                   content.extras[j] = alphaList[j] + '. ' + content.extras[j];
                                   if (content.answers[j]) content.extras[j] += "        - 正确答案";
@@ -49,7 +51,7 @@
                           }
                           else if (content.type == 2) {
 
-                              content.name += "   - 填空题";
+                              // content.name += "   - 填空题";
                               content.extras = [];
                               for (j = 0; j < content.answers.length; j++) {
                                   content.extras[j] = "第" + (j + 1) + "个空：" + content.answers[j];
@@ -64,23 +66,5 @@
       };
       TeacherHeaderFactory.setOnSelectedListener(freshData);
       freshData();
-
-      //FIXME 去重复
-      var showAlert = function(title,message) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          // Modal dialogs should fully cover application
-          // to prevent interaction outside of dialog
-          $mdDialog.show(
-              $mdDialog.alert()
-                  .parent(angular.element(document.querySelector('#popupContainer')))
-                  .clickOutsideToClose(true)
-                  .title(title)
-                  .textContent(message)
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('明白')
-          );
-      };
-
-
   }
 })();
