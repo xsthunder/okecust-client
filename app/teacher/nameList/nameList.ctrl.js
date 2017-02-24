@@ -36,7 +36,7 @@
                 }
 
                 if (res === undefined) {
-                    showAlert('','读取名单数据，请重试');
+                    showAlert('','读取名单数据失败，请重试');
                     $scope.showFab = true;
                 }
             });
