@@ -7,8 +7,8 @@ angular
         'student',
         'teacher'
     ])
-    .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/teacher');
+    .config(function ($stateProvider) {
+
     })
     .config(['$sceDelegateProvider', function ($sceDelegateProvider) {
         // Prevent OPTIONS http request.

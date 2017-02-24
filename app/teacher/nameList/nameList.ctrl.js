@@ -21,16 +21,19 @@
             TeacherCourse.getCourseStudents(teacherFactory.getCurrentCourse()._id, function (error, res) {
                 if (error) {
                     console.log(teacherFactory.getCurrentCourse()._id);
-                    if (teacherFactory.getCurrentCourse()._id !== undefined||teacherFactory.getCurrentCourse()._id===0) {
+                    if (teacherFactory.getCurrentCourse()._id !== undefined || teacherFactory.getCurrentCourse()._id === 0) {
                         $scope.showFab = true;
                         return showAlert("失败", "获取名单失败，可以尝试刷新");
                     }
                 }
                 $log.info(res);
                 $scope.students = res;
+
+                if (res.length == 0)return showAlert('','本课程名单为空');
+
                 console.log('set false');
                 $scope.showFab = false;
-                if(res===undefined)$scope.showFab = true;
+                if (res === undefined) $scope.showFab = true;
             });
         };
         TeacherHeaderFactory.setOnSelectedListener(freshData);
