@@ -15,10 +15,11 @@
                     if (!error) {
                         $scope.QAitems = res;
                         $scope.showFab=true;
+                        if(res.length==0)return showAlert('','目前该课程还没有问答');
                     }
                     else {
-
                         $scope.showFab=false;
+                        return showAlert('','错误：没有选择课程');
                     }
                 });
             };

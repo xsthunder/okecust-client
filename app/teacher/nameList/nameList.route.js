@@ -13,7 +13,9 @@
     views: {
       'header': {
         templateUrl: 'app/layout/header/header.html',
-        controller: 'layoutHeaderCtrl'
+        controller: function ($scope) {
+            $scope.title='添加名单';
+        }
       },
       'main': {
         templateUrl: 'app/teacher/nameList/add/add.html',

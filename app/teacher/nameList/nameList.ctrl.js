@@ -28,12 +28,17 @@
                 }
                 $log.info(res);
                 $scope.students = res;
-
-                if (res.length == 0)return showAlert('','本课程名单为空');
-
-                console.log('set false');
                 $scope.showFab = false;
-                if (res === undefined) $scope.showFab = true;
+
+                if (res.length == 0){
+                    $scope.showFab = false;
+                    return showAlert('','本课程名单为空');
+                }
+
+                if (res === undefined) {
+                    showAlert('','读取名单数据，请重试');
+                    $scope.showFab = true;
+                }
             });
         };
         TeacherHeaderFactory.setOnSelectedListener(freshData);

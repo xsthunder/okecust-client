@@ -6,7 +6,7 @@
     .controller('teacherQaAddCtrl', ctrl);
 
 
-  function ctrl($scope, $mdDialog, teacherFactory, qaAddDetailFactory, teacherQuizFactory, $log, TeacherCourse) {
+  function ctrl($scope, $mdDialog, teacherFactory, qaAddDetailFactory,$state, teacherQuizFactory, $log, TeacherCourse) {
     $log.info('teacherQaAddCtrl init');
     $scope.newQuizTitle = '';
       var selected = [];
@@ -30,6 +30,7 @@
               //console.log(questions);
               $scope.questions= [];
               $scope.questionSet=questions;
+              if(questions.length==0)return showAlert('','该课程还没有题目，请到题库添加');
 
 
               console.log($scope.questionSet);
@@ -68,20 +69,7 @@
       }
     });
       //FIXME 去重复
-      var showAlert = function(title,message) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          // Modal dialogs should fully cover application
-          // to prevent interaction outside of dialog
-          $mdDialog.show(
-              $mdDialog.alert()
-                  .parent(angular.element(document.querySelector('#popupContainer')))
-                  .clickOutsideToClose(true)
-                  .title(title)
-                  .textContent(message)
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('明白')
-          );
-      };
+      var showAlert = teacherFactory.showToast;
 
 
     //获取选择条目部分
@@ -112,8 +100,15 @@
         $log.log(error);
         $log.log(data);
 
-        if(error)return showAlert("新增小测验","添加失败，请检查重试");
-        else return showAlert("新增小测验","成功：名称“"+title+"”共"+data.questions.length+"道题");
+        if(error) {
+            showAlert("新增小测验", "添加失败，请检查重试");
+            $state.go('teacher.qa');
+
+        }
+        else {
+          showAlert("新增小测验","成功：名称“"+title+"”共"+data.questions.length+"道题");
+          $state.go('teacher.qa');
+        }
       });
     };
   }

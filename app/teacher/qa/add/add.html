@@ -2,9 +2,9 @@
 <br>
 <br>
 <br>
-<md-content  class="md-padding"  ng-repeat="question in questions track by $index">
+<div layout-padding>
+<md-content   ng-repeat="question in questions track by $index">
     <div   layout="column">
-
       <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
         <md-card-title >
           <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]" ng-click="cardClick($index)" >
@@ -16,17 +16,20 @@
             </div>
           </md-card-title-text>
         </md-card-title>
-
       </md-card>
 
     </div>
+</div>
   </md-content>
-  <md-input-container>
+<div layout-padding>
+<md-content >
+  <md-input-container >
     <label>试题名称</label>
     <input required ng-model="newQuizTitle">
   </md-input-container>
   <md-button ng-click="submit(newQuizTitle)" class="md-raised md-primary">确定</md-button>
 </md-content>
+</div>
 <div ng-show="false">
   {{questionSet}}
 </div>

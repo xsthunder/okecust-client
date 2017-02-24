@@ -7,28 +7,20 @@
     function ctrl($scope, $log,$state, $mdDialog, headerFactory, TeacherCourse, teacherFactory) {
         var showAlert = teacherFactory.showToast;
         $scope.students = [];
+        $scope.nameList=[
+            {
+                id:'' ,
+                name:''
+            }
+        ];
         $log.info('nameListAddCtrl init');
         $scope.submit = function () {
             console.log("init sumit");
-            var nameList = $scope.nameList;
-            var nameListArr = [];
-            if ((nameList === "" || nameList === undefined)) {
-            }
-            else {
-                var arr = nameList.split('\n');
-
-                for (var i = 0; i < arr.length; i++) {
-                    var obj = {};
-
-                    var xarr = arr[i].split(/[\t ]/);
-                    if (xarr.length != 2) {
-                        return showAlert('错误', "生成数据失败，请确认在学号和姓名间使用TAB或空格");
-                    }
-                    obj.id = xarr[0];
-                    obj.name = xarr[1];
-                    nameListArr.push(obj);
-                }
-            }
+            var nameListArr = $scope.nameList.filter(function (each) {
+                if(each.id==''||each.name=='')return false;
+                else return true;
+            });
+            console.log(nameListArr);
             nameListArr=nameListArr.concat($scope.students);
             if(nameListArr.length==0)return showAlert('cuowu','没有读取到任何名单数据');
             $log.info(nameListArr);
@@ -38,7 +30,7 @@
                     return showAlert('错误', "添加名单失败,请重试" + error.status);
                 }
                 showAlert("成功", "成功添加\"" + res.scoresCreated + "\"名学生到\"" + teacherFactory.getCurrentCourse().name + "\"");
-                //$state.go('teacher.nameList');
+                $state.go('teacher.nameList');
             })
 
         };

@@ -48,8 +48,8 @@
                 <textarea required ng-model="questionInstance.name"  md-select-on-focus></textarea>
             </md-input-container>
         </md-content>
-        <md-content layout-padding class="md-block" layout="column">
-            <div layout="row" ng-repeat="x in contents track by $index" layout-align="center center">
+        <md-content  >
+            <div layout="row" ng-repeat="x in contents track by $index" >
                 <md-checkbox aria-label="check" ng-model="x.answer" ng-disabled="!type" ng-hide="showCheckbox" layout-align="center center"
                              title="设为正确答案">
                 </md-checkbox>
@@ -57,10 +57,12 @@
                     <label ng-hide="!type">{{String.fromCharCode('A'.charCodeAt(0)+$index)+"."}}</label>
                     <input ng-model="x.extras">
                 </md-input-container>
-                <md-icon class="material-icons md-secondary" style="display: inline;"
-                         ng-click="btnRemoveContent($index)" title="删除这一栏">
+                <md-button ng-click="btnRemoveContent($index)" >
+                <md-icon class="material-icons md-secondary"
+                          title="删除这一栏">
                     delete
                 </md-icon>
+                </md-button>
             </div>
         </md-content>
 
