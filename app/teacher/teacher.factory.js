@@ -85,10 +85,10 @@ angular.module('teacher')
 
             $cookies.putObject('currentCourse', value);
             currentCourse = value;
-            console.log("setting cureent courses");
-            console.log("value");
-            console.log(value);
-            console.log("valueend");
+            // console.log("setting cureent courses");
+            // console.log("value");
+            // console.log(value);
+            // console.log("valueend");
         };
         self.getCurrentCourse = function () {
             currentCourse = $cookies.getObject('currentCourse');

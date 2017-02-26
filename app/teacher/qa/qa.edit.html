@@ -1,0 +1,25 @@
+<md-content layout-padding="false">
+    <div flex>
+        <span class="md-toast-text" flex>问答名称:{{quiz.name}}</span>
+        <md-button class="md-highlight" ng-click="openMoreInfo($event)">
+        </md-button>
+        <md-button ng-click="closeToast()">
+            Close
+        </md-button>
+        <md-datepicker ng-model="newDate"></md-datepicker>
+        <div layout="row">
+            <md-input-container flex="33">
+                <label>名称</label>
+                <input ng-model="newName" style="background-color: white">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>开始时间</label>
+                <input ng-model="newName" style="background-color: white">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>持续时间</label>
+                <input ng-model="newName" style="background-color: white">
+            </md-input-container>
+        </div>
+    </div>
+</md-content>

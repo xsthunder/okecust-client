@@ -13,7 +13,6 @@ angular.module('student.person', ['ui.router', 'account'])
             Account.deleteCredit();
             $location.path('/login');
         };
-
     }
   })
 });

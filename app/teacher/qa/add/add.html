@@ -1,39 +1,56 @@
-
 <div layout-padding>
-<md-content   ng-repeat="question in questions track by $index">
-    <div   layout="column">
-      <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
-        <md-card-title >
-          <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]" ng-click="cardClick($index)" >
-        </md-checkbox>
-          <md-card-title-text>
-            <span class="md-headline">{{question.name}}</span>
-            <div ng-repeat="extra in question.extras">
-              {{extra}}
-            </div>
-          </md-card-title-text>
-        </md-card-title>
-      </md-card>
+    <md-content ng-repeat="question in questions track by $index">
+        <div layout="column">
+            <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
+                <md-card-title>
+                    <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]"
+                                 ng-click="cardClick($index)">
+                    </md-checkbox>
+                    <md-card-title-text>
+                        <span class="md-headline">{{question.name}}</span>
+                        <div ng-repeat="extra in question.extras">
+                            {{extra}}
+                        </div>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
 
-    </div>
+        </div>
+    </md-content>
 </div>
-  </md-content>
+
 <div layout-padding>
-<md-content >
-  <md-input-container >
-    <label>试题名称</label>
-    <input required ng-model="newQuizTitle">
-  </md-input-container>
-  <md-button ng-click="submit(newQuizTitle)" class="md-raised md-primary">确定</md-button>
-</md-content>
+    <md-content layout="column">
+        <md-input-container>
+            <label>试题名称</label>
+            <input required ng-model="newQuizTitle">
+        </md-input-container>
+        <md-input-container>
+            <label>开始时间</label>
+            <input type="datetime-local" name="date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2017-01-01T00:00:00" max="2030-12-31T00:00:00" required ng-model="date" id="user_date"/>
+        </md-input-container>
+        <md-input-container>
+            <label>持续时间(分钟）</label>
+            <input required ng-model="minute">
+
+        </md-input-container>
+
+        <md-button ng-click="submit(newQuizTitle)" class="md-raised md-primary" flex="none">确定</md-button>
+    </md-content>
+    <!--<md-content flex-gt-xs>-->
+        <!--<label>Enter date</label>-->
+        <!--<md-datepicker ng-model="user.submissionDate"></md-datepicker>-->
+    <!--</md-content>-->
+    <!--<label for="meeting">约会日期：</label><input id="meeting" type="date" value="2014-01-13:23-55"/>-->
 </div>
 <div ng-show="false">
-  {{questionSet}}
+    {{questionSet}}
 </div>
 <style>
-  md-list {
-    padding: 2em;
-  }
-  md-checkbox {
-  }
+    md-list {
+        padding: 2em;
+    }
+
+    md-checkbox {
+    }
 </style>

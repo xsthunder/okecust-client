@@ -30,7 +30,7 @@
                     $location.path('/admin');
                 } else if (type == 1) {
                     $log.info('student');
-                    $state.go('student');
+                    $state.go('student.class');
                 } else if (type == 2) {
                     $location.path('/teacher/class');
                 }

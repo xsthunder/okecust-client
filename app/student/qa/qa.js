@@ -157,7 +157,7 @@ angular.module('student.qa', [
             controller: 'qaCtrl'
         })
     })
-    .controller('qaCtrl', function ($scope, $mdSidenav, $location, Account, $mdToast, $mdDialog,
+    .controller('qaCtrl', function ($scope, $mdSidenav,$state, $location, Account, $mdToast, $mdDialog,
                                     studentFactory, $log, studentAchievementFactory, studentQuizFactory) {
         if (!Account.checkCredit(1)) {
             return $location.path('/login');
@@ -209,7 +209,7 @@ angular.module('student.qa', [
                 //   studentFactory.setCurrentCourse(id);
                 // }
             }
-            else Account.showAlert('错误','无法获得课程列表');
+            else Account.showAlert('错误', '无法获得课程列表');
         });
         $scope.switchPaper = function (idx) {
             $scope.paperVisible = true;
@@ -219,60 +219,60 @@ angular.module('student.qa', [
                     $scope.achID = res._id;
                     var ansConst;
                     studentAchievementFactory.getAchievementDetail($scope.achID, function (err, res) {
-                        if (err == null) {
-                            console.log(res);
-                            $scope.questions = res.questionDetails;
-                            $scope.questionNum = $scope.questions.length;
-                            $scope.answer = [];
-                            for (var i = 0; i < $scope.questions.length; i++) {
-                                $scope.answer.push([]);
-                                if($scope.questions[i].type==1)ansConst=false;
-                                else ansConst='';
-                                for (var j = 0; j < $scope.questions[i].extras.length; j++) {
-                                    $scope.answer[i].push(ansConst);
+                            if (err == null) {
+                                console.log(res);
+                                $scope.questions = res.questionDetails;
+                                $scope.questionNum = $scope.questions.length;
+                                $scope.answer = [];
+                                for (var i = 0; i < $scope.questions.length; i++) {
+                                    $scope.answer.push([]);
+                                    if ($scope.questions[i].type == 1) ansConst = false;
+                                    else ansConst = '';
+                                    for (var j = 0; j < $scope.questions[i].extras.length; j++) {
+                                        $scope.answer[i].push(ansConst);
+                                    }
                                 }
                             }
+                            else
+                                Account.showAlert('无法上传结果', "请重试");
                         }
-                else
-                            Account.showAlert('无法上传结果',"请重试");
+                    )
                 }
-                )
+            })
+        };
+
+        $scope.switchCourse = function (course) {
+            studentFactory.setCurrentCourse(course);
+            studentFactory.getCourseQuizzesList(studentFactory.getCurrentCourse(), function (err, list) {
+                if (err == null) {
+                    $scope.quizList = list;
+                }
+            });
+        };
+        $scope.switchCourse(studentFactory.getCurrentCourse());
+        $scope.courseSelected = studentFactory.getCurrentCourseName();
+        $scope.switchQuestion = function (index) {
+            $scope.questionVisible = true;
+            $scope.currentQuestion = index;
+        };
+        $scope.submitQuiz = function () {
+            var confirm = $mdDialog.confirm()
+                .title('确认交卷吗？')
+                .textContent('只能提交一次')
+                .ariaLabel('Lucky day')
+                .ok('确定')
+                .cancel('取消');
+
+            $mdDialog.show(confirm).then(function () {
+                studentAchievementFactory.submitAchievementDetail($scope.achID, $scope.answer, function (err, res) {
+                    if (err == null) Account.showAlert('成功', '提交成功');
+                    else Account.showAlert('错误', '已经提交过');
+                })
+                console.log($scope.answer)
+            }, function () {
+            });
+        }
+        $scope.backToClass=function () {
+            $state.go('student.class');
         }
     })
-}
-;
-$scope.switchCourse = function (idx) {
-    var id = $scope.courseList[idx]._id;
-    studentFactory.setCurrentCourse(id);
-    studentFactory.getCourseQuizzesList(studentFactory.getCurrentCourse(), function (err, list) {
-        if (err == null) {
-            $scope.quizList = list;
-        }
-    });
-};
-$scope.switchQuestion = function (index) {
-    $scope.questionVisible = true;
-    $scope.currentQuestion = index;
-};
-$scope.submitQuiz = function () {
-    var confirm = $mdDialog.confirm()
-        .title('确认交卷吗？')
-        .textContent('只能提交一次')
-        .ariaLabel('Lucky day')
-        .ok('确定')
-        .cancel('取消');
-
-    $mdDialog.show(confirm).then(function() {
-        studentAchievementFactory.submitAchievementDetail($scope.achID, $scope.answer, function (err, res) {
-            if (err == null) Account.showAlert('成功','提交成功');
-            else Account.showAlert('错误','已经提交过');
-        })
-        console.log($scope.answer)
-    }, function() {
-    });
-
-
-
-
-}
-})

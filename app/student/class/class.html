@@ -1,16 +1,74 @@
-<div layout="column" style="height:100%">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <span>班级列表</span>
-    </div>
-  </md-toolbar>
-  <md-content style="overflow: auto">
-    <md-list flex>
-      <md-list-item class="md-3-line" ng-repeat="course in courseList" ng-click="setCourse($index)">
-        <div class="md-list-item-text" layout="column" layout-padding>
-          <h3>{{ course.name }}</h3>
+<!--<div layout="column" style="height:100%">-->
+  <!--<md-toolbar>-->
+    <!--<div class="md-toolbar-tools">-->
+      <!--<span>班级列表</span>-->
+    <!--</div>-->
+  <!--</md-toolbar>-->
+  <!--<md-content style="overflow: auto">-->
+    <!--<md-list flex>-->
+      <!--<md-list-item class="md-3-line" ng-repeat="course in courseList" ng-click="setCourse($index)">-->
+        <!--<div class="md-list-item-text" layout="column" layout-padding>-->
+          <!--<h3>{{ course.name }}</h3>-->
+        <!--</div>-->
+      <!--</md-list-item>-->
+    <!--</md-list>-->
+  <!--</md-content>-->
+<!--</div>-->
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <!--<md-button ng-click="click()">-->
+    <!--<md-icon class="material-icons">keyboard_backspace</md-icon>-->
+    <!--</md-button>-->
+    <h1 flex="noshrink">
+      <md-icon class="md-secondary material-icons">call_to_action</md-icon>
+      就叫课堂
+    </h1>
+    <md-button ng-click="updatePwd()">
+      <md-icon class="md-secondary material-icons">build</md-icon>
+      <span>修改密码</span>
+    </md-button>
+    <md-button ng-click="logout()">
+      <md-icon class="md-secondary material-icons">power_settings_new</md-icon>
+      <span>登出</span>
+    </md-button>
+
+  </div>
+</md-toolbar>
+<md-content class="md-padding" layout="column">
+  <div ng-repeat="course in courseList" flex-xs flex-gt-xs="50" layout="column">
+    <md-card md-theme="default">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{course.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-xs="column" layout-align="end end">
+        <div layout-xs="row">
+          <md-button ng-click="btnExam(course)">
+            <md-icon class="md-secondary material-icons">people</md-icon>
+            <span>做题</span>
+          </md-button>
+          <md-button ng-click="btnExam(course)">
+            <md-icon class="md-secondary material-icons">folder</md-icon>
+            <span>题库</span>
+          </md-button>
+          <md-button ng-click="btnQa(course)">
+            <md-icon class="md-secondary material-icons">assessment</md-icon>
+            <span>成绩</span>
+          </md-button>
         </div>
-      </md-list-item>
-    </md-list>
-  </md-content>
-</div>
+        <!--<div layout-xs="row">-->
+          <!--<md-button ng-click="btnUpdateCourse(course)">-->
+            <!--<md-icon class="md-secondary material-icons">edit</md-icon>-->
+            <!--<span>编辑</span>-->
+          <!--</md-button>-->
+          <!--<md-button ng-click="btnRemoveCourse(course)">-->
+            <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
+            <!--<span>删除</span>-->
+          <!--</md-button>-->
+        <!--</div>-->
+      </md-card-actions>
+
+    </md-card>
+  </div>
+</md-content>

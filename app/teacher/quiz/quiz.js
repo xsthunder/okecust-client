@@ -98,10 +98,17 @@ angular.module('teacher.quiz', [
          * @param callback
          */
         //添加题目方法
+        var currentQuiz;
+        self.setCurrentQuiz=function (quiz) {
+            currentQuiz=quiz;
+        };
+        self.getCurrentQuiz=function () {
+            return currentQuiz;
+        };
         self.createNewQuiz = function (courseID, quiz, callback) {
             $http.post(TeacherConstants.URL_BASE + '/courses/' + courseID + '/quizzes', {
                 name: quiz.name,
-                desc: quiz.desc,
+                description: quiz.desc,
                 time: quiz.time,
                 questions: quiz.questions
             }, {
@@ -117,6 +124,8 @@ angular.module('teacher.quiz', [
             $http.patch(TeacherQuizConstants.URL_MODEL, {
                 name: quiz.name,
                 desc: quiz.desc,
+                duration: quiz.duration,
+                time: quiz.time,
                 questions: quiz.questions
             }, {
                 headers: {'x-token': Account.getToken()}

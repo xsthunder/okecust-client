@@ -38,6 +38,7 @@ angular.module('student', [
   .factory('studentFactory', function (Account, $http, $log, StudentConstants) {
     var courseList;
     var currentCourse;
+    var currentCourseName;
     var self = {};
     self.flushCourseList = function (callback) {
 
@@ -65,10 +66,18 @@ angular.module('student', [
     };
     self.setCurrentCourse = function (value) {
       currentCourse = value;
+      console.log('setCurrentC');
+      console.log(value);
     };
+    self.setCurrentCourseName = function(name) {
+        currentCourseName = name;
+    }
     self.getCurrentCourse = function () {
       return currentCourse;
     };
+    self.getCurrentCourseName = function() {
+        return currentCourseName;
+    }
     /**
      * Get course detail.
      *
