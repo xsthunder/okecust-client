@@ -2,5 +2,6 @@
 # Ignore ide files.
 .idea
 .vscode
+node_modules
 
 
