@@ -12,6 +12,11 @@
 
     function mainCtrl($scope,$state, Account, teacherQuizFactory, $log, teacherQaFactory) {
         var showAlert = Account.showToast;
+        $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+        $scope.data = [300, 500, 100];
+
+
+
         $log.log(teacherQuizFactory.nowQuiz);
         try {
             var quizId = teacherQuizFactory.nowQuiz._id;
@@ -38,6 +43,8 @@
         function getCharts(reports, callback) {
             var charts = [];
             $log.log(reports);
+            var detail=[];
+            var each={};
             for (var i = 0; i < reports.length; i++) {
                 var report = reports[i];
                 var chart = {};
@@ -46,23 +53,22 @@
                     "cols": [
                         {id: '1', label: '题号', type: 'string'},
                         {id: '2', label: '回答人数', type: 'number'}]
-                    // "rows": [
-                    //   {c: [{v: 'A'}, {v: report[0]}]},
-                    //   {c: [{v: 'B'}, {v: report[1]}]},
-                    //   {c: [{v: 'C'}, {v: report[2]}]},
-                    //   {c: [{v: 'D'}, {v: report[3]}]},
-                    // ]
                 };
                 chart.data.rows = [];
+
                 for (var j = 0; j < report.length; j++) {
                     chart.data.rows.push(
                         {c: [{v: String.fromCharCode('A'.charCodeAt(0) + j)}, {v: report[j]}]}
                     )
                 }
+
                 chart.options = {
                     'title': ('第' + (i + 1) + '题报告')
                 };
+                each['titile']=('第' + (i + 1) + '题报告');
                 charts.push(chart);
+                each['detail']=report[j];
+                detail.push(each);
             }
             callback();
             return charts;

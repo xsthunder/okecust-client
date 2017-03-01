@@ -17,6 +17,7 @@
             .state('teacher.docAdd', docAddRoute)
             .state('teacher.qaAdd', qaAddRoute)
             .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
+            .state('teacher.accountUpdate',teacherAccountUpdate)
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -24,7 +25,19 @@
                 }
             });
     }
-
+    var teacherAccountUpdate={
+        url: '/account/update',
+        views: {
+            'header': {
+                templateUrl: 'app/layout/header/header2.html',
+                controller: 'teacherHeaderCtrl'
+            },
+            'main': {
+                templateUrl: 'app/teacher/accountUpdate/accountUpdate.html',
+                controller: 'accountUpdateCtrl'
+            }
+        }
+    };
     var questionLibraryDetailRoute = {
         url: '/questionLibrary/detail',
         views: {
@@ -176,15 +189,17 @@
     }
 
     function headerBackClickCtrl(title, back) {
-        return function ($scope, $state, Account, $location) {
+        return function ($scope, $state,teacherFactory, Account, $location) {
             $scope.title = title;
             $scope.logout = function () {
                 Account.deleteCredit();
+                teacherFactory.setCurrentCourse(null);
+                teacherFactory.clearCourseList();
                 //location.reload();
                 $location.path('/login');
             };
-            $scope.click = function () {
-                $state.go(back);
+            $scope.updatePwd = function () {
+                $state.go('teacher.accountUpdate');
             }
         }
     }

@@ -5,7 +5,9 @@ angular
         'admin',
         'login',
         'student',
-        'teacher'
+        'teacher',
+        'account.update'
+
     ])
     .config(function ($stateProvider) {
 

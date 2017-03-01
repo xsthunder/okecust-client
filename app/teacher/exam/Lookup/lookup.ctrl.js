@@ -7,7 +7,7 @@
   function ctrl($scope,$state,TeacherHeaderFactory , teacherFactory, qaAddDetailFactory, teacherQuizFactory, $log, TeacherCourse) {
     $log.info('lookuptrl init');
     $scope.gotoQa=function () {
-        $state.go('teacher.qaAdd');
+        $state.go('teacher.qa');
     };
     var showAlert=teacherFactory.showToast;
       var freshData=function() {

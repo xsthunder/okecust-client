@@ -3,6 +3,14 @@
   <!--<div ng-repeat="report in reports">-->
     <!--{{report}}-->
   <!--</div>-->
+  <canvas id="pie" class="chart chart-pie"
+          chart-data="data" chart-labels="labels" chart-options="options">
+  </canvas>
+
+
+
+  <div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
+
   <p ng-hide="status">正在生成数据，请耐心等候</p>
   <md-progress-linear ng-hide="status" md-mode="indeterminate"></md-progress-linear>
   <div layout-align="initial initial" flex layout="column" ng-repeat="chart in charts track by $index">

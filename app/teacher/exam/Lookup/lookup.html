@@ -1,5 +1,10 @@
 
   <md-content layout-padding  >
+    <div  layout="row" layout="center center">
+      <md-button  class="md-raised md-primary" ng-click="gotoQa()">
+        去出题
+      </md-button>
+    </div>
     <div >
       <md-card  md-theme="default" ng-repeat="question in questions ">
         <md-card-title>
@@ -12,9 +17,5 @@
         </md-card-title>
       </md-card>
     </div>
-    <div>
-      <md-button class="md-raised md-primary" ng-click="gotoQa()">
-        去出题
-      </md-button>
-    </div>
+
   </md-content>

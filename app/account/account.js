@@ -8,6 +8,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         var base = AppConstants.URL_BASE + '/account-secure/' + self.USER_ID;
         self.URL_TOKENS = base + '/tokens';
         self.URL_PROFILE = base + '/profile';
+        self.URL_PWD = base + '/account/password';
         return self;
     })
     .factory('Account', function ($http, $cookies, $mdDialog, $mdToast, md5, AccountConstants) {
@@ -44,7 +45,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.showToast = function (title, message) {
 
             console.log($mdToast.simple()
-                );
+            );
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(message)
@@ -79,6 +80,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
             $cookies.put('type', data.type);
             $cookies.put('uid', data.uid);
             $cookies.put('freshTeacherConstantsFlag', 'yes');
+            AccountConstants.USER_ID = data.uid;
 
         };
         self.getFreshTeacherConstantsFlag = function () {
@@ -118,6 +120,45 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                     profile = res.data;
                     $cookies.put('uid', profile.uid);
                     callback(null, profile);
+                }, function (res) {
+                    callback(res);
+                })
+            }
+            else {
+                return callback(null, profile);
+            }
+        };
+        self.updateProfile = function (newProfile, callback) {
+            console.log('updateProfile account', newProfile);
+
+            if (newProfile.uid === self.getUid()) {
+
+                $http.patch(AccountConstants.URL_PROFILE, newProfile, {
+                    headers: {'x-token': self.getToken()}
+                }).then(function (res) {
+                    profile = res.data;
+                    callback(null);
+                }, function (res) {
+                    callback(res);
+                })
+            }
+            else {
+                return callback(null);
+            }
+        };
+        self.updatePwd = function (username, newPwd, curPwd, callback) {
+
+            if (username && newPwd && curPwd) {
+                newPwd = hash(username, newPwd);
+                curPwd = hash(username, curPwd);
+                $http.post(AccountConstants.URL_PWD, {
+                    pwd:curPwd,
+                    newPwd:newPwd
+                    },
+                    {
+                        headers: {'x-token': self.getToken()}
+                    }).then(function (res) {
+                    callback(null);
                 }, function (res) {
                     callback(res);
                 })

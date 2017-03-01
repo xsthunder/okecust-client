@@ -30,7 +30,9 @@ angular.module('teacher')
         var courseList;
         var currentCourse;
         var self = {};
-
+        self.clearCourseList = function () {
+          courseList = null;
+        };
 
       /**
        * FIXME help me remove this repeated code
@@ -73,9 +75,9 @@ angular.module('teacher')
             // if(freshCoursesFlag=='yes'){
             //     self.flushCourseList(callback);
             // }
-
+            console.log("courseList",courseList);
             if (courseList) {
-                console.log("in tearcher factory, courseList: " +courseList);
+                //console.log("in tearcher factory, courseList: " +courseist);
 
                 return callback(null, courseList);
             }
@@ -83,6 +85,8 @@ angular.module('teacher')
         };
         self.setCurrentCourse = function (value) {
 
+            console.log('setcuurnetcousre',value);
+            if(value===null)$cookies.remove('setcuurnetcousre');
             $cookies.putObject('currentCourse', value);
             currentCourse = value;
             // console.log("setting cureent courses");

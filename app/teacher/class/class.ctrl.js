@@ -3,7 +3,7 @@
  */
 (function () {
     angular.module('teacher')
-        .controller('teacherClassesCtrl', function ($scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
+        .controller('teacherClassesCtrl', function ($log, $scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
             var showAlert=teacherFactory.showToast;
             var onDataCallback = function (err, courses) {
                 if (err) {
