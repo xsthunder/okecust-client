@@ -8,7 +8,6 @@
     'teacher.qa.report',
     'teacher.qa.qaPost',
     'teacher.quiz',
-    'teacher.qa.add',
-      'chart.js'
+    'teacher.qa.add'
   ]);
 })();

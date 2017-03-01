@@ -4,18 +4,14 @@
 (function () {
     angular.module('teacher.qa.report')
         .controller('qaReportHeaderCtrl', headerCtrl)
-        .controller('qaReportMainCtrl', mainCtrl)
+        .controller('qaReportMainCtrl', mainCtrl);
     function headerCtrl() {
         var header = this;
         header.title = '测试报告';
     }
 
-    function mainCtrl($scope,$state, Account, teacherQuizFactory, $log, teacherQaFactory) {
+    function mainCtrl($scope, $state, Account, teacherQuizFactory, $log, teacherQaFactory) {
         var showAlert = Account.showToast;
-        $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-        $scope.data = [300, 500, 100];
-
-
 
         $log.log(teacherQuizFactory.nowQuiz);
         try {
@@ -35,16 +31,18 @@
             $log.log(res.reports);
             $scope.reports = res.reports;
             $scope.status = false;
-            $scope.charts = getCharts(res.reports, function () {
+            $scope.charts = getCharts(res.reports, function (detail) {
                 $scope.status = 'finished';
+                console.log('detail',detail);
+                $scope.saying=detail;
             })
 
         });
         function getCharts(reports, callback) {
             var charts = [];
             $log.log(reports);
-            var detail=[];
-            var each={};
+            var detail = [];
+            var each = {};
             for (var i = 0; i < reports.length; i++) {
                 var report = reports[i];
                 var chart = {};
@@ -65,12 +63,12 @@
                 chart.options = {
                     'title': ('第' + (i + 1) + '题报告')
                 };
-                each['titile']=('第' + (i + 1) + '题报告');
+                each['title'] = ('第' + (i + 1) + '题报告');
                 charts.push(chart);
-                each['detail']=report[j];
+                each['detail'] = report;
                 detail.push(each);
             }
-            callback();
+            callback(detail);
             return charts;
         }
 

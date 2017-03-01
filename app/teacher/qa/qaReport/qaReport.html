@@ -3,13 +3,20 @@
   <!--<div ng-repeat="report in reports">-->
     <!--{{report}}-->
   <!--</div>-->
-  <canvas id="pie" class="chart chart-pie"
-          chart-data="data" chart-labels="labels" chart-options="options">
-  </canvas>
+  <!--<div>-->
+  <!--<canvas id="pie" class="chart chart-pie"-->
+          <!--chart-data="data[0]" chart-labels="labels[0]" chart-options="options">-->
+  <!--</canvas>-->
+  <!--</div>-->
 
 
-
-  <div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
+  <!--<div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>-->
+  <div ng-repeat="each in saying track by $index">
+    <p>{{each.title}}</p>
+    各选项人数
+    {{each.detail}}
+  </div>
+<!--{{saying}}-->
 
   <p ng-hide="status">正在生成数据，请耐心等候</p>
   <md-progress-linear ng-hide="status" md-mode="indeterminate"></md-progress-linear>
