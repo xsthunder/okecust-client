@@ -40,20 +40,14 @@
                     return Account.showToast('','更新个人信息成功');
                 })
             };
-            var updatePwd = function () {
-                if ($scope.updatePwd == true) {
-                    if(!$scope.newPwd1||!$scope.newPwd2)return Account.showToast('','密码栏不能为空');
-                    if($scope.newPwd1!=$scope.newPwd2)return Account.showToast('','两次密码输入不一致');
-                    Account.updatePwd($scope.uid,$scope.newPwd1,$scope.curPwd,function (err) {
-                        if(err)return Account.showToast('','更新个人信息失败');
-                        history.back();
-                        return Account.showToast('','更新个人信息成功');
-                    })
-                }
-            };
-            //updateInfo();
-
-            updatePwd();
+            if ($scope.updatePwd == true) {
+                if(!$scope.newPwd1||!$scope.newPwd2)return Account.showToast('','密码栏不能为空');
+                if($scope.newPwd1!=$scope.newPwd2)return Account.showToast('','两次密码输入不一致');
+                Account.updatePwd($scope.uid,$scope.newPwd1,$scope.curPwd,function (err) {
+                    if(err)return Account.showToast('','更新个人信息失败');
+                })
+            }
+            updateInfo();
         }
     }
 })();

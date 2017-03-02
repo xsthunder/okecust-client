@@ -151,9 +151,9 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
             if (username && newPwd && curPwd) {
                 newPwd = hash(username, newPwd);
                 curPwd = hash(username, curPwd);
-                $http.post(AccountConstants.URL_PWD, {
-                    pwd:curPwd,
-                    newPwd:newPwd
+                $http.put(AccountConstants.URL_PWD, {
+                    password:curPwd,
+                    newPassword:newPwd
                     },
                     {
                         headers: {'x-token': self.getToken()}
