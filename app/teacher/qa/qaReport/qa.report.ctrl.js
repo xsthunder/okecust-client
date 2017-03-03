@@ -33,8 +33,8 @@
             $scope.status = false;
             $scope.charts = getCharts(res.reports, function (detail) {
                 $scope.status = 'finished';
-                console.log('detail',detail);
-                $scope.saying=detail;
+                console.log('detail', detail);
+                $scope.saying = detail;
             })
 
         });
@@ -42,9 +42,10 @@
             var charts = [];
             $log.log(reports);
             var detail = [];
-            var each = {};
+            if(reports.length==0)return teacherQaFactory.showToast('','本问题没有添加任何问题');
             for (var i = 0; i < reports.length; i++) {
                 var report = reports[i];
+                var each ={};
                 var chart = {};
                 chart.type = "PieChart";
                 chart.data = {
@@ -54,18 +55,26 @@
                 };
                 chart.data.rows = [];
 
+
                 for (var j = 0; j < report.length; j++) {
-                    chart.data.rows.push(
+                    if (typeof (report[j]) === 'number') chart.data.rows.push(
                         {c: [{v: String.fromCharCode('A'.charCodeAt(0) + j)}, {v: report[j]}]}
-                    )
+                    );
+                    else {
+                        chart.data.rows.push(
+                            {c: [{v: report[j].name}, {v: report[j].frequency}]}
+                        );
+                    }
                 }
 
                 chart.options = {
                     'title': ('第' + (i + 1) + '题报告')
                 };
-                each['title'] = ('第' + (i + 1) + '题报告');
                 charts.push(chart);
-                each['detail'] = report;
+                each['title'] = chart.options['title'];
+                each['detail'] =chart.data.rows ;
+                console.log('each titile',each['title']);
+                console.log(each)
                 detail.push(each);
             }
             callback(detail);

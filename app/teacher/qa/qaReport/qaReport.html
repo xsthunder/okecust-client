@@ -13,8 +13,23 @@
   <!--<div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>-->
   <div ng-repeat="each in saying track by $index">
     <p>{{each.title}}</p>
-    各选项人数
-    {{each.detail}}
+    <!--<p>{{each}}</p>-->
+
+    <p ng-hide="each.detail.length">还没有学生做过此题</p>
+    <table border="1">
+      <tr>
+        <td>选项或填空内容</td>
+        <td>频率</td>
+      </tr>
+      <tr ng-repeat="eachEach in each.detail track by $index">
+        <td>{{eachEach["c"][0]["v"]}}</td>
+        <td>{{eachEach["c"][1]["v"]}}</td>
+      </tr>
+
+    </table>
+    <!--<div ng-repeat="eachEach in each.detail track by $index">-->
+      <!--{{eachEach["c"][0]["v"]}}{{eachEach["c"][1]["v"]}}-->
+    <!--</div>-->
   </div>
 <!--{{saying}}-->
 
