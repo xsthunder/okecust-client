@@ -18,6 +18,8 @@
             .state('teacher.qaAdd', qaAddRoute)
             .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
             .state('teacher.accountUpdate',teacherAccountUpdate)
+            .state('teacher.notification',teacherNotification)
+            .state('teacher.notificationPost',teacherNotificationPost)
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -25,6 +27,32 @@
                 }
             });
     }
+    var teacherNotification={
+        url: '/course/notification',
+        views: {
+            'header': {
+                templateUrl: 'app/teacher/teacher.header.html',
+                controller: 'teacherHeaderCtrl'
+            },
+            'main': {
+                templateUrl: 'app/teacher/notification/notification.html',
+                controller: 'accountNotification'
+            }
+        }
+    };
+    var teacherNotificationPost={
+        url: '/course/notification/add',
+        views: {
+            'header': {
+                templateUrl: 'app/layout/header/header2.html',
+                controller: headerBackCtrl('修改或添加一个通知')
+            },
+            'main': {
+                templateUrl: 'app/teacher/notification/add/notificationPost.html',
+                controller: 'accountNotificationPost'
+            }
+        }
+    };
     var teacherAccountUpdate={
         url: '/account/update',
         views: {

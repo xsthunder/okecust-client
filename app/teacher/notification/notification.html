@@ -25,47 +25,29 @@
 <!--</md-content>-->
 
 <md-content class="md-padding" layout="column">
-    <div ng-repeat="course in courses" flex-xs flex-gt-xs="50" layout="column">
+    <div ng-repeat="notification in notifications" flex-xs flex-gt-xs="50" layout="column">
         <md-card md-theme="default">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">{{course.name}}</span>
+                    <span class="md-headline">{{notification.name}}</span>
+                    {{notification.description}}
                 </md-card-title-text>
             </md-card-title>
             <md-card-actions layout="row" layout-xs="column" layout-align="end end">
                 <div layout-xs="row">
-                    <md-button ng-click="btnNameList(course)">
-                        <md-icon class="md-secondary material-icons">people</md-icon>
-                        <span>名单</span>
-                    </md-button>
-                    <md-button ng-click="btnExam(course)">
-                        <md-icon class="md-secondary material-icons">folder</md-icon>
-                        <span>题库</span>
-                    </md-button>
-                    <md-button ng-click="btnQa(course)">
-                        <md-icon class="md-secondary material-icons">help</md-icon>
-                        <span>问答</span>
-                    </md-button>
-                </div>
-                <div layout-xs="row">
-                    <md-button ng-click="btnNotification(course)">
-                        <md-icon class="md-secondary material-icons">help</md-icon>
-                        <span>通知</span>
-                    </md-button>
-                    <md-button ng-click="btnUpdateCourse(course)">
+                    <md-button ng-click="btnUpdateNotification(notification)">
                         <md-icon class="md-secondary material-icons">edit</md-icon>
                         <span>编辑</span>
                     </md-button>
-                    <md-button ng-click="btnRemoveCourse(course)">
+                    <md-button ng-click="btnRemoveNotification(notification)">
                         <md-icon class="md-secondary material-icons">delete</md-icon>
                         <span>删除</span>
                     </md-button>
                 </div>
             </md-card-actions>
-
         </md-card>
     </div>
 </md-content>
-<md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">
+<md-button class="md-fab" ng-click="btnNewNotification()" id="fab" title="新增一门课程">
     <md-icon class="material-icons">add</md-icon>
 </md-button>

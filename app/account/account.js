@@ -9,6 +9,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         self.URL_TOKENS = base + '/tokens';
         self.URL_PROFILE = base + '/profile';
         self.URL_PWD = base + '/account/password';
+        self.URL_BASE = AppConstants.URL_BASE;
         return self;
     })
     .factory('Account', function ($http, $cookies, $mdDialog, $mdToast, md5, AccountConstants) {
@@ -72,7 +73,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                     $cookies.put('uid', res.data.uid);
                     callback(null, res.data);
                 }, function (res) {
-                    callback(true, res);
+                    callback(res);
                 });
         };
         self.setCredit = function (data) {
@@ -110,6 +111,25 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
             console.log($cookies.get('uid') + "uid");
             if (!$cookies.get('uid')) location.reload();
             return $cookies.get('uid');
+        };
+        self.getUrl = function () {
+            var type = $cookies.get('type');
+            console.log($cookies.get('type') + "type");
+            url = AccountConstants.URL_BASE;
+            switch (type) {
+                case "1":
+                    url += '/student-side/';
+                    break;
+                case "2":
+                    url += '/teacher-side/';
+                    break;
+                default:
+                    console.log('unsuupported type in get url ', type);
+            }
+            url += self.getUid() + '/';
+            console.log('url_base', url, type);
+
+            return url;
         };
         var profile;
         self.getProfile = function (callback) {
@@ -149,8 +169,8 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                 newPwd = hash(username, newPwd);
                 curPwd = hash(username, curPwd);
                 $http.put(AccountConstants.URL_PWD, {
-                    password:curPwd,
-                    newPassword:newPwd
+                        password: curPwd,
+                        newPassword: newPwd
                     },
                     {
                         headers: {'x-token': self.getToken()}
@@ -164,5 +184,77 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                 return callback(profile);
             }
         };
+        /**
+         * notification goes here for its highly similarity
+         */
+        function getNotificationURL(courseID) {
+            return AccountConstants.URL_NOTIFICATION + '/' + courseID.courseID + 'notifications'
+        }
+
+
+        /**
+         * @param url
+         * @param notification:{courseID:course._id,name:name,description:descrition}
+         * @param callback
+         */
+        self.newNotification = function (url, notification, callback) {
+            $http.post(url, {
+                    name: notification.name,
+                    description: notification.description
+                },
+                {headers: {'x-token': self.getToken()}}
+            ).then(function (res) {
+                console.log('newNOtifcation', res);
+                callback(null, res.data);
+            }, function (res) {
+                callback(res);
+            });
+        };
+        self.listNotifications = function (url, callback) {
+            $http.get(
+                url,
+                {headers: {'x-token': self.getToken()}}
+            ).then(function (res) {
+                console.log('listnotifcation', res);
+                callback(null, res);
+            }, function (res) {
+                callback(res);
+            });
+        };
+        self.removeNotification = function (url, notification, callback) {
+            // url += '/' + notification._id;
+            $http.delete(
+                url,
+                {headers: {'x-token': self.getToken()}})
+                .then(function (res) {
+                    callback(null, res);
+                }, function (res) {
+                    callback(res);
+                })
+        };
+        self.updateNotification = function (url, notification, callback) {
+            // url += '/' + notification._id;
+            $http.patch(
+                url,
+                {
+                    name: notification.name,
+                    description: notification.description
+                }
+                ,
+                {headers: {'x-token': self.getToken()}})
+                .then(function (res) {
+                    callback(null, res);
+                }, function (res) {
+                    callback(res);
+                })
+        };
+        self.currentNotification = undefined;
+        self.setCurrentNotification = function (notification) {
+            self.notification = notification;
+        };
+        self.getCurrentNotification = function () {
+            return self.notification ? self.notification : 0;
+        };
         return self;
-    });
+    })
+;

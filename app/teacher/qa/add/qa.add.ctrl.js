@@ -105,6 +105,7 @@
                 var list = [];
                 var i;
                 console.log($scope.questionSet);
+                if(!$scope.selected)return showAlert('','没有题目，添加问答失败');
                 for (i = 0; i < $scope.selected.length; i++) {
                     if ($scope.selected[i] === true) list.push($scope.questionSet[i]);
                 }

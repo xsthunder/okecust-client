@@ -108,7 +108,6 @@ angular.module('teacher')
             if(currentCourse===undefined) {
                 //showAlert("严重错误","拒绝和服务器通信，原因是:\n没有选择课程");
                 return function () {
-
                     _id:0
                 };
             }

@@ -33,7 +33,7 @@ angular.module('student.class', ['ui.router'])
         };
         $scope.updatePwd = function () {
             $state.go('student.accountUpdate');
-        }
+        };
         $scope.btnInfo=function (course) {
                 $scope.alert = '';
                 $mdBottomSheet.show({

@@ -1,0 +1,17 @@
+
+<md-content  layout-padding>
+    <md-content >
+        <br>
+        <md-input-container class="md-block">
+        <label>通知</label>
+        <input  ng-model="notification.name" required>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>通知内容</label>
+          <textarea style="" ng-model="notification.description" rows="5" md-select-on-focus></textarea>
+      </md-input-container>
+  </md-content>
+<md-content layout="column" layout-align="center center">
+    <md-button class="md-raised md-primary" ng-click="submit(notification)">确定</md-button>
+</md-content>
+</md-content>

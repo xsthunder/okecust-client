@@ -1,7 +1,7 @@
 <div layout-padding>
-    <md-content ng-repeat="question in questions track by $index">
+    <md-content >
         <div layout="column">
-            <md-card ng-click="cardClick($index)" layout="row" title="选择此题">
+            <md-card ng-repeat="question in questions track by $index" ng-click="cardClick($index)" layout="row" title="选择此题">
                 <md-card-title>
                     <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]"
                                  ng-click="cardClick($index)">

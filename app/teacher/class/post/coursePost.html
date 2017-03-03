@@ -21,29 +21,10 @@
         <label>课程名称</label>
         <input  ng-model="course.name" required>
         </md-input-container>
-
-        <div layout="row" layout-xs="column">
-            <md-input-container class="md-block" flex="auto" ng-show="false">
-                <label>联系电话</label>
-                <input ng-model="course.tel">
-            </md-input-container>
-            <md-input-container class="md-block" flex="auto" ng-show="false">
-                <label>邮件地址</label>
-                <input ng-model="course.email">
-            </md-input-container>
-        </div>
-        <md-input-container class="md-block" ng-show="false">
-            <label>学生人数（不可用）</label>
-            <input ng-model="course.students" disabled>
-        </md-input-container>
-
         <md-input-container class="md-block">
           <label>课程描述</label>
           <textarea style="" ng-model="course.description" rows="5" md-select-on-focus></textarea>
       </md-input-container>
-
-
-
   </md-content>
 <md-content layout="column" layout-align="center center">
     <md-button class="md-raised md-primary" ng-click="btnNewCourse()">{{targetText}}</md-button>

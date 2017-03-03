@@ -25,7 +25,6 @@
         })
         .controller('teacherHeaderCtrl', function ($scope,$state, $mdDialog, Account, $location, teacherFactory, TeacherHeaderFactory, $log) {
                 self.freshData = function () {
-
                     teacherFactory.getCourseList(function (err, courses) {
 
                         if (err) {

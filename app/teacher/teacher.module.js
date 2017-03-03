@@ -19,6 +19,10 @@
         'teacher.exam',
         'teacher.questionLibrary',
         'teacher.questionLibrary.detail',
-        'teacher.questionLibrary.post'
+        'teacher.questionLibrary.post',
+        'account.update',
+        'account.notification'
+
+
     ]);
 })();
