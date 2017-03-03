@@ -9,7 +9,7 @@ angular.module('student.class', ['ui.router'])
             controller: 'classCtrl'
         })
     })
-    .controller('classCtrl', function ($scope, $log, $state, Account, studentFactory) {
+    .controller('classCtrl', function ($scope,$mdBottomSheet, $log, $state, Account, studentFactory) {
         studentFactory.getCourseList(function (err, list) {
             if (err == null) {
                 $scope.courseList = list;
@@ -25,11 +25,26 @@ angular.module('student.class', ['ui.router'])
             console.log(course);
             setCourse(course);
             $state.go('student.qa');
-        }
+        };
         $scope.logout = function () {
             console.log('要推出了');
             Account.deleteCredit();
             $state.go('login');
         };
+        $scope.updatePwd = function () {
+            $state.go('student.accountUpdate');
+        }
+        $scope.btnInfo=function (course) {
+                $scope.alert = '';
+                $mdBottomSheet.show({
+                    templateUrl: 'app/student/class/class.info.html',
+                    controller: function ($scope) {
+                        $scope.course=course;
+                        console.log('hello bottom sheet');
+                    }
+                }).then(function(clickedItem) {
+                    $scope.alert = clickedItem['name'] + ' clicked!';
+                });
+        }
     });
    

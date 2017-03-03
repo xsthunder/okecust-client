@@ -1,0 +1,53 @@
+<md-toolbar >
+    <div class="md-toolbar-tools" >
+        <md-button onclick="history.back()">
+            <md-icon class="material-icons">keyboard_backspace</md-icon>
+        </md-button>
+        <h1 flex="noshrink">
+            {{title}}
+        </h1>
+    </div>
+</md-toolbar>
+<div layout-padding>
+    <p>你好{{name}}<br>ID:{{uid}}</p>
+    <md-content layout="column">
+        <md-input-container>
+            <label>nick</label>
+            <input ng-model="nick">
+        </md-input-container>
+        <md-input-container>
+            <label>email</label>
+            <input ng-model="email">
+        </md-input-container>
+        <md-input-container>
+            <label>tel</label>
+            <input ng-model="tel">
+        </md-input-container>
+        <md-input-container>
+            <label>motto</label>
+            <input ng-model="motto">
+        </md-input-container>
+        <div ng-show="updatePwd">
+            <md-input-container>
+                <label>新密码</label>
+                <input ng-model="newPwd1">
+            </md-input-container>
+            <md-input-container>
+                <label>新密码</label>
+                <input ng-model="newPwd2">
+            </md-input-container>
+            <md-input-container>
+                <label>当前密码</label>
+                <input ng-model="curPwd">
+            </md-input-container>
+        </div>
+        <md-button ng-click="switchUpdatePwd()" class="md-raised md-primary" flex="none">{{updatePwdInfo[updatePwd]}}</md-button>
+        <md-button ng-click="submit()" class="md-raised md-primary" flex="none">确定</md-button>
+    </md-content>
+
+    <!--<md-content flex-gt-xs>-->
+    <!--<label>Enter date</label>-->
+    <!--<md-datepicker ng-model="user.submissionDate"></md-datepicker>-->
+    <!--</md-content>-->
+    <!--<label for="meeting">约会日期：</label><input id="meeting" type="date" value="2014-01-13:23-55"/>-->
+</div>

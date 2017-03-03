@@ -8,7 +8,8 @@ angular.module('student', [
   'student.class',
     'student.person',
     'student.doc',
-    'student.sign'
+    'student.sign',
+    'account.update'
   ])
   .factory('StudentConstants', function (Account, AppConstants,TeacherConstants) {
     var self = {};
@@ -183,9 +184,16 @@ angular.module('student', [
       .state('student', {
         url: '/student',
         templateUrl: 'app/student/student.html',
-        controller: 'studentCtrl',
+        controller: 'studentCtrl'
       })
+        .state('student.accountUpdate',{
+            url: '/account/update',
+            templateUrl: 'app/student/accountUpdate/accountUpdate.html',
+            controller: 'accountUpdateCtrl'
+        })
+
     })
+
     .controller('studentCtrl', function ($scope, $mdSidenav, $location, Account, studentFactory, $log) {
         if (!Account.checkCredit(1)) {
             return $location.path('/login');

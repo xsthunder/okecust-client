@@ -130,9 +130,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         };
         self.updateProfile = function (newProfile, callback) {
             console.log('updateProfile account', newProfile);
-
             if (newProfile.uid === self.getUid()) {
-
                 $http.patch(AccountConstants.URL_PROFILE, newProfile, {
                     headers: {'x-token': self.getToken()}
                 }).then(function (res) {
@@ -143,11 +141,10 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                 })
             }
             else {
-                return callback(null);
+                return callback(true);
             }
         };
         self.updatePwd = function (username, newPwd, curPwd, callback) {
-
             if (username && newPwd && curPwd) {
                 newPwd = hash(username, newPwd);
                 curPwd = hash(username, curPwd);
@@ -164,7 +161,7 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                 })
             }
             else {
-                return callback(null, profile);
+                return callback(profile);
             }
         };
         return self;
