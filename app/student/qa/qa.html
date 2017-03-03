@@ -14,7 +14,7 @@
     <md-list flex>
       <md-list-item class="md-3-line" ng-repeat="quiz in quizList" ng-click="switchPaper($index)" ng-init="outerindex=$index">
         <div class="md-list-item-text" layout="column" layout-padding>
-          <h3>{{ quiz.name }}</h3>
+          <h3>{{ quiz.name }}：开始时间:{{quiz.time.from|date:'medium'}}-》结束时间：{{quiz.time.to|date:'medium'}}</h3>
         </div>
       </md-list-item>
     </md-list>
@@ -66,6 +66,7 @@
           <!--</md-radio-button>-->
         <!--</md-radio-group>-->
         <div  layout="column">
+          正确答案{{questions[currentQuestion].answers}};
           <md-checkbox ng-show="questions[currentQuestion].type==1" aria-label="check"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  layout-align="center center" title="设为正确答案">
           {{extra}}
           </md-checkbox>

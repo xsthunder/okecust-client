@@ -4,20 +4,20 @@
             <md-list-item>
                 <span class="md-headline">课程名称：{{course.name}}</span>
             </md-list-item>
-            <md-list-item>
+            <md-list-item title="昵称：{{profile.nick}}">
                 作者：{{course.author}}
             </md-list-item>
-            <md-list-item>
-                电话：{{course.tel}}
+            <md-list-item title="座右铭：{{profile.motto}}">
+                电话：{{profile.tel}}
             </md-list-item>
             <md-list-item>
-                邮箱：{{course.email}}
+                邮箱：{{profile.email}}
             </md-list-item>
             <md-list-item>
-                课程描述{{course.description}}
+                课程描述：{{course.description}}
             </md-list-item>
             <md-list-item>
-                创建时间{{course.cTime}}
+                创建时间：{{course.cTime}}
             </md-list-item>
         </md-list>
         <md-content>

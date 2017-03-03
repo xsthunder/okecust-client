@@ -34,16 +34,43 @@ angular.module('student.class', ['ui.router'])
         $scope.updatePwd = function () {
             $state.go('student.accountUpdate');
         };
+        $scope.btnNotification=function (course) {
+            $mdBottomSheet.show({
+                templateUrl: 'app/student/class/class.notifications.html',
+                controller: function ($scope,Account) {
+                    $scope.course=course;
+                    function getUrl(notificationID) {
+                        var url = Account.getUrl();
+                        url += 'courses/' + course._id + '/notifications';
+                        if (notificationID) url += '/' + notificationID;
+                        return url;
+                    }
+                    Account.listNotifications(getUrl(),function (err,res) {
+                        if(err)return Account.showToast('','获取通知列表失败');
+                        $scope.notifications=res.data;
+                    });
+                    console.log('hello bottom sheet');
+                }
+            }).then(function(clickedItem) {
+            });
+        };
         $scope.btnInfo=function (course) {
-                $scope.alert = '';
                 $mdBottomSheet.show({
                     templateUrl: 'app/student/class/class.info.html',
-                    controller: function ($scope) {
+                    controller: function ($scope,Account,studentFactory) {
+                        course.tel='';
+                        course.email='';
                         $scope.course=course;
+                        studentFactory.getTeacherProfile(course._id,function (err,data) {
+                            if(err)return Account.showToast('','获取作者信息失败');
+                            else {
+                                console.log('profile',data);
+                                $scope.profile=data;
+                            }
+                        });
                         console.log('hello bottom sheet');
                     }
                 }).then(function(clickedItem) {
-                    $scope.alert = clickedItem['name'] + ' clicked!';
                 });
         }
     });

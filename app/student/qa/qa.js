@@ -3,7 +3,7 @@
  */
 angular.module('student.qa', [
     'account',
-    'ui.router',
+    'ui.router'
 ])
     .factory('studentQuizFactory', function (Account, $http, $log, StudentConstants) {
         var quizList;
@@ -19,29 +19,7 @@ angular.module('student.qa', [
                 callback(res);
             });
         };
-        /**
-         * Quiz Array
-         [{
-    "_id": "581f063bbde445e00f71581a",
-    "lTime": "2016-11-06T10:31:02.808Z",
-    "cTime": "2016-11-06T10:30:19.388Z",
-    "author": "250",
-    "quizID": "581eff94bde445e00f71580d",
-    "name": "QUIZ for 线性代数-第二章",
-    "__v": 1,
-    "questions": [
-      "57cbdd38f3ae1d4b4f1126dd",
-      "57f92006ff19051e5b81b4c1",
-      "57e7f625c2a982ff466c6c0d"
-    ],
-    "time": {
-      "from": 1478404032544,
-      "duration": 3600000
-    }
-  }]
-         * @param callback
-         * @returns {*}
-         */
+
         self.getQuizList = function (callback) {
             if (quizList) {
                 return callback(null, quizList);
@@ -157,7 +135,7 @@ angular.module('student.qa', [
             controller: 'qaCtrl'
         })
     })
-    .controller('qaCtrl', function ($scope, $mdSidenav,$state, $location, Account, $mdToast, $mdDialog,
+    .controller('qaCtrl', function ($scope, $mdSidenav, $state, $location, Account, $mdToast, $mdDialog,
                                     studentFactory, $log, studentAchievementFactory, studentQuizFactory) {
         if (!Account.checkCredit(1)) {
             return $location.path('/login');
@@ -213,7 +191,12 @@ angular.module('student.qa', [
         });
         $scope.switchPaper = function (idx) {
             $scope.paperVisible = true;
+            var quiz = $scope.quizList[idx];
             var quizID = $scope.quizList[idx]._id;
+            try {
+                if (+new Date < quiz.from) return Account.showToast('', '问答还没开始');
+            } catch (err) {
+            }
             studentFactory.joinAQuiz(studentFactory.getCurrentCourse(), quizID, function (err, res) {
                 if (err == null) {
                     $scope.achID = res._id;
@@ -224,7 +207,10 @@ angular.module('student.qa', [
                                 $scope.questions = res.questionDetails;
                                 $scope.questionNum = $scope.questions.length;
                                 $scope.answer = [];
-                                for (var i = 0; i < $scope.questions.length; i++) {
+                                if (res.answers) {
+                                    $scope.answer=res.answers;
+                                }
+                                else for (var i = 0; i < $scope.questions.length; i++) {
                                     $scope.answer.push([]);
                                     if ($scope.questions[i].type == 1) ansConst = false;
                                     else ansConst = '';
@@ -233,11 +219,14 @@ angular.module('student.qa', [
                                     }
                                 }
                             }
-                            else
-                                Account.showAlert('无法上传结果', "请重试");
+                            else {
+                                Account.showAlert('', "无法读取题目，请重试");
+                            }
                         }
                     )
                 }
+                else $scope.questions = [];
+
             })
         };
 
@@ -246,6 +235,7 @@ angular.module('student.qa', [
             studentFactory.getCourseQuizzesList(studentFactory.getCurrentCourse(), function (err, list) {
                 if (err == null) {
                     $scope.quizList = list;
+                    if (!list.length) Account.showToast('', '该课程还没有问答');
                 }
             });
         };
@@ -272,7 +262,7 @@ angular.module('student.qa', [
             }, function () {
             });
         }
-        $scope.backToClass=function () {
+        $scope.backToClass = function () {
             $state.go('student.class');
         }
     })
