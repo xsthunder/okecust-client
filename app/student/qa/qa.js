@@ -210,7 +210,8 @@ angular.module('student.qa', [
                                 if (res.answers) {
                                     $scope.answer=res.answers;
                                 }
-                                else for (var i = 0; i < $scope.questions.length; i++) {
+
+                            else for (var i = 0; i < $scope.questions.length; i++) {
                                     $scope.answer.push([]);
                                     if ($scope.questions[i].type == 1) ansConst = false;
                                     else ansConst = '';

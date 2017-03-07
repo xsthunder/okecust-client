@@ -48,6 +48,8 @@ angular.module('student.class', ['ui.router'])
                     Account.listNotifications(getUrl(),function (err,res) {
                         if(err)return Account.showToast('','获取通知列表失败');
                         $scope.notifications=res.data;
+                        if($scope.notifications.length==0)return Account.showAlert('meiyou','暂时还没有通知');
+
                     });
                     console.log('hello bottom sheet');
                 }

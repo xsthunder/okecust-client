@@ -2,7 +2,7 @@
     <md-content layout-padding>
         <md-list class="md-dense" flex>
             <md-subheader  class="md-title" layout-align="center center"><span class="md-title">{{course.name}}:课程通知<span></md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in notifications">
+            <md-list-item class="md-3-line" ng-repeat="item in notifications" ng-click="null">
                 <div class="md-list-item-text" layout="column">
                     <span class="md-headline">{{ item.name }} on {{ item.createdTime | date: 'fullDate' }}</span>
                     <span class="md-title">{{ item.description }}</span>

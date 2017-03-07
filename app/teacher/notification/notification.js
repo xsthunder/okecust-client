@@ -18,6 +18,8 @@
             Account.listNotifications(getUrl(), function (err, res) {
                 if (err)return Account.showToast('', '获取课程通知失败');
                 $scope.notifications = res.data;
+                if($scope.notifications.length==0)return Account.showAlert('meiyou','暂时还没有通知');
+
             });
             Account.setCurrentNotification(undefined);
         };
