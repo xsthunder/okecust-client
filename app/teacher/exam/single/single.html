@@ -55,6 +55,7 @@
                 </md-checkbox>
                 <md-input-container flex>
                     <label ng-hide="!type">{{String.fromCharCode('A'.charCodeAt(0)+$index)+"."}}</label>
+                    <label ng-hide="type">第{{$index+1}}个空</label>
                     <input ng-model="x.extras">
                 </md-input-container>
                 <md-button ng-click="btnRemoveContent($index)" >
