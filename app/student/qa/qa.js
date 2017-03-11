@@ -191,7 +191,7 @@ angular.module('student.qa', [
                 //   studentFactory.setCurrentCourse(id);
                 // }
             }
-            else Account.showAlert('错误', '无法获得课程列表');
+            else Account.showToast('错误', '无法获得课程列表');
         });
         $scope.switchPaper = function (idx) {
             $scope.paperVisible = true;
@@ -241,7 +241,7 @@ angular.module('student.qa', [
                                 }
                             }
                             else {
-                                Account.showAlert('', "无法读取题目，请重试");
+                                Account.showToast('', "无法读取题目，请重试");
                             }
                         }
                     )
@@ -276,8 +276,8 @@ angular.module('student.qa', [
 
             $mdDialog.show(confirm).then(function () {
                 studentAchievementFactory.submitAchievementDetail($scope.achID, $scope.answer, function (err, res) {
-                    if (err == null) Account.showAlert('成功', '提交成功');
-                    else Account.showAlert('错误', '已经提交过');
+                    if (err == null) Account.showToast('成功', '提交成功');
+                    else Account.showToast('错误', '已经提交过');
                 })
                 console.log($scope.answer)
             }, function () {
