@@ -32,6 +32,98 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
                 .join(' ');
         };
 
+        /* processing array buffers, only required for readAsArrayBuffer */
+        function fixdata(data) {
+            var o = "", l = 0, w = 10240;
+            for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+            o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+            return o;
+        }
+
+        var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+        /* set up drag-and-drop event */
+        /* fixdata and rABS are defined in the drag and drop example */
+        function handleFile(e) {
+            var files = e.target.files;
+            var i, f;
+            if (1 > files.length) {
+                return showAlert('cuowu', '请选择一个文件');
+            }
+            f = files[0];
+            var reader = new FileReader();
+            var name = f.name;
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook;
+                if (rABS) {
+                    /* if binary string, read with type 'binary' */
+                    workbook = XLSX.read(data, {type: 'binary'});
+                } else {
+                    /* if array buffer, convert to base64 */
+                    var arr = fixdata(data);
+                    workbook = XLSX.read(btoa(arr), {type: 'base64'});
+                }
+                /* DO SOMETHING WITH workbook HERE */
+                handleWorkbook(workbook);
+            };
+            reader.readAsBinaryString(f);
+        }
+
+        /**
+         * Handle workbook.
+         */
+        function handleWorkbook(workbook) {
+            var sheet_name_list = workbook.SheetNames;
+            console.log(sheet_name_list);
+            sheet_name_list.forEach(function (y) {
+                /* iterate through sheets */
+                var worksheet = workbook.Sheets[y];
+                var sheetMap = {};
+                var sheetArray = [];
+                // Head: A1(CampusID) B1(Name)
+                // Data: A2           B2
+                // Data: A3           B3
+                var regex = /(.+?)(\d+)/;
+                for (var key in worksheet) {
+                    /* all keys that do not begin with "!" correspond to cell addresses */
+                    if (key[0] === '!') {
+                        continue;
+                    }
+                    var res = regex.exec(key);
+                    if (!res) {
+                        return showAlert('cuowu', '无法处理: ' + key);
+                    }
+                    if (3 !== res.length) {
+                        showAlert('cuowu', '格式不对: ' + key);
+                        continue;
+                    }
+                    var keyOfRow = res[1];
+                    if (!sheetMap[keyOfRow]) {
+                        sheetMap[keyOfRow] = {};
+                    }
+                    sheetMap[keyOfRow][res[2]] = worksheet[key].v;
+                }
+                for (var key in sheetMap) {
+                    sheetArray.push(sheetMap[key]);
+                }
+                console.log(sheetArray);
+                console.log(sheetArray[0][1]);
+                $scope.students = [];
+                for (var key in sheetArray[0]) {
+                    console.log(key);
+                    console.log({
+                        id: sheetArray[0][key] + '',
+                        name: sheetArray[1][key]
+                    });
+                    $scope.students.push({
+                        id: sheetArray[0][key] + '',
+                        name: sheetArray[1][key]
+                    });
+                }
+                console.log($scope.students);
+            });
+        }
+
         function sanitizePosition() {
             var current = toastPosition;
 
@@ -59,8 +151,17 @@ angular.module('account', ['helper', 'angular-md5', 'ngCookies'])
         var hash = self.hash = function (uid, password) {
             return md5.createHash('hash-it-happily-' + uid + '$' + password);
         };
-        self.showAlert = self.showToast;
-
+        self.showAlert = function (title, message) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title(title)
+                    .textContent(message)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('明白')
+            );
+        };
         self.login = function (username, password, callback) {
             password = hash(username, password);
             $http

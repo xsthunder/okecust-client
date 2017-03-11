@@ -3,5 +3,8 @@
 .idea
 .vscode
 node_modules
+node_mo.zip
+js/
+app/login/qr.png
 
 

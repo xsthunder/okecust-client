@@ -101,7 +101,7 @@ angular.module('teacher.quiz.detail', [
     var quiz = TeacherQuiz.getActiveQuiz();
     console.log(quiz);
     TeacherQuizDetail.getQuizQuestion(quiz._id, function (err, questions) {
-        if(err){return Account.showAlert('成功','some error: '+err);}
+        if(err){return Account.showToast('成功','some error: '+err);}
         console.log(questions);
     })
 });

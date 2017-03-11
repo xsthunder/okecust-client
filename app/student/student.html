@@ -1,22 +1,22 @@
-<div layout="row" >
-    <div flex="nogrow" ng-hide="true">
-        <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" id="sidenavContainer">
-            <md-toolbar class="md-hue-2">
-                <h1 class="md-toolbar-tools">欢迎</h1>
-            </md-toolbar>
-            <md-content style="overflow: auto;">
-                <md-list ng-repeat="it in items">
-                    <md-list-item ui-sref={{it.sref}} ng-click="toggleList()">
-                        <h1 class="md-title">
-                            <md-icon class="material-icons">{{it.icon}}</md-icon>
-                            <span>{{it.content}}</span>
-                        </h1>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </md-sidenav>
-    </div>
-    <div id="mainContainer" flex layout="column">
+<!--<div layout="row" >-->
+    <!--<div flex="nogrow" ng-hide="true">-->
+        <!--<md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" id="sidenavContainer">-->
+            <!--<md-toolbar class="md-hue-2">-->
+                <!--<h1 class="md-toolbar-tools">欢迎</h1>-->
+            <!--</md-toolbar>-->
+            <!--<md-content style="overflow: auto;">-->
+                <!--<md-list ng-repeat="it in items">-->
+                    <!--<md-list-item ui-sref={{it.sref}} ng-click="toggleList()">-->
+                        <!--<h1 class="md-title">-->
+                            <!--<md-icon class="material-icons">{{it.icon}}</md-icon>-->
+                            <!--<span>{{it.content}}</span>-->
+                        <!--</h1>-->
+                    <!--</md-list-item>-->
+                <!--</md-list>-->
+            <!--</md-content>-->
+        <!--</md-sidenav>-->
+    <!--</div>-->
+    <!--<div id="mainContainer" flex layout="column">-->
 
         <!--<md-toolbar ng-if="true" id="classTitle" >-->
             <!--<div class="md-toolbar-tools">-->
@@ -27,15 +27,15 @@
         <!--</md-toolbar>-->
 
 
-        <div style="height: 100%" ui-view flex></div>
-    </div>
-    <script>
-        var delta = $("#classTitle").height();
-        $("#sidenavContainer, #mainContainer").height(document.documentElement.clientHeight);
-        $("#mainContainer").height(document.documentElement.clientHeight - delta);
-        $(window).resize(function () {
-            $("#sidenavContainer, #mainContainer").height(document.documentElement.clientHeight);
-            $("#mainContainer").height(document.documentElement.clientHeight - delta);
-        });
-    </script>
-</div>
+        <div style="width: 100%;height: 100%"  ui-view></div>
+    <!--</div>-->
+    <!--<script>-->
+        <!--var delta = $("#classTitle").height();-->
+        <!--$("#sidenavContainer, #mainContainer").height(document.documentElement.clientHeight);-->
+        <!--$("#mainContainer").height(document.documentElement.clientHeight - delta);-->
+        <!--$(window).resize(function () {-->
+            <!--$("#sidenavContainer, #mainContainer").height(document.documentElement.clientHeight);-->
+            <!--$("#mainContainer").height(document.documentElement.clientHeight - delta);-->
+        <!--});-->
+    <!--</script>-->
+<!--</div>-->

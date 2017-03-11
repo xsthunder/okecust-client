@@ -48,9 +48,11 @@ angular.module('student.class', ['ui.router'])
                     Account.listNotifications(getUrl(),function (err,res) {
                         if(err)return Account.showToast('','获取通知列表失败');
                         $scope.notifications=res.data;
-                        if($scope.notifications.length==0)return Account.showAlert('meiyou','暂时还没有通知');
-
+                        if($scope.notifications.length==0)return Account.showToast('meiyou','暂时还没有通知');
                     });
+                    $scope.showNotification=function (item) {
+                        Account.showAlert(item.name,item.description+' on '+new Date((item.createdTime)).toLocaleDateString());
+                    };
                     console.log('hello bottom sheet');
                 }
             }).then(function(clickedItem) {

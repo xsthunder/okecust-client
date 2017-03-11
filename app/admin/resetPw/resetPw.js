@@ -8,6 +8,7 @@ angular.module('admin.resetPw', ['ui.router', 'account'])
     })
     .controller('resetPwCtrl', function ($scope, $http, Account, AdminConstants) {
         $scope.resetPw = function () {
+            if(!$scope.password||!$scope.confirmPw||!$scope.username)return Account.showToast('','任意字段不能为空');
             if ($scope.password != $scope.confirmPw) {return $scope.flag = '密码输入不一致';}
             else {
                 $http.post(AdminConstants.URL_ACCOUNTS_PASSWORD, {
@@ -16,12 +17,12 @@ angular.module('admin.resetPw', ['ui.router', 'account'])
                 }, {
                     headers: {'x-token': Account.getToken()}
                 }).then(function (res) {
-                    Account.showAlert('Updated password!');
+                    Account.showToast('','更新密码成功');
                     //$scope.username = '';
                     $scope.password = '';
                     $scope.confirmPw = '';
                 }, function (res) {
-                    Account.showAlert('Failed to update password!');
+                    Account.showToast('','更新密码失败');
                 })
             }
         }

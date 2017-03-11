@@ -28,16 +28,16 @@ angular.module('teacher.quiz.post', [
     $scope.btnNewQuiz = function () {
         if (TARGET_CREATE === target) {
             TeacherQuiz.createNewQuiz($scope.quiz, function (err, quiz) {
-                if (err) {return Account.showAlert('失败','Failed to create quiz: ' + err.data);}
+                if (err) {return Account.showToast('失败','Failed to create quiz: ' + err.data);}
                 $scope.quiz = quiz;
                 alert('成功','Quiz created!');
                 history.back();
             });
         } else {
             TeacherQuiz.updateQuiz($scope.quiz, function (err, quiz) {
-                if (err) {return Account.showAlert('失败','Failed to update quiz: ' + err.data);}
+                if (err) {return Account.showToast('失败','Failed to update quiz: ' + err.data);}
                 $scope.quiz = quiz;
-                Account.showAlert('成功','Quiz updated!');
+                Account.showToast('成功','Quiz updated!');
                 // FIXME ? whether to go-to detail page.
                 history.back();
             });

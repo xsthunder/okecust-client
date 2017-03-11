@@ -47,12 +47,12 @@ angular.module('admin.studentOpt', ['account', 'helper', 'ui.router'])
         $scope.createStd = function () {
             if ($scope.password != $scope.confirmPw) {return $scope.flag = '密码输入不一致';}
             AdminStudent.createStudent($scope.userId, $scope.userName, $scope.password, function (err, data) {
-                if (err) {return Account.showAlert("错误",'Failed to add student: ' + err.status + '(' + err.data + ')');}
+                if (err) {return Account.showToast("错误",'Failed to add student: ' + err.status + '(' + err.data + ')');}
                 AdminStudent.getStudentList(function (err, students) {
                     if (err) {return console.error(err);}
                     $scope.students = students;
                 });
-                Account.showAlert('错误','Added student ' + $scope.userName + ' with uid: ' + $scope.userId);
+                Account.showToast('错误','Added student ' + $scope.userName + ' with uid: ' + $scope.userId);
                 $scope.userName = '';
                 $scope.userId = '';
                 $scope.password = '';

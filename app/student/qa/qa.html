@@ -4,7 +4,7 @@
       <md-button ng-click="backToClass()">
         <md-icon class="material-icons">home</md-icon>菜单
       </md-button>
-      <md-select ng-model="courseSelected" placeholder="选择班级"> 
+      <md-select ng-model="courseSelected" placeholder="选择班级"  flex="50">
         <md-option ng-repeat="course in courseList" ng-click="switchCourse(course._id)" >{{ course.name }}</md-option>
       </md-select>
       <span h2 flex="noshrink">试卷列表</span>
@@ -69,7 +69,7 @@
         <div  layout="column">
           <div ng-show="questions[currentQuestion].answers">正确答案{{questions[currentQuestion].answers}};</div>
           <md-checkbox ng-show="questions[currentQuestion].type==1" aria-label="check"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  layout-align="center center" title="设为正确答案">
-          {{extra}}
+          {{alphabet($index)}}.{{extra}}
           </md-checkbox>
           <md-input-container  ng-show="questions[currentQuestion].type==2"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  flex >
             <label>{{extra}}</label>

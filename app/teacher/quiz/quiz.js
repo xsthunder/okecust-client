@@ -165,7 +165,7 @@ angular.module('teacher.quiz', [
     .controller('teacherQuizzesCtrl', function ($scope, Account, teacherFactory, TeacherQuiz) {
         var onListCallback = function (err, quizzes) {
             if (err) {
-                return Account.showAlert('错误', 'Error getting quizzes list.');
+                return Account.showToast('错误', 'Error getting quizzes list.');
             }
             $scope.quizzes = quizzes;
         };
@@ -190,10 +190,10 @@ angular.module('teacher.quiz', [
             $mdDialog.show(confirm).then(function () {
                     TeacherQuiz.removeQuiz(quiz._id, function (err, quiz) {
                         if (err) {
-                            return Account.showAlert('错误', 'failed to delete quiz: ' + err.data);
+                            return Account.showToast('错误', 'failed to delete quiz: ' + err.data);
                         }
                         TeacherQuiz.flushQuizList(onListCallback);
-                        Account.showAlert('成功', 'Quiz deleted!');
+                        Account.showToast('成功', 'Quiz deleted!');
                     })
                 }, function () {
                 }

@@ -1,13 +1,25 @@
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <h3 class="md-padding">{{name}}</h3>
-    <span flex></span>
-    <md-button ng-click="logout()">登出</md-button>
-  </div>
-</md-toolbar>
-<md-content>
-  <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-    <md-nav-item ng-repeat='it in items' md-nav-sref={{it.sref}} name={{it.content}}>{{it.content}}</md-nav-item>
-  </md-nav-bar>
-</md-content>
-<div ui-view style="height:500px; overflow: auto;"></div>
+<div >
+    <md-toolbar style="height: 50px;overflow-y:hidden">
+        <div class="md-toolbar-tools">
+            <h1 flex="noshrink">
+                <md-icon class="md-secondary material-icons">call_to_action</md-icon>
+                就叫课堂
+            </h1>
+            <span flex></span>
+            <md-button ng-click="logout()">登出</md-button>
+        </div>
+    </md-toolbar>
+    <md-content style="height: 50px;overflow-y:hidden ">
+        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <md-nav-item ng-repeat='it in items' md-nav-sref={{it.sref}} name={{it.content}}>{{it.content}}
+            </md-nav-item>
+        </md-nav-bar>
+    </md-content>
+    <div ui-view id="Tmain"  layout-fill></div>
+</div>
+<script>
+    $("#Tmain").height(document.documentElement.clientHeight - 100);
+    $(window).resize(function () {
+        $("#Tmain").height(document.documentElement.clientHeight - 100);
+    });
+</script>

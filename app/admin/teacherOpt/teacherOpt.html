@@ -1,4 +1,4 @@
-<md-content>
+<md-content layout-fill>
   <md-subheader class="md-primary">
     添加教师
   </md-subheader>
@@ -24,7 +24,14 @@
           {{flag}}
         </div>
       </md-input-container>
+
       <div layout="column">
+        <md-content >
+          <md-input class="md-block">
+            <label>选择一个xlsx文件（第一行列ID、第二列姓名）: </label>
+            <input type="file" id="xlsx"/>
+          </md-input>
+        </md-content>
         <md-button ng-click="createStd()" type="submit">确认</md-button>
       </div>
     </form>
