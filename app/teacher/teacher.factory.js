@@ -9,6 +9,7 @@ angular.module('teacher')
         self.URL_QUESTIONS = self.URL_BASE + '/questions';
         self.URL_COURSE = self.URL_COURSES + '/:courseId';
         self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
+        self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
         self.URL_LIBRARIES = self.URL_BASE + '/libraries';
         self.URL_QUIZZES = self.URL_BASE + '/quizzes';
 
@@ -19,6 +20,7 @@ angular.module('teacher')
             self.URL_QUESTIONS = self.URL_BASE + '/questions';
             self.URL_COURSE = self.URL_COURSES + '/:courseId';
             self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
+            self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
             self.URL_LIBRARIES = self.URL_BASE + '/libraries';
             self.URL_QUIZZES = self.URL_BASE + '/quizzes';
 

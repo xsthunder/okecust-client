@@ -20,6 +20,7 @@
             .state('teacher.accountUpdate',teacherAccountUpdate)
             .state('teacher.notification',teacherNotification)
             .state('teacher.notificationPost',teacherNotificationPost)
+            .state('teacher.analyseStudents',teacherAnalyseStudents)
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -27,6 +28,19 @@
                 }
             });
     }
+    var teacherAnalyseStudents={
+        url:'/course/analyseStudents',
+        views:{
+            'header': {
+                templateUrl: 'app/teacher/teacher.header.html',
+                controller: 'teacherHeaderCtrl'
+            },
+            'main': {
+                templateUrl:'app/teacher/analyseStudents/analyseStudents.html',
+                controller:'teacherAnalyseStudentsCtrl'
+            }
+        }
+    };
     var teacherNotification={
         url: '/course/notification',
         views: {

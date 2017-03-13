@@ -8,6 +8,7 @@ angular
         'teacher',
         'account.update'
 
+
     ])
     .config(function ($stateProvider) {
 

@@ -21,8 +21,7 @@
         'teacher.questionLibrary.detail',
         'teacher.questionLibrary.post',
         'account.update',
-        'account.notification'
-
-
+        'account.notification',
+        'teacher.analyseStudents'
     ]);
 })();
