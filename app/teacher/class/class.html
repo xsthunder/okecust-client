@@ -29,7 +29,7 @@
         <md-card md-theme="default">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">{{course.name}}</span>
+                    <span class="md-headline" ng-click="btnUpdateCourse(course)">{{course.name}}</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-actions layout="row" layout-xs="column" layout-align="end end">
@@ -46,20 +46,21 @@
                         <md-icon class="md-secondary material-icons">folder</md-icon>
                         <span>题库</span>
                     </md-button>
+
+                </div>
+                <div layout-xs="row">
                     <md-button ng-click="btnQa(course)">
                         <md-icon class="md-secondary material-icons">help</md-icon>
                         <span>问答</span>
                     </md-button>
-                </div>
-                <div layout-xs="row">
                     <md-button ng-click="btnNotification(course)">
                         <md-icon class="md-secondary material-icons">speaker_notes</md-icon>
                         <span>通知</span>
                     </md-button>
-                    <md-button ng-click="btnUpdateCourse(course)">
-                        <md-icon class="md-secondary material-icons">edit</md-icon>
-                        <span>编辑</span>
-                    </md-button>
+                    <!--<md-button ng-click="btnUpdateCourse(course)">-->
+                        <!--<md-icon class="md-secondary material-icons">edit</md-icon>-->
+                        <!--<span>编辑</span>-->
+                    <!--</md-button>-->
                     <md-button ng-click="btnRemoveCourse(course)">
                         <md-icon class="md-secondary material-icons">delete</md-icon>
                         <span>删除</span>
