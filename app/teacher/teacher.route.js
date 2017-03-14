@@ -233,6 +233,9 @@
     function headerBackClickCtrl(title, back) {
         return function ($scope, $state,teacherFactory, Account, $location) {
             $scope.title = title;
+            $scope.aboutInfo=function () {
+                Account.showAlert('关于','查看学生过往成绩已经上线，首页-分析');
+            };
             $scope.logout = function () {
                 Account.deleteCredit();
                 teacherFactory.setCurrentCourse(null);

@@ -14,7 +14,7 @@
             var questionSet = [];
             var quiz = teacherQuizFactory.getCurrentQuiz();
             var showAlert = teacherFactory.showToast;
-            showAlert('', '请注意，一旦开始时间过，您将不能修改此问答的题目和开始时间');
+            showAlert('', '请注意，一旦开始时间过去，您将不能修改此问答的题目和开始时间');
             TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
                 if (error) {
                     if (teacherFactory.getCurrentCourse()._id === 0)return showAlert("错误", "没有选择课程");
