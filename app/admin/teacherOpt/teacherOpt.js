@@ -9,7 +9,10 @@ angular.module('admin.teacherOpt', ['ui.router'])
     .factory('AdminTeacher', function ($http, AdminConstants, Account) {
         var factory = {};
         var teacherList;
-        factory.createTeachers = function (teachers,callback) {
+        // factory.addTeachers=function (teachers) {
+        //     factory.teacherList.push(teachers);
+        // };
+        factory.createTeachers = function (teachers, callback) {
             $http.post(AdminConstants.URL_TEACHERS, teachers,
                 {
                     headers: {'x-token': Account.getToken()}
@@ -20,9 +23,9 @@ angular.module('admin.teacherOpt', ['ui.router'])
             });
         }
         factory.getTeacherList = function (callback) {
-            if (teacherList) {
-                return callback(null, teacherList);
-            }
+            // if (teacherList) {
+            //     return callback(null, teacherList);
+            // }
             $http.get(AdminConstants.URL_TEACHERS, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
@@ -32,19 +35,19 @@ angular.module('admin.teacherOpt', ['ui.router'])
                 callback(res);
             });
         };
-        factory.createTeacher = function (uid, name, password, callback) {
-            $http.post(AdminConstants.URL_TEACHERS, {
-                uid: uid,
-                name: name,
-                password: Account.hash(uid, password)
-            }, {
-                headers: {'x-token': Account.getToken()}
-            }).then(function (res) {
-                callback(null, res.data);
-            }, function (res) {
-                callback(res);
-            });
-        };
+        // factory.createTeacher = function (uid, name, password, callback) {
+        //     $http.post(AdminConstants.URL_TEACHERS, {
+        //         uid: uid,
+        //         name: name,
+        //         password: Account.hash(uid, password)
+        //     }, {
+        //         headers: {'x-token': Account.getToken()}
+        //     }).then(function (res) {
+        //         callback(null, res.data);
+        //     }, function (res) {
+        //         callback(res);
+        //     });
+        // };
         return factory;
     })
     .controller('AdminTeacherCtrl', function (Account, $scope, AdminTeacher) {
@@ -52,6 +55,8 @@ angular.module('admin.teacherOpt', ['ui.router'])
         $scope.userId = '';
         $scope.password = '';
         $scope.confirmPw = '';
+        $scope.NewTeachers=new Array();
+
         var flushData = function () {
             AdminTeacher.getTeacherList(function (err, teachers) {
                 if (err) {
@@ -87,7 +92,13 @@ angular.module('admin.teacherOpt', ['ui.router'])
                 var workbook;
                 if (rABS) {
                     /* if binary string, read with type 'binary' */
-                    workbook = XLSX.read(data, {type: 'binary'});
+                    try {
+                        workbook = XLSX.read(data, {type: 'binary'});
+                    }
+                    catch (err){
+                        Account.showToast('','无法处理数据');
+                        return ;
+                    }
                 } else {
                     /* if array buffer, convert to base64 */
                     var arr = fixdata(data);
@@ -138,50 +149,64 @@ angular.module('admin.teacherOpt', ['ui.router'])
                 }
                 console.log(sheetArray);
                 console.log(sheetArray[0][1]);
-                $scope.teachers = [];
+                $scope.NewTeachers=new Array();
                 for (var key in sheetArray[0]) {
                     console.log(key);
                     console.log({
-                        id: sheetArray[0][key] + '',
+                        uid: sheetArray[0][key] + '',
                         name: sheetArray[1][key]
                     });
-                    $scope.teachers.push({
-                        id: sheetArray[0][key] + '',
+                    $scope.NewTeachers.push({
+                        uid: sheetArray[0][key] + '',
                         name: sheetArray[1][key]
                     });
                 }
-                console.log($scope.teachers);
+                console.log($scope.NewTeachers);
             });
         }
 
         document.getElementById('xlsx').addEventListener('change', handleFile, false);
-
         $scope.createStd = function () {
-            if($scope.teachers.length){
-                //TODO invalid API
-                AdminTeacher.createTeachers($scope.teachers, function (err, teacher) {
+            if ($scope.userName) {
+                if ($scope.password) {
+                    if ($scope.password != $scope.confirmPw)return $scope.flag = '密码输入不一致';
+                    $scope.NewTeachers.push({
+                        uid: $scope.userId,
+                        name: $scope.userName
+                    });
+                }
+                else return Account.showToast('', '请输入密码');
+            }
+            console.log($scope.NewTeachers);
+            if ($scope.NewTeachers&&$scope.NewTeachers.length) {
+                console.log('newTEachers',$scope.NewTeachers)
+                AdminTeacher.createTeachers($scope.NewTeachers, function (err, teacher) {
                     if (err) {
                         return Account.showToast('错误', 'Failed to add teacher: ' + err.status + '(' + err.data + ')');
                     }
-                    $scope.teachers.push(teacher);
-                    Account.showToast('成功', 'Added teacher ' + $scope.userName + ' with uid: ' + $scope.userId);
+                    Account.showToast('成功', '添加'+teacher.created.length+'位老师，已存在'+teacher.existed.length+'位老师');
+                    // AdminTeacher.addTeachers(teacher.created);
+                    $scope.NewTeachers=new Array();
+                    $scope.userName = '';
+                    $scope.userId = '';
+                    $scope.password = '';
+                    $scope.confirmPw = '';
                     flushData();
                 });
             }
-            if ($scope.password != $scope.confirmPw) {
-                return $scope.flag = '密码输入不一致';
-            }
-            AdminTeacher.createTeacher($scope.userId, $scope.userName, $scope.password, function (err, teacher) {
-                if (err) {
-                    return Account.showToast('错误', 'Failed to add teacher: ' + err.status + '(' + err.data + ')');
-                }
-                $scope.teachers.push(teacher);
-                Account.showToast('成功', 'Added teacher ' + $scope.userName + ' with uid: ' + $scope.userId);
-                flushData();
-                $scope.userName = '';
-                $scope.userId = '';
-                $scope.password = '';
-                $scope.confirmPw = '';
-            });
+            else return Account.showToast('','没有读取到任何数据');
+
+            // AdminTeacher.createTeacher($scope.userId, $scope.userName, $scope.password, function (err, teacher) {
+            //     if (err) {
+            //         return Account.showToast('错误', 'Failed to add teacher: ' + err.status + '(' + err.data + ')');
+            //     }
+            //     $scope.teachers.push(teacher);
+            //     Account.showToast('成功', 'Added teacher ' + $scope.userName + ' with uid: ' + $scope.userId);
+            //     flushData();
+            //     $scope.userName = '';
+            //     $scope.userId = '';
+            //     $scope.password = '';
+            //     $scope.confirmPw = '';
+            // });
         }
     });
