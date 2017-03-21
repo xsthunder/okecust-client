@@ -2,13 +2,16 @@
  * Created by xs on 3/13/2017.
  */
 (function () {
+    'use strict';
     angular.module('teacher.analyseStudents', [
             'ui.router',
-            'account'
+            'account',
+            'teacher.analyseStudents.detail',
+            'chart.js'
         ]
     )
         .factory('teacherAnalyseStudentsFactory', function (Account, $http, TeacherConstants, TeacherCourseConstants) {
-            self = {};
+            var self = {};
             self.getStudentsScoresByCourseID = function (courseID, callback) {
                 TeacherCourseConstants.updateCourseId(courseID);
                 $http.get(TeacherConstants.URL_COURSE_STUDENTS_SCORES + '/' + courseID + '/' + 'students/scores', {
@@ -20,31 +23,5 @@
                 });
             };
             return self;
-        })
-        .controller('teacherAnalyseStudentsCtrl', function (TeacherHeaderFactory,Account, $scope, teacherAnalyseStudentsFactory, teacherFactory) {
-            console.log('hello analyse');
-                var freshData = function () {
-                $scope.scores = teacherAnalyseStudentsFactory.getStudentsScoresByCourseID(teacherFactory.getCurrentCourse()._id, function (err, res) {
-                    if (err) {
-                        Account.showToast('', '获取学生成绩失败');
-                    }
-                    else {
-                        if(res.length==0)return  Account.showToast('', '本课程还没有添加任何学生');
-                        console.log('in scores', res);
-                        $scope.scores = res;
-                    }
-                })
-            };
-            TeacherHeaderFactory.setOnSelectedListener(freshData);
-
-            freshData();
-            $scope.sortBy = function(propertyName) {
-                $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
-                $scope.propertyName = propertyName;
-            };
-
-            $scope.propertyName = 'average';
-            $scope.reverse = true;
-
         });
 })();

@@ -2,8 +2,9 @@
  * Created by YY on 2016/11/16.
  */
 (function () {
+    'use strict';
     angular.module('teacher')
-        .controller('teacherClassesCtrl', function ($log, $scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
+        .controller('teacherClassesCtrl', function ($location, $log, $scope, $state, $mdDialog, $mdToast, $cookies, teacherFactory, TeacherCourse) {
             var showAlert=teacherFactory.showToast;
             var onDataCallback = function (err, courses) {
                 if (err) {
@@ -28,9 +29,9 @@
                 TeacherCourse.setActiveCourse(course);
                 $state.go('teacher.coursePost');
             };
-
-
-            //two new btn
+            $scope.btnVideo = function (url) {
+                window.open('https://appear.in/' + url);
+            };
             $scope.btnNameList=function (course) {
                 console.log('btnNameListl');
                 teacherFactory.setCurrentCourse(course);

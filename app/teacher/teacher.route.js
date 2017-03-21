@@ -21,6 +21,7 @@
             .state('teacher.notification',teacherNotification)
             .state('teacher.notificationPost',teacherNotificationPost)
             .state('teacher.analyseStudents',teacherAnalyseStudents)
+            .state('teacher.analyseStudentsDetail', teacherAnalyseStudentsDetailRoute)
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -28,6 +29,19 @@
                 }
             });
     }
+    var teacherAnalyseStudentsDetailRoute = {
+        url:'/course/analyseStudents/detail',
+        views:{
+            'header': {
+                templateUrl: 'app/layout/header/header2.html',
+                controller: headerBackCtrl('学生成绩详细报告')
+            },
+            'main': {
+                templateUrl:'app/teacher/analyseStudents/detail/detail.html',
+                controller:'teacherAnalyseStudentsDetailCtrl'
+            }
+        }
+    };
     var teacherAnalyseStudents={
         url:'/course/analyseStudents',
         views:{

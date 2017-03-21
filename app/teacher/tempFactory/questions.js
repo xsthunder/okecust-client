@@ -23,7 +23,7 @@ angular.module('teacher.questionLibrary', [
      * @param question Question Object.
      * @param callback Callback.
      {
-        "type": 1,    // @see README.md
+        "type": 1,    //
         "name": "在微型计算机中，微处理器芯片上集成的是",
         "extras": ["控制器和运算器", "控制器和存储器", "CPU和控制器", "运算器和I/O接口"],
         "answers": [false, false, true, false]
@@ -73,7 +73,7 @@ angular.module('teacher.questionLibrary', [
      * @param questions{Array} Instances of questions.
      * @param callback{Function} Callback.
      [{
-        "type": 1,    // @see README.md
+        "type": 1,    //
         "name": "在微型计算机中，微处理器芯片上集成的是",
         "extras": ["控制器和运算器", "控制器和存储器", "CPU和控制器", "运算器和I/O接口"],
         "answers": [false, false, true, false]

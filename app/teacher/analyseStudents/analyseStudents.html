@@ -1,67 +1,46 @@
-<!--<p>hello analysestundets-->
-    <!--&lt;!&ndash;{{scores}}&ndash;&gt;-->
 <div>
     <md-content>
-        <!--&lt;!&ndash;TODO remove the spaces&ndash;&gt;-->
-        <!--<br/>-->
-        <!--<br/>-->
-        <!--<br/>-->
 
-        <md-divider></md-divider>
-
+        <md-card>
         <table border="1">
             <tr>
-                <th>name</th>
-                <!--<th>average</th>-->
-                <!--<th>campusID</th>-->
-                <!--<th>gpa</th>-->
-                <!--<th>F</th>-->
-                <th>
-                    <button ng-click="sortBy('average')">average</button>
-                    <span class="sortorder" ng-show="propertyName === 'average'" ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button ng-click="sortBy('campusID')">campusID</button>
+                <th ng-click="sortBy('campusID')">
+                    学号
                     <span class="sortorder" ng-show="propertyName === 'campusID'" ng-class="{reverse: reverse}"></span>
                 </th>
-                <th>
-                    <button ng-click="sortBy('gpa')">gpa</button>
+                <th ng-click="sortBy('name')">
+                    姓名
+                    <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+                </th>
+                <th ng-click="sortBy('average')">
+                    平均分
+                    <span class="sortorder" ng-show="propertyName === 'average'" ng-class="{reverse: reverse}" ></span>
+                </th>
+                <th ng-click="sortBy('gpa')">
+                    绩点
                     <span class="sortorder" ng-show="propertyName === 'gpa'" ng-class="{reverse: reverse}"></span>
                 </th>
-                <th>
-                    <button ng-click="sortBy('F')">F</button>
-                    <span class="sortorder" ng-show="propertyName === 'F'" ng-class="{reverse: reverse}"></span>
+                <th ng-click="sortBy('F')">
+                    挂科数
+                    <span class="sortorder" ng-show="propertyName === 'F'" ng-class="{reverse: reverse}" ></span>
                 </th>
             </tr>
             <tr ng-repeat="student in scores |orderBy :propertyName:reverse">
                 <div ng-show="student.name!==undefined">
+                    <th><md-button ng-click="showDetail(student.campusID)">{{student.campusID}}</md-button></th>
                     <th>{{student.name}}</th>
                     <th>{{student.average.toFixed(3)}}</th>
-                    <th>{{student.campusID}}</th>
                     <th>{{student.gpa.toFixed(3)}}</th>
                     <th>{{student.F}}</th>
                 </div>
             </tr>
         </table>
-
-        <!--<div>-->
-        <!--<md-list style="overflow-y: hidden">-->
-        <!--<md-list-item class="md-title" ng-repeat="student in scores" title="删除此学生" ng-click="btnRemoveStudent(student)" layout="row" style="align-items:initial;" style="overflow-y: hidden" flex="auto">-->
-        <!--{{student.name}}-->
-        <!--{{student.average}}-->
-        <!--{{student.gpa}}-->
-        <!--{{student.F}}-->
-
-
-        <!--<md-icon class="md-secondary material-icons" style="display: inline;" ng-click="btnRemoveStudent(student)" title="删除此学生">-->
-        <!--delete-->
-        <!--</md-icon>-->
-        <!--</md-list-item>-->
-        <!--</md-list>-->
-
-        <!--</div>-->
-        <md-divider></md-divider>
-
+        </md-card>
+        <md-card>
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"> chart-series="series"
+            </canvas>
+        </md-card>
     </md-content>
 
 </div>

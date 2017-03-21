@@ -2,14 +2,13 @@
 <html ng-app="myApp">
 <head>
     <meta charset="UTF-8">
-    <title>OKecust R</title>
+    <title>就叫课堂</title>
     <meta name="viewport" content="initial-scale=1, width = device-width, user-scalable = no"/>
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="src/iconfont/material-icons.css"/>
     <link rel="stylesheet" href="src/main.css"/>
-    <style> body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
-        font-family: Microsoft YaHei, '宋体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
-    }</style>
+    <link rel="shortcut icon" type='image/x-icon' href='favicon.ico' />
+    <link rel="stylesheet" href="node_modules/angular-material-data-table/dist/md-data-table.css">
 </head>
 <body style="overflow-y:hidden ">
 <div ui-view ng-cloak></div>
@@ -22,8 +21,11 @@
 <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="node_modules/angular-md5/angular-md5.js"></script>
 <script src="node_modules/angular-google-chart/ng-google-chart.js"></script>
+<script src="node_modules/chart.js/dist/Chart.min.js"></script>
+<script src="node_modules/angular-chart.js/angular-chart.js"></script>
+<script src="node_modules/xlsx.core.min.js"></script>
+<script src="node_modules/angular-material-data-table/dist/md-data-table.js"></script>
 <script src="app.js"></script>
-<!-- inject:js -->
 <script src="app/teacher/quizModel/post/quizModelPost.js"></script>
 <script src="app/teacher/quizModel/detail/quizModelDetail.js"></script>
 <script src="app/teacher/quiz/post/quizPost.js"></script>
@@ -92,8 +94,6 @@
 <script src="app/helper/help.js"></script>
 <script src="app/admin/admin.js"></script>
 <script src="app/account/account.js"></script>
-
-<!-- endinject -->
 <script src="app/teacher/dialog.ctrl.js"></script>
 <script src="app/teacher/exam/multiply/multiply.module.js"></script>
 <script src="app/teacher/exam/multiply/multiply.factory.js"></script>
@@ -101,12 +101,13 @@
 <script src="app/teacher/exam/lookup/lookup.module.js"></script>
 <script src="app/teacher/exam/lookup/lookup.factory.js"></script>
 <script src="app/teacher/exam/lookup/lookup.ctrl.js"></script>
-<script src="node_modules/xlsx.core.min.js"></script>
 <script src="app/teacher/accountUpdate/accountUpdate.ctrl.js"></script>
 <script src="app/teacher/notification/notification.js"></script>
 <script src="app/teacher/notification/add/notificationPost.js"></script>
 <script src="app/teacher/analyseStudents/analyseStudents.module.js"></script>
-
-
+<script src="app/teacher/analyseStudents/analyseStudents.ctrl.js"></script>
+<script src="app/teacher/analyseStudents/detail/detail.module.js"></script>
+<script src="app/teacher/analyseStudents/detail/detail.factory.js"></script>
+<script src="app/teacher/analyseStudents/detail/detail.ctrl.js"></script>
 </body>
 </html>

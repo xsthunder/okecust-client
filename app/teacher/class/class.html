@@ -1,29 +1,3 @@
-<!--<md-content>-->
-<!--&lt;!&ndash;TODO remove the spaces&ndash;&gt;-->
-<!--<br/>-->
-<!--<br/>-->
-<!--<br/>-->
-<!--<div>-->
-<!--<md-divider></md-divider>-->
-<!--<md-list>-->
-<!--<div ng-repeat="course in courses">-->
-<!--<md-list-item class="md-title" layout="row" ng-click="selectCourse(course)" title="查看课程信息" ui-sref="teacher.courseDetail">-->
-<!--{{course.name}}-->
-<!--<md-icon class="md-secondary material-icons" ng-click="btnUpdateCourse(course)" ui-sref="teacher.coursePost"-->
-<!--title="修改课程信息">edit-->
-<!--</md-icon>-->
-<!--<md-icon class="md-secondary material-icons" ng-click="btnRemoveCourse(course)" title="删除课程">-->
-<!--delete-->
-<!--</md-icon>-->
-<!--</div>-->
-<!--</md-list>-->
-<!--<md-button class="md-fab" ng-click="btnTargetNewCourse()" ui-sref="teacher.coursePost" id="fab" title="新增一门课程">-->
-<!--<md-icon class="material-icons">add</md-icon>-->
-<!--</md-button>-->
-<!--<md-divider>  </md-divider>-->
-<!--</div>-->
-<!--</md-content>-->
-
 <md-content class="md-padding" layout="column">
     <div ng-repeat="course in courses" flex-xs flex-gt-xs="50" layout="column">
         <md-card md-theme="default">
@@ -48,7 +22,6 @@
                         <md-icon class="md-secondary material-icons">folder</md-icon>
                         <span>题库</span>
                     </md-button>
-
                 </div>
                 <div layout-xs="row">
                     <md-button ng-click="btnQa(course)">
@@ -63,10 +36,14 @@
                         <!--<md-icon class="md-secondary material-icons">edit</md-icon>-->
                         <!--<span>编辑</span>-->
                     <!--</md-button>-->
-                    <md-button ng-click="btnRemoveCourse(course)">
-                        <md-icon class="md-secondary material-icons">delete</md-icon>
-                        <span>删除</span>
+                    <md-button ng-click="btnVideo(course._id)">
+                        <md-icon class="md-secondary material-icons">video_call</md-icon>
+                        <span>视频</span>
                     </md-button>
+                    <!--<md-button ng-click="btnRemoveCourse(course)">-->
+                        <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
+                        <!--<span>删除</span>-->
+                    <!--</md-button>-->
                 </div>
             </md-card-actions>
 

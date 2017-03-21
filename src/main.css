@@ -13,12 +13,12 @@ table, th, td {
     right: 3em;
     bottom: 3em;
 }
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+    font-family: Microsoft YaHei, '宋体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
 .sortorder:after {
     content: '\25b2';   // BLACK UP-POINTING TRIANGLE
 }
 .sortorder.reverse:after {
     content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
 }
-/*body {*/
-    /*overflow-y: hidden*/
-/*}*/
