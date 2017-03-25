@@ -1,0 +1,31 @@
+<md-card md-theme="default">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{studentInfo.campusID}} {{studentInfo.name}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <p>平均分 : {{studentInfo.average}}</p>
+        <p>平均绩点 : {{studentInfo.gpa}}</p>
+    </md-card-content>
+
+</md-card>
+<md-card>
+    <canvas id="pie" class="chart chart-pie"
+            chart-data="data" chart-labels="labels" chart-options="options">
+    </canvas>
+</md-card>
+<md-card>
+    <table>
+        <tr>
+            <td>学期</td>
+            <td>课程名称</td>	<td>课程性质</td>	<td>平台类别</td>	<td>成绩</td><td>学分</td><td>绩点</td>
+        </tr>
+        <tr ng-repeat="detail in studentInfo.detail track by $index">
+            {{detail}}
+            <td ng-repeat="e in detail track by $index" ng-style="e == 0.0 && {'color':'red'}">{{e}}</td>
+        </tr>
+    </table>
+
+</md-card>
