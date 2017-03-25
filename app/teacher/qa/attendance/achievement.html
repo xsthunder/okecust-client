@@ -1,0 +1,18 @@
+<md-bottom-sheet class="md-list">
+    <md-content>
+        <md-list layout-padding>
+                <span class="md-headline">学号：{{res.campusID}}</span>
+                答对{{res.wrongAnswersCount}}题
+                答错{{res.rightAnswersCount}}题
+                共{{res.answersCount}}题
+            <div ng-repeat="detail in details track by $index" ng-style="!detail && {'color':'red'}">
+            第{{$index+1}}题：{{detail?"正确":"错误"}}
+            </div>
+
+
+
+        </md-list>
+        <md-content>
+
+</md-bottom-sheet>
+

@@ -22,6 +22,7 @@
             .state('teacher.notificationPost',teacherNotificationPost)
             .state('teacher.analyseStudents',teacherAnalyseStudents)
             .state('teacher.analyseStudentsDetail', teacherAnalyseStudentsDetailRoute)
+            .state('teacher.qaAttendance',teacherQaAttendance)
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -29,6 +30,19 @@
                 }
             });
     }
+    var teacherQaAttendance = {
+        url: '/qa/attendance',
+        views: {
+            'header': {
+                templateUrl: 'app/layout/header/header2.html',
+                controller: headerBackCtrl('出勤')
+            },
+            'main': {
+                templateUrl: 'app/teacher/qa/attendance/attendance.html',
+                controller: 'teacherQaAttendanceCtrl'
+            }
+        }
+    };
     var teacherAnalyseStudentsDetailRoute = {
         url:'/course/analyseStudents/detail',
         views:{

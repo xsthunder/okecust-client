@@ -31,6 +31,7 @@
                             // $scope.questions = err.questions;
                             return showAlert('错误', '无法获得“' + library.name + "”的题目，可能是没有题目");
                         }
+                        // console.log('qa.add.ctrl res',res);
                         //$log.info("question :"+library._id+library.name);
                         //console.log(questions);
                         $scope.questions = [];
@@ -50,6 +51,8 @@
                             }
                         }
                         $scope.newQuizTitle = quiz === null ? '' : quiz.name;
+                        $scope.date
+                        console.log('quiz',quiz);
                         for (i = 0; i < questions.length; i++) {
                             questionSet.push(questions[i]);
                             var flag = true;

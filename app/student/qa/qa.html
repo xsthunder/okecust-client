@@ -47,7 +47,7 @@
         <md-button class="md-raised md-primary md-hue-1" ng-click="preQuestion()">上一题</md-button>
         <md-button class="md-raised md-primary md-hue-2" ng-click="nextQuestion()">下一题</md-button>
         <span flex></span>
-        <md-button class="md-warn md-raised" ng-click="submitQuiz()">提交试卷</md-button>
+        <md-button class="md-warn md-raised" ng-click="submitQuiz()" ng-show="showSubmitBtn">提交试卷</md-button>
       </div>
     </md-toolbar>
     <md-content style="overflow: auto">
@@ -68,6 +68,7 @@
         <!--</md-radio-group>-->
         <div  layout="column">
           <div ng-show="questions[currentQuestion].answers">正确答案{{questions[currentQuestion].answers}};</div>
+          <div ng-show="showDoneMessage">您已经提交过了，下面是您答案</div>
           <md-checkbox ng-show="questions[currentQuestion].type==1" aria-label="check"  ng-model="answer[currentQuestion][$index]" ng-repeat="extra in questions[currentQuestion].extras track by $index"  layout-align="center center" title="设为正确答案">
           {{alphabet($index)}}.{{extra}}
           </md-checkbox>

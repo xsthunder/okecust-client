@@ -140,14 +140,14 @@ angular.module('student.qa', [
         if (!Account.checkCredit(1)) {
             return $location.path('/login');
         }
+        $scope.showSubmitBtn = true;
         $scope.paperVisible = false;
         $scope.questionVisible = false;
         $scope.currentPaper = null;
         $scope.currentQuestion = null;
-        $scope.alphabet=function (i) {
-            return String.fromCharCode("A".charCodeAt(0)+i);
+        $scope.alphabet = function (i) {
+            return String.fromCharCode("A".charCodeAt(0) + i);
         };
-
         $scope.backToList = function () {
             $scope.paperVisible = false;
             $scope.currentPaper = null;
@@ -197,6 +197,9 @@ angular.module('student.qa', [
             $scope.paperVisible = true;
             var quiz = $scope.quizList[idx];
             var quizID = $scope.quizList[idx]._id;
+            $scope.showSubmitBtn = true;
+            $scope.showDoneMessage=false;
+
             try {
                 if (+new Date < quiz.from) return Account.showToast('', '问答还没开始');
             } catch (err) {
@@ -212,24 +215,27 @@ angular.module('student.qa', [
                                 $scope.questionNum = $scope.questions.length;
                                 $scope.answer = [];
                                 //deal with the teacher's answer in questions
-                                if($scope.questions.length&&$scope.questions[0].answers)
-                                    $scope.questions=$scope.questions.map(function (item) {
-                                        console.log('in maping answers',item);
-                                        var alphaArr= [];
-                                        if(item.answers.length&&typeof(item.answers[0])=='boolean'){
-                                            for(var i = 0 ; i< item.answers.length;i++){
-                                                if(item.answers[i])alphaArr.push(String.fromCharCode("A".charCodeAt(0)+i));
+                                if ($scope.questions.length && $scope.questions[0].answers) {
+                                    $scope.showSubmitBtn = false;
+                                    $scope.questions = $scope.questions.map(function (item) {
+                                        //console.log('in maping answers',item);
+                                        var alphaArr = [];
+                                        if (item.answers.length && typeof(item.answers[0]) == 'boolean') {
+                                            for (var i = 0; i < item.answers.length; i++) {
+                                                if (item.answers[i]) alphaArr.push(String.fromCharCode("A".charCodeAt(0) + i));
                                             }
-                                            item.answers=alphaArr;
+                                            item.answers = alphaArr;
                                             return item;
                                         }
                                         else return item;
                                     });
-
-
+                                }
                                 //deal with the student answers
-                                if (res.answers) {
+                                console.log(res.answers);
+                                if (res.answers&&res.answers.length) {
+                                    $scope.showDoneMessage=true;
                                     $scope.answer = res.answers;
+                                    $scope.showSubmitBtn = false;
                                 }
                                 else for (var i = 0; i < $scope.questions.length; i++) {
                                     $scope.answer.push([]);
@@ -252,6 +258,7 @@ angular.module('student.qa', [
         };
 
         $scope.switchCourse = function (course) {
+            $scope.showSubmitBtn = true;
             studentFactory.setCurrentCourse(course);
             studentFactory.getCourseQuizzesList(studentFactory.getCurrentCourse(), function (err, list) {
                 if (err == null) {

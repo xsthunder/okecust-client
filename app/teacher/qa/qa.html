@@ -22,6 +22,13 @@
         <span ng-class="{'md-offset': true}" class="md-title">{{item.name}}</span>
         </div>
         <div flex layout="row" layout-align="end end">
+            <md-button ng-click="btnAttendance(item)" >
+                <md-icon class="material-icons">
+                    supervisor account
+
+                </md-icon>
+                <span>出勤</span>
+            </md-button>
         <md-button ng-click="selectQuiz(item)" >
             <md-icon class="material-icons">explore</md-icon>
             <span>分析</span>

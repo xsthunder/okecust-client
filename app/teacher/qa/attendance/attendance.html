@@ -1,0 +1,22 @@
+<md-subheader class="md-primary">
+    未参加问答学生
+</md-subheader>
+<md-list style="overflow-y: hidden">
+    <md-list-item class="md-title" ng-repeat="student in res.notJoinedStudentIDs track by $index"  layout="row" style="align-items:initial;" style="overflow-y: hidden" flex="auto">
+        {{student}}
+    </md-list-item>
+</md-list>
+<md-subheader class="md-primary">
+    已参加问答学生
+</md-subheader>
+<md-list style="overflow-y: hidden">
+    <md-list-item class="md-title" ng-repeat="student in  res.achievements track by $index" title="查看详情" ng-click="btnAchievement($index)" layout="row" style="align-items:initial;" style="overflow-y: hidden" flex="auto">
+        {{student.campusID}}
+        <!--答对{{student.wrongAnswersCount}}题-->
+        <!--答错{{student.rightAnswersCount}}题-->
+        <!--共{{student.answersCount}}题-->
+        正确率：{{student.rightAnswersRate*100}}%
+        分数：{{student.scores}}
+
+    </md-list-item>
+</md-list>

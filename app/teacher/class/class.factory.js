@@ -225,6 +225,16 @@
                     callback(res);
                 });
             };
+            self.getQuizAttendanceFromQuiz = function (quizId, callback) {
+                $http.get(TeacherConstants.URL_QUIZZES +quizId+'/reportsDetail', {
+                    headers: {'x-token': Account.getToken()}
+                }).then(function (res) {
+                    callback(null, res.data);
+                }, function (res) {
+                    callback(res);
+                });
+            };
+
 
             self.removeCourse = function (courseID, callback) {
                 TeacherCourseConstants.updateCourseId(courseID);

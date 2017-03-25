@@ -42,15 +42,16 @@
                     if (err) {
                         return teacherFactory.showToast('失败', '删除失败: ' + err.data);
                     }
-                    teacherFactory.flushCourseList(onDataCallback);
-                    $cookies.put('freshCoursesFlag','yes');
-
-                    var change = function (name) {
-                        console.log("childRemoveCtr1", name);
-                        $scope.$emit("Ctr1RemoveChange", name);
-                    };
-                    change("remove course");//success
+                    teacherFactory.flushCourseList(function () {
+                    });
+                    // $cookies.put('freshCoursesFlag','yes');
+                    // var change = function (name) {
+                    //     console.log("childRemoveCtr1", name);
+                    //     $scope.$emit("Ctr1RemoveChange", name);
+                    // };
+                    // change("remove course");//success
                     teacherFactory.showToast('成功', '删除了一门课程');
+                    $state.go('teacher.class');
                 });
 
             }, function () {

@@ -37,7 +37,6 @@
     };
 
     self.getQuestionLibraryQuestion = function (libraryID, callback) {
-
       self.flushQuestionLibraryQuestion(libraryID, callback);
     };
     return self;

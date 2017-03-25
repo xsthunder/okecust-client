@@ -11,7 +11,8 @@ angular.module('teacher')
         self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
         self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
         self.URL_LIBRARIES = self.URL_BASE + '/libraries';
-        self.URL_QUIZZES = self.URL_BASE + '/quizzes';
+        self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
+
 
 
         self.freshTeacherConstant=function () {
@@ -65,9 +66,9 @@ angular.module('teacher')
             $http.get(TeacherConstants.URL_COURSES, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
-                console.log('resh coursfe list');
-                courseList = res.data;
-                callback(null, courseList);
+                console.log('resh coursfe list',res);
+                self.courseList = res.data;
+                callback(null, self.courseList);
             }, function (res) {
                 callback(res);
             });

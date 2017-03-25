@@ -8,22 +8,6 @@
         })
 
         .controller('teacher.qa.ctrl', function ($scope, $mdDialog, teacherQuizFactory, $mdToast, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
-
-
-            var showAlert = teacherFactory.showToast;
-            // $scope.edit = function (quiz) {
-            //     teacherQuizFactory.setCurrentQuiz(quiz);
-            //     $mdToast.show(
-            //         {
-            //             hideDelay: 0,
-            //             position: 'top right',
-            //             controller: 'teacher.qa.edit.ctrl',
-            //             templateUrl: 'app/teacher/qa/qa.edit.html'
-            //         }
-            //     );
-            // };
-
-
             var freshData = function () {
                 TeacherCourse.getQuizListFromCourse(teacherFactory.getCurrentCourse()._id, function (error, res) {
                     if (!error) {
@@ -40,7 +24,10 @@
             $scope.showFab = true;
             TeacherHeaderFactory.setOnSelectedListener(freshData);
             freshData();
-
+            $scope.btnAttendance=function (quiz) {
+                teacherQuizFactory.setCurrentQuiz(quiz);
+                $state.go('teacher.qaAttendance');
+            };
             $scope.selectQuiz = function (quiz) {
                 teacherQuizFactory.nowQuiz = quiz;
                 $state.go('teacher.qaReport')
