@@ -1,3 +1,4 @@
+<md-content layout-padding ng-show="type">
 <md-subheader class="md-primary">
     未参加问答学生
 </md-subheader>
@@ -17,6 +18,22 @@
         <!--共{{student.answersCount}}题-->
         正确率：{{student.rightAnswersRate*100}}%
         分数：{{student.scores}}
-
     </md-list-item>
 </md-list>
+</md-content>
+<md-content ng-show="!type">
+
+    <table border="0">
+        <tr>
+            <th>学号</th>
+            <th ng-repeat="t in res.reportsByQuiz"> {{t.quiz.name}}</th>
+            <th>总评分</th>
+        </tr>
+        <tr ng-repeat="t in res.reportsByStudent track by $index">
+            <td>{{t.studentID}}</td>
+            <td ng-repeat="a in t.achievements track by $index">{{a.scores}}<span ng-show="!a" style="color: red">没参加</span></td>
+            <td>{{t.scores.toFixed(3)}}</td>
+        </tr>
+    </table>
+
+</md-content>

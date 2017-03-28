@@ -262,7 +262,7 @@
         return function ($scope, $state,teacherFactory, Account, $location) {
             $scope.title = title;
             $scope.aboutInfo=function () {
-                Account.showAlert('关于','查看学生过往成绩已经上线，首页-分析');
+                Account.showAlert('关于','添加查看课程总出勤情况，首页-问答-分析-总出勤');
             };
             $scope.logout = function () {
                 Account.deleteCredit();

@@ -55,7 +55,7 @@ angular.module('admin.teacherOpt', ['ui.router'])
         $scope.userId = '';
         $scope.password = '';
         $scope.confirmPw = '';
-        $scope.NewTeachers=new Array();
+        $scope.NewTeachers = new Array();
 
         var flushData = function () {
             AdminTeacher.getTeacherList(function (err, teachers) {
@@ -95,9 +95,9 @@ angular.module('admin.teacherOpt', ['ui.router'])
                     try {
                         workbook = XLSX.read(data, {type: 'binary'});
                     }
-                    catch (err){
-                        Account.showToast('','无法处理数据');
-                        return ;
+                    catch (err) {
+                        Account.showToast('', '无法处理数据');
+                        return;
                     }
                 } else {
                     /* if array buffer, convert to base64 */
@@ -149,7 +149,7 @@ angular.module('admin.teacherOpt', ['ui.router'])
                 }
                 console.log(sheetArray);
                 console.log(sheetArray[0][1]);
-                $scope.NewTeachers=new Array();
+                $scope.NewTeachers = new Array();
                 for (var key in sheetArray[0]) {
                     console.log(key);
                     console.log({
@@ -168,25 +168,21 @@ angular.module('admin.teacherOpt', ['ui.router'])
         document.getElementById('xlsx').addEventListener('change', handleFile, false);
         $scope.createStd = function () {
             if ($scope.userName) {
-                if ($scope.password) {
-                    if ($scope.password != $scope.confirmPw)return $scope.flag = '密码输入不一致';
-                    $scope.NewTeachers.push({
-                        uid: $scope.userId,
-                        name: $scope.userName
-                    });
-                }
-                else return Account.showToast('', '请输入密码');
+                $scope.NewTeachers.push({
+                    uid: $scope.userId,
+                    name: $scope.userName
+                });
             }
             console.log($scope.NewTeachers);
-            if ($scope.NewTeachers&&$scope.NewTeachers.length) {
-                console.log('newTEachers',$scope.NewTeachers)
+            if ($scope.NewTeachers && $scope.NewTeachers.length) {
+                console.log('newTEachers', $scope.NewTeachers)
                 AdminTeacher.createTeachers($scope.NewTeachers, function (err, teacher) {
                     if (err) {
                         return Account.showToast('错误', 'Failed to add teacher: ' + err.status + '(' + err.data + ')');
                     }
-                    Account.showToast('成功', '添加'+teacher.created.length+'位老师，已存在'+teacher.existed.length+'位老师');
+                    Account.showToast('成功', '添加' + teacher.created.length + '位老师，已存在' + teacher.existed.length + '位老师');
                     // AdminTeacher.addTeachers(teacher.created);
-                    $scope.NewTeachers=new Array();
+                    $scope.NewTeachers = new Array();
                     $scope.userName = '';
                     $scope.userId = '';
                     $scope.password = '';
@@ -194,7 +190,7 @@ angular.module('admin.teacherOpt', ['ui.router'])
                     flushData();
                 });
             }
-            else return Account.showToast('','没有读取到任何数据');
+            else return Account.showToast('', '没有读取到任何数据');
 
             // AdminTeacher.createTeacher($scope.userId, $scope.userName, $scope.password, function (err, teacher) {
             //     if (err) {

@@ -14,7 +14,6 @@
 <!--<md-divider></md-divider>-->
 <!---->
 <!--</div>-->
-
 <md-list layout="column">
     <md-list-item title="编辑问答" class="md-3-line" ng-click="btnQuiz(item)" ng-repeat="item in QAitems" >
         <div layout-xs = "column" layout="row" flex>
@@ -39,8 +38,9 @@
         </div></div>
     </md-list-item>
 </md-list>
-
-
+<md-content layout-padding  layout-align="center center">
+<md-button ng-click="btnAttendance(-1)" class="md-raised md-primary" >总出勤</md-button>
+</md-content>
 <md-button ng-disabled="!showFab" class="md-fab" ng-click="btnQuiz(null)" id="fab" title="新增小测验">
     <md-icon class="material-icons">add</md-icon>
 </md-button>

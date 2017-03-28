@@ -13,11 +13,11 @@
         <label>ID</label>
         <input ng-model="userId" type="text" required>
       </md-input-container>
-      <md-input-container class="md-block">
-        <label>密码</label>
+      <md-input-container class="md-block" ng-show="null">
+        <label >密码</label>
         <input ng-model="password" type="password" required>
       </md-input-container>
-      <md-input-container class='md-block'>
+      <md-input-container class='md-block' ng-show="null">
         <label>确认密码</label>
         <input ng-model="confirmPw" type="password" required>
         <div ng-message="required">
@@ -32,7 +32,7 @@
             <input type="file" id="xlsx"/>
           </md-input>
         </md-content>
-        <md-button ng-click="createStd()" type="submit">确认</md-button>
+        <md-button ng-click="createStd()" type="submit" >确认</md-button>
       </div>
     </form>
   </div>
