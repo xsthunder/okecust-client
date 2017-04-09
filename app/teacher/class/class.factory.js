@@ -159,6 +159,21 @@
                     callback(res);
                 });
             };
+            self.resetStudentsPwdFromCourse = function (courseID, studentIDs, callback) {
+                TeacherCourseConstants.updateCourseId(courseID);
+                $http({
+                    url: TeacherCourseConstants.URL_COURSE + '/students'+'/'+studentIDs+'/password',
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                        'x-token': Account.getToken()
+                    }
+                }).then(function (res) {
+                    callback(null, res.data);
+                }, function (res) {
+                    callback(res);
+                });
+            };
 
             /**
              * Get the corresponding library via course id.

@@ -10,9 +10,14 @@
                 <md-list-item class="md-title" ng-repeat="student in students" title="删除此学生" ng-click="btnRemoveStudent(student)" layout="row" style="align-items:initial;" style="overflow-y: hidden" flex="auto">
                         {{student.uid}}
                         {{student.name}}
-                    <md-icon class="md-secondary material-icons" style="display: inline;" ng-click="btnRemoveStudent(student)" title="删除此学生">
-                        delete
-                    </md-icon>
+                    <div flex layout="row" layout-align="end end">
+                    <md-button ng-click="btnRemoveStudent(student)" title="删除此学生" layout-align="end end ">
+                    删除
+                    </md-button>
+                    <md-button ng-click="btnResetStudentPwd(student)" title="重置该学生密码" layout-align="end end ">
+                        重置密码
+                    </md-button>
+                    </div>
                 </md-list-item>
         </md-list>
 

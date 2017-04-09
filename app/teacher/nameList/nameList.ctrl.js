@@ -65,6 +65,29 @@
             });
 
         };
+        $scope.btnResetStudentPwd = function (student) {
+            var studentIDs = [student.uid];
+
+
+            var confirm = $mdDialog.confirm()
+                .title('重置一名学生密码')
+                .textContent('学生姓名:' + student.name + "  学号：" + studentIDs)
+                .ariaLabel('Lucky day')
+                .ok('确定')
+                .cancel('取消');
+
+            $mdDialog.show(confirm).then(function () {
+                TeacherCourse.resetStudentsPwdFromCourse(teacherFactory.getCurrentCourse()._id, studentIDs, function (error, res) {
+                    if (error) {
+                        return showAlert("失败", "重置密码失败");
+                    }
+                    showAlert("成功", "成功重置密码");
+                    freshData();
+                });
+            }, function () {
+            });
+
+        };
         freshData();
 
     }

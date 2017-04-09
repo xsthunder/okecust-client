@@ -28,6 +28,7 @@
                 showAlert('', '获取数据失败');
 
             }
+            getCanvasCharts(res.reports);
             $log.log(res.reports);
             $scope.reports = res.reports;
             $scope.status = false;
@@ -38,6 +39,35 @@
             })
 
         });
+
+        function getCanvasCharts(reports,callback) {
+            var datas=[];
+            console.log('getCC',reports);
+            for(var i=0;i<reports.length;i++){
+                var scores = [];
+                var labels = [];
+                var report=reports[i];
+                for(var j =0 ;j< report.length;j++){
+                    if (typeof (report[j]) === 'number'){
+                        scores.push(report[j]);
+                        labels.push(String.fromCharCode('A'.charCodeAt(0) + j));
+                    }
+                    else {
+                        scores.push(report[j].frequency);
+                        labels.push(report[j].name);
+                    }
+                }
+                datas.push({
+                    scores:scores,
+                    labels:labels,
+                    'title': ('第' + (i + 1) + '题报告')
+                });
+            }
+            console.log('datas',datas);
+            $scope.datas=datas;
+        }
+
+
         function getCharts(reports, callback) {
             var charts = [];
             $log.log(reports);
