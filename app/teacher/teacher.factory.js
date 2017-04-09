@@ -23,7 +23,7 @@ angular.module('teacher')
             self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
             self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
             self.URL_LIBRARIES = self.URL_BASE + '/libraries';
-            self.URL_QUIZZES = self.URL_BASE + '/quizzes';
+            self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
 
 
         };
