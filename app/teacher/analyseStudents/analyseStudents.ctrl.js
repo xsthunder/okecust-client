@@ -41,7 +41,7 @@
         $scope.propertyName = 'average';
         $scope.reverse = true;
         $scope.showDetail = function (studentId) {
-            teacherAnalyseStudentsDetailFactory.teacherAnalyseStudentsDetailFactory(studentId);
+            teacherAnalyseStudentsDetailFactory.setSelectStudentId(studentId);
             $state.go('teacher.analyseStudentsDetail');
         };
     }
