@@ -10,27 +10,27 @@
   <!--</div>-->
 
 
-  <!--<div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>-->
-  <div ng-repeat="each in saying track by $index">
-    <p>{{each.title}}</p>
-    <!--<p>{{each}}</p>-->
+  <!--&lt;!&ndash;<div  google-chart chart="myChartObject" style="height:600px; width:100%;"></div>&ndash;&gt;-->
+  <!--<div ng-repeat="each in saying track by $index">-->
+    <!--<p>{{each.title}}</p>-->
+    <!--&lt;!&ndash;<p>{{each}}</p>&ndash;&gt;-->
 
-    <p ng-hide="each.detail.length">还没有学生做过此题</p>
-    <table border="1">
-      <tr>
-        <td>选项或填空内容</td>
-        <td>频率</td>
-      </tr>
-      <tr ng-repeat="eachEach in each.detail track by $index">
-        <td>{{eachEach["c"][0]["v"]}}</td>
-        <td>{{eachEach["c"][1]["v"]}}</td>
-      </tr>
+    <!--<p ng-hide="each.detail.length">还没有学生做过此题</p>-->
+    <!--<table border="1">-->
+      <!--<tr>-->
+        <!--<td>选项或填空内容</td>-->
+        <!--<td>频率</td>-->
+      <!--</tr>-->
+      <!--<tr ng-repeat="eachEach in each.detail track by $index">-->
+        <!--<td>{{eachEach["c"][0]["v"]}}</td>-->
+        <!--<td>{{eachEach["c"][1]["v"]}}</td>-->
+      <!--</tr>-->
 
-    </table>
-    <!--<div ng-repeat="eachEach in each.detail track by $index">-->
-      <!--{{eachEach["c"][0]["v"]}}{{eachEach["c"][1]["v"]}}-->
-    <!--</div>-->
-  </div>
+    <!--</table>-->
+    <!--&lt;!&ndash;<div ng-repeat="eachEach in each.detail track by $index">&ndash;&gt;-->
+      <!--&lt;!&ndash;{{eachEach["c"][0]["v"]}}{{eachEach["c"][1]["v"]}}&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--</div>-->
 <!--{{saying}}-->
 
   <!--<md-progress-linear ng-hide="status" md-mode="indeterminate"></md-progress-linear>-->
@@ -42,10 +42,26 @@
     <md-card-title>
       {{data.title}}
     </md-card-title>
+    <!--{{data}}-->
+<!--{{data.scores}}-->
+    <!--{{data.labels}}-->
+    <!--{{data.options}}-->
+    <p ng-hide="data.scores.length">还没有学生做过此题</p>
 
-    <canvas id="bar" class="chart chart-bar"
-            chart-data="data.scores" chart-labels="data.labels"> chart-series="series"
+    <canvas id="pie" class="chart chart-pie"
+            chart-data="data.scores" chart-labels="data.labels" chart-options="data.options">
     </canvas>
+    <table border="1">
+      <tr>
+        <td>选项或填空内容</td>
+        <td>频率</td>
+      </tr>
+      <tr ng-repeat="each in data.scores track by $index">
+        <td>{{data.labels[$index]}}</td>
+        <td>{{data.scores[$index]}}</td>
+      </tr>
+
+    </table>
   </md-card>
 </md-content>
 <style>

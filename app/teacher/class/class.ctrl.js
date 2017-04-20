@@ -58,6 +58,11 @@
                 teacherFactory.setCurrentCourse(course);
                 $state.go('teacher.analyseStudents');
             };
+            $scope.btnFile=function (course) {
+                console.log('btnFile');
+                teacherFactory.setCurrentCourse(course);
+                $state.go('teacher.file');
+            };
 
             $scope.btnRemoveCourse = function (course) {
                 console.log('btnRemove');

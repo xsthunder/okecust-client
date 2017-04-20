@@ -60,11 +60,29 @@
                 datas.push({
                     scores:scores,
                     labels:labels,
-                    'title': ('第' + (i + 1) + '题报告')
+                    options : {
+                        title : {
+                            display: true,
+                            text: ('第' + (i + 1) + '题报告')
+                        },
+                        legend: {
+                            display: true
+                        }
+                    }
                 });
+
             }
             console.log('datas',datas);
             $scope.datas=datas;
+            $scope.options = {
+                title : {
+                    display: true,
+                    text: '成绩分析'
+                },
+                legend: {
+                    display: true
+                }
+            };
         }
 
 
@@ -112,43 +130,43 @@
         }
 
         //数据图
-        $scope.myChartObject = {};
-        $scope.myChartObject.type = "PieChart";
-        $scope.onions = [
-            {v: "Onions"},
-            {v: 3},
-        ];
-        $scope.myChartObject.data = {
-            "cols": [
-                {id: "t", label: "Topping", type: "string"},
-                {id: "s", label: "Slices", type: "number"}
-            ], "rows": [
-                {
-                    c: [
-                        {v: "Mushrooms"},
-                        {v: 3},
-                    ]
-                },
-                {c: $scope.onions},
-                {
-                    c: [
-                        {v: "Olives"},
-                        {v: 31}
-                    ]
-                },
-                {
-                    c: [
-                        {v: "Zucchini"},
-                        {v: 1},
-                    ]
-                },
-                {
-                    c: [
-                        {v: "Pepperoni"},
-                        {v: 2},
-                    ]
-                }
-            ]
-        };
+        // $scope.myChartObject = {};
+        // $scope.myChartObject.type = "PieChart";
+        // $scope.onions = [
+        //     {v: "Onions"},
+        //     {v: 3},
+        // ];
+        // $scope.myChartObject.data = {
+        //     "cols": [
+        //         {id: "t", label: "Topping", type: "string"},
+        //         {id: "s", label: "Slices", type: "number"}
+        //     ], "rows": [
+        //         {
+        //             c: [
+        //                 {v: "Mushrooms"},
+        //                 {v: 3},
+        //             ]
+        //         },
+        //         {c: $scope.onions},
+        //         {
+        //             c: [
+        //                 {v: "Olives"},
+        //                 {v: 31}
+        //             ]
+        //         },
+        //         {
+        //             c: [
+        //                 {v: "Zucchini"},
+        //                 {v: 1},
+        //             ]
+        //         },
+        //         {
+        //             c: [
+        //                 {v: "Pepperoni"},
+        //                 {v: 2},
+        //             ]
+        //         }
+        //     ]
+        // };
     }
 })();
