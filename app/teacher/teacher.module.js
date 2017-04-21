@@ -22,6 +22,7 @@
         'teacher.questionLibrary.post',
         'account.update',
         'account.notification',
-        'teacher.analyseStudents'
+        'teacher.analyseStudents',
+        'teacher.fileSystem'
     ]);
 })();

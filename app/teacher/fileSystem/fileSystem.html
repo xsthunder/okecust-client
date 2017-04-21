@@ -1,0 +1,40 @@
+<!--{{files}}-->
+<md-card ng-repeat="file in files">
+    <md-content layout-padding>
+        <md-card-title>
+            {{file.name}}
+        </md-card-title>
+        <span ng-show="file.size/1024<1000">
+        size:{{(file.size/1024).toFixed(3)}}KB<br>
+    </span>
+        <span ng-show="file.size/1024>=1000">
+        size:{{(file.size/1024/1024).toFixed(3)}}KB<br>
+    </span>
+        <span>
+        createdTime:{{file.createdTime|date:'medium'}}
+    </span>
+        <div ng-if="image[fileID]==true">
+
+        </div>
+        <div ng-if="video[fileID]==true">
+
+        </div>
+        <md-card-actions layout="row" layout-xs="column" layout-align="end end">
+            <div layout-xs="row">
+                <md-button ng-click="btnPlayFile(file.fileID)">
+                <md-icon class="md-secondary material-icons">delete</md-icon>
+                <span>play</span>
+            </md-button>
+                <md-button ng-click="btnDownloadFile(file.fileID)">
+                    <md-icon class="md-secondary material-icons">delete</md-icon>
+                    <span>Download</span>
+                </md-button>
+                <md-button ng-click="btnRemoveCourse(file.fileID)">
+                    <md-icon class="md-secondary material-icons">delete</md-icon>
+                    <span>删除</span>
+                </md-button>
+            </div>
+        </md-card-actions>
+    </md-content>
+
+</md-card>

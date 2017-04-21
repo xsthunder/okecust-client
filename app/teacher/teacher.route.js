@@ -17,12 +17,14 @@
             .state('teacher.docAdd', docAddRoute)
             .state('teacher.qaAdd', qaAddRoute)
             .state('teacher.questionLibraryDetail', questionLibraryDetailRoute)
-            .state('teacher.accountUpdate',teacherAccountUpdate)
-            .state('teacher.notification',teacherNotification)
-            .state('teacher.notificationPost',teacherNotificationPost)
-            .state('teacher.analyseStudents',teacherAnalyseStudents)
+            .state('teacher.accountUpdate', teacherAccountUpdate)
+            .state('teacher.notification', teacherNotification)
+            .state('teacher.notificationPost', teacherNotificationPost)
+            .state('teacher.analyseStudents', teacherAnalyseStudents)
             .state('teacher.analyseStudentsDetail', teacherAnalyseStudentsDetailRoute)
-            .state('teacher.qaAttendance',teacherQaAttendance)
+            .state('teacher.qaAttendance', teacherQaAttendance)
+            .state('teacher.fileSystem', teacherFileSystem)
+
             .state("otherwise", {
                 url: "*path",
                 controller: function ($state) {
@@ -30,6 +32,20 @@
                 }
             });
     }
+
+    var teacherFileSystem = {
+        url: '/fileSystem',
+        views: {
+            'header': {
+                templateUrl: 'app/teacher/teacher.header.html',
+                controller: 'teacherHeaderCtrl'
+            },
+            'main': {
+                templateUrl: 'app/teacher/fileSystem/fileSystem.html',
+                controller: 'teacherFileSystem'
+            }
+        }
+    };
     var teacherQaAttendance = {
         url: '/qa/attendance',
         views: {
@@ -44,32 +60,32 @@
         }
     };
     var teacherAnalyseStudentsDetailRoute = {
-        url:'/course/analyseStudents/detail',
-        views:{
+        url: '/course/analyseStudents/detail',
+        views: {
             'header': {
                 templateUrl: 'app/layout/header/header2.html',
                 controller: headerBackCtrl('学生成绩详细报告')
             },
             'main': {
-                templateUrl:'app/teacher/analyseStudents/detail/detail.html',
-                controller:'teacherAnalyseStudentsDetailCtrl'
+                templateUrl: 'app/teacher/analyseStudents/detail/detail.html',
+                controller: 'teacherAnalyseStudentsDetailCtrl'
             }
         }
     };
-    var teacherAnalyseStudents={
-        url:'/course/analyseStudents',
-        views:{
+    var teacherAnalyseStudents = {
+        url: '/course/analyseStudents',
+        views: {
             'header': {
                 templateUrl: 'app/teacher/teacher.header.html',
                 controller: 'teacherHeaderCtrl'
             },
             'main': {
-                templateUrl:'app/teacher/analyseStudents/analyseStudents.html',
-                controller:'teacherAnalyseStudentsCtrl'
+                templateUrl: 'app/teacher/analyseStudents/analyseStudents.html',
+                controller: 'teacherAnalyseStudentsCtrl'
             }
         }
     };
-    var teacherNotification={
+    var teacherNotification = {
         url: '/course/notification',
         views: {
             'header': {
@@ -82,7 +98,7 @@
             }
         }
     };
-    var teacherNotificationPost={
+    var teacherNotificationPost = {
         url: '/course/notification/add',
         views: {
             'header': {
@@ -95,7 +111,7 @@
             }
         }
     };
-    var teacherAccountUpdate={
+    var teacherAccountUpdate = {
         url: '/account/update',
         views: {
             'header': {
@@ -259,10 +275,10 @@
     }
 
     function headerBackClickCtrl(title, back) {
-        return function ($scope, $state,teacherFactory, Account, $location) {
+        return function ($scope, $state, teacherFactory, Account, $location) {
             $scope.title = title;
-            $scope.aboutInfo=function () {
-                Account.showAlert('关于','添加查看课程总出勤情况，首页-问答-分析-总出勤');
+            $scope.aboutInfo = function () {
+                Account.showAlert('关于', '添加查看课程总出勤情况，首页-问答-分析-总出勤');
             };
             $scope.logout = function () {
                 Account.deleteCredit();

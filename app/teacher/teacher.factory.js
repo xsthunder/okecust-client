@@ -12,7 +12,8 @@ angular.module('teacher')
         self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
         self.URL_LIBRARIES = self.URL_BASE + '/libraries';
         self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
-
+        self.URL_FILES=self.URL_BASE+'/courses/err_courseIDNotSet';
+        self.URL_FILE=self.URL_BASE+'/courses/err_courseIDNotSet'+'/files';
 
 
         self.freshTeacherConstant=function () {
@@ -24,8 +25,22 @@ angular.module('teacher')
             self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
             self.URL_LIBRARIES = self.URL_BASE + '/libraries';
             self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
-
-
+            self.URL_FILES=self.URL_BASE+'/courses/'+teacherFactory.getCurrentCourse()._id+'/files';
+            self.URL_FILE=self.URL_BASE+'/courses/'+teacherFactory.getCurrentCourse()._id+'/files/';
+        };
+        self.freshTeacherConstant=function (courseID) {
+            self.URL_BASE = AppConstants.URL_BASE + '/teacher-side/'+Account.getUid();
+            self.URL_COURSES = self.URL_BASE + '/courses';
+            self.URL_QUESTIONS = self.URL_BASE + '/questions';
+            self.URL_COURSE = self.URL_COURSES + '/:courseId';
+            self.URL_COURSE_STUDENTS = self.URL_COURSES + '/students';
+            self.URL_COURSE_STUDENTS_SCORES=self.URL_COURSES;
+            self.URL_LIBRARIES = self.URL_BASE + '/libraries';
+            self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
+            if(courseID){
+                self.URL_FILES=self.URL_BASE+'/courses/'+courseID+'/files';
+                self.URL_FILE=self.URL_BASE+'/courses/'+courseID+'/files/';
+            }
         };
         return self;
     })
@@ -87,7 +102,7 @@ angular.module('teacher')
             self.flushCourseList(callback);
         };
         self.setCurrentCourse = function (value) {
-
+            if(value)TeacherConstants.freshTeacherConstant(value._id);
             console.log('setcuurnetcousre',value);
             if(value===null)$cookies.remove('setcuurnetcousre');
             $cookies.putObject('currentCourse', value);

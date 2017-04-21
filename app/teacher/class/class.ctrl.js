@@ -61,7 +61,7 @@
             $scope.btnFile=function (course) {
                 console.log('btnFile');
                 teacherFactory.setCurrentCourse(course);
-                $state.go('teacher.file');
+                $state.go('teacher.fileSystem');
             };
 
             $scope.btnRemoveCourse = function (course) {
