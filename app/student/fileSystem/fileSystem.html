@@ -1,4 +1,14 @@
 <!--{{files}}-->
+<md-toolbar layout="row">
+    <div  class="md-toolbar-tools">
+        <md-button ng-click="backToClass()">
+            <md-icon class="material-icons">home</md-icon>菜单
+        </md-button>
+        <md-select ng-model="courseSelected" placeholder="选择班级"  flex="50">
+            <md-option ng-repeat="course in courseList" ng-click="switchCourse(course._id)" >{{ course.name }}</md-option>
+        </md-select>
+    </div>
+</md-toolbar>
 <md-card ng-repeat="file in files">
     <md-content layout-padding>
         <md-card-title>
@@ -39,8 +49,8 @@
         </md-card-actions>
     </md-content>
 </md-card>
-<md-content layout-padding>
-选择一个文件上传<input type="file" id="file">
-<md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
-</md-content>
+<!--<md-content layout-padding>-->
+<!--选择一个文件上传<input type="file" id="file">-->
+<!--<md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>-->
+<!--</md-content>-->
 

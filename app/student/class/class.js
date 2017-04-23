@@ -28,6 +28,13 @@
                 setCourse(course);
                 $state.go('student.qa');
             };
+            $scope.btnFile = function (course) {
+                console.log('file');
+                console.log(course);
+                setCourse(course);
+                $state.go('student.fileSystem');
+            };
+
             $scope.logout = function () {
                 console.log('要推出了');
                 Account.deleteCredit();

@@ -9,9 +9,10 @@ angular.module('student', [
     'student.person',
     'student.doc',
     'student.sign',
+    'student.fileSystem',
     'account.update'
 ])
-    .factory('StudentConstants', function (Account, AppConstants, TeacherConstants) {
+    .factory('StudentConstants', function (Account, AppConstants) {
         var self = {};
         self.URL_BASE = AppConstants.URL_BASE + '/student-side/' + Account.getUid();
         self.URL_COURSES = self.URL_BASE + '/courses';
@@ -20,6 +21,10 @@ angular.module('student', [
         self.URL_QUIZ = self.URL_QUIZZES + '/:quizID';
         self.URL_ACHIEVEMENTS = self.URL_BASE + '/achievements';
         self.URL_ACHIEVEMENT = self.URL_ACHIEVEMENTS + '/:achievementID';
+        self.URL_FILES = self.URL_COURSES + '/notSet';
+        self.URL_FILE = self.URL_COURSES + '/notSet/notSet/';
+
+
         self.freshStudentConstant = function () {
             console.log(self.URL_BASE);
             self.URL_BASE = AppConstants.URL_BASE + '/student-side/' + Account.getUid();
@@ -30,8 +35,11 @@ angular.module('student', [
             self.URL_ACHIEVEMENTS = self.URL_BASE + '/achievements';
             self.URL_ACHIEVEMENT = self.URL_ACHIEVEMENTS + '/:achievementID';
             console.log(self.URL_BASE);
-
-
+        };
+        self.freshStudentConstantWithCourse=function (name) {
+            self.freshStudentConstant();
+            self.URL_FILES = self.URL_COURSES + '/'+name+'/files';
+            self.URL_FILE = self.URL_COURSES + '/'+name+'/files/';
         };
 
         return self;
@@ -67,6 +75,8 @@ angular.module('student', [
         };
         self.setCurrentCourse = function (value) {
             currentCourse = value;
+            StudentConstants.freshStudentConstantWithCourse(value);
+
             console.log('setCurrentC');
             console.log(value);
         };
