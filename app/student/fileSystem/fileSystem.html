@@ -1,57 +1,59 @@
 <!--{{files}}-->
 <md-content layout-fill>
-<md-toolbar layout="row">
-    <div  class="md-toolbar-tools">
-        <md-button ng-click="backToClass()">
-            <md-icon class="material-icons">home</md-icon>菜单
-        </md-button>
-        <md-select ng-model="courseSelected" placeholder="选择班级"  flex="50">
-            <md-option ng-repeat="course in courseList" ng-click="switchCourse(course._id)" >{{ course.name }}</md-option>
-        </md-select>
-    </div>
-</md-toolbar>
-<md-card ng-repeat="file in files">
-    <md-content layout-padding>
-        <md-card-title>
-            {{file.name}}
-        </md-card-title>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="backToClass()">
+                <md-icon class="material-icons">home</md-icon>
+                菜单
+            </md-button>
+            <md-select ng-model="courseSelected" placeholder="选择班级" flex="50">
+                <md-option ng-repeat="course in courseList" ng-click="switchCourse(course._id)">{{ course.name }}
+                </md-option>
+            </md-select>
+        </div>
+    </md-toolbar>
+    <md-card ng-repeat="file in files">
+        <md-content layout-padding>
+            <md-card-title>
+                {{file.name}}
+            </md-card-title>
 
-        <img ng-src="{{getSrc(file.fileID)}}" ng-if="file.name.length>5&&
+            <img ng-src="{{getSrc(file.fileID)}}" ng-if="file.name.length>5&&
         (file.name.substr(file.name.lenght-4)=='.png'||file.name.substr(file.name.lenght-4)=='jpg'||file.name.substr(file.name.lenght-4)=='.jpeg'||file.name.substr(file.name.lenght-4)=='.BMP')">
-        </img>
-        <video controls preload="metadata" ng-src="{{getSrc(file.fileID)}}" controls ng-if="file.name.length>5&&
+            </img>
+            <video controls preload="metadata" ng-src="{{getSrc(file.fileID)}}" controls ng-if="file.name.length>5&&
             (file.name.substr(file.name.lenght-4)=='.mp4'||file.name.substr(file.name.lenght-5)=='.webm')">
-        </video>
-        <br>
-        <span ng-show="file.size/1024<1000">
+            </video>
+            <br>
+            <span ng-show="file.size/1024<1000">
         size:{{(file.size/1024).toFixed(3)}}KB<br>
         </span>
-        <span ng-show="file.size/1024>=1000">
+            <span ng-show="file.size/1024>=1000">
         size:{{(file.size/1024/1024).toFixed(3)}}MB<br>
          </span>
-        <span>
+            <span>
         createdTime:{{file.createdTime|date:'medium'}}
     </span>
-        <md-card-actions layout="row" layout-xs="column" layout-align="end end">
-            <div layout-xs="row">
-                <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
-                <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
-                <!--<span>play</span>-->
-                <!--</md-button>-->
-                <md-button ng-click="btnDownloadFile(file.fileID)">
-                    <md-icon class="md-secondary material-icons">delete</md-icon>
-                    <span>Download</span>
-                </md-button>
-                <md-button ng-click="btnRemoveFile(file)">
-                    <md-icon class="md-secondary material-icons">delete</md-icon>
-                    <span>删除</span>
-                </md-button>
-            </div>
-        </md-card-actions>
-    </md-content>
-</md-card>
-<!--<md-content layout-padding>-->
-<!--选择一个文件上传<input type="file" id="file">-->
-<!--<md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>-->
-<!--</md-content>-->
+            <md-card-actions layout="row" layout-xs="column" layout-align="end end">
+                <div layout-xs="row">
+                    <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
+                    <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
+                    <!--<span>play</span>-->
+                    <!--</md-button>-->
+                    <md-button ng-click="btnDownloadFile(file.fileID)">
+                        <md-icon class="md-secondary material-icons">file_download</md-icon>
+                        <span>下载</span>
+                    </md-button>
+                    <!--<md-button ng-click="btnRemoveFile(file)">-->
+                    <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
+                    <!--<span>删除</span>-->
+                    <!--</md-button>-->
+                </div>
+            </md-card-actions>
+        </md-content>
+    </md-card>
+    <!--<md-content layout-padding>-->
+    <!--选择一个文件上传<input type="file" id="file">-->
+    <!--<md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>-->
+    <!--</md-content>-->
 </md-content>

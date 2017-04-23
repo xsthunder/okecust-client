@@ -28,8 +28,8 @@
                 <!--<span>play</span>-->
                 <!--</md-button>-->
                 <md-button ng-click="btnDownloadFile(file.fileID)">
-                    <md-icon class="md-secondary material-icons">delete</md-icon>
-                    <span>Download</span>
+                    <md-icon class="md-secondary material-icons">file_download</md-icon>
+                    <span>下载</span>
                 </md-button>
                 <md-button ng-click="btnRemoveFile(file)">
                     <md-icon class="md-secondary material-icons">delete</md-icon>
@@ -40,7 +40,7 @@
     </md-content>
 </md-card>
 <md-content layout-padding>
-选择一个文件上传<input type="file" id="file">
-<md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
+    选择一个文件上传<input type="file" id="file">
+    <md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
 </md-content>
 
