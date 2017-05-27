@@ -9,9 +9,7 @@
             })
         })
         .controller('classCtrl', function ($scope, $mdBottomSheet, $log, $state, Account, studentFactory) {
-            $scope.btnVideo = function (url) {
-                window.open('https://appear.in/' + url);
-            };
+
             studentFactory.getCourseList(function (err, list) {
                 if (err == null) {
                     $scope.courseList = list;

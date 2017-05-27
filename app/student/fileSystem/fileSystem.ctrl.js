@@ -34,6 +34,9 @@
             studentFactory.setCurrentCourse(course);
             freshData();
         };
+        $scope.btnVideo = function () {
+            window.open('https://appear.in/' + studentFactory.getCurrentCourse());
+        };
         freshData();
         $scope.uploading=false;
 

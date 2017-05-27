@@ -5,7 +5,7 @@
     'use strict';
     angular.module('teacher.fileSystem')
         .controller('teacherFileSystem', ctrl);
-    function ctrl(teacherFileSystemFactory, TeacherConstants, $scope, $sce, $http, Account,$mdDialog,TeacherHeaderFactory) {
+    function ctrl(teacherFileSystemFactory, TeacherConstants,teacherFactory, $scope, $sce, $http, Account,$mdDialog,TeacherHeaderFactory) {
         console.log('init teacher file system');
         function freshData() {
             teacherFileSystemFactory.getFiles(function (err, res) {
@@ -17,6 +17,9 @@
         }
         freshData();
         TeacherHeaderFactory.setOnSelectedListener(freshData);
+        $scope.btnVideo = function () {
+            window.open('https://appear.in/' + teacherFactory.getCurrentCourse()._id);
+        };
         $scope.uploading=false;
         $scope.btnRemoveFile = function (file) {
             var confirm = $mdDialog.confirm()
