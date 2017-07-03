@@ -25,10 +25,54 @@
             <label>试题名称</label>
             <input required ng-model="newQuizTitle">
         </md-input-container>
-        <md-input-container>
-            <label>开始时间</label>
-            <input type="datetime-local" name="date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2017-01-01T00:00:00" max="2030-12-31T00:00:00" required ng-model="date" id="user_date"/>
+        <!--<md-input-container>-->
+            <!--<label>开始时间</label>-->
+            <!--<input type="datetime-local" name="date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2017-01-01T00:00:00" max="2030-12-31T00:00:00" required ng-model="date" id="user_date"/>-->
+        <!--</md-input-container>-->
+
+        <md-input-container layout = "row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>年份</label>
+                <md-select ng-model="startDate.year">
+                    <md-option ng-repeat="year in startYear" value="{{year.abbrev}}">
+                        {{year.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>月份</label>
+                <md-select ng-model="startDate.month">
+                    <md-option ng-repeat="month in startMonth" value="{{month.abbrev}}">
+                        {{month.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>日期</label>
+                <md-select ng-model="startDate.day">
+                    <md-option ng-repeat="day in startDay" value="{{day.abbrev}}">
+                        {{day.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>小时</label>
+                <md-select ng-model="startDate.hour">
+                    <md-option ng-repeat="hour in startHour" value="{{hour.abbrev}}">
+                        {{hour.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>分钟</label>
+                <md-select ng-model="startDate.minute">
+                    <md-option ng-repeat="minute in startMinute" value="{{minute.abbrev}}">
+                        {{minute.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </md-input-container>
+
         <md-input-container>
             <label>持续时间(分钟）</label>
             <input required ng-model="minute">

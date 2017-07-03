@@ -8,7 +8,33 @@
 
         function ctrl($scope, $mdDialog, teacherFactory, qaAddDetailFactory, $state, teacherQuizFactory, $log, TeacherCourse) {
             $log.info('teacherQaAddCtrl init');
-            $scope.date = new Date();
+            //$scope.date = new Date();
+            var date = new Date();
+            $scope.startDate = {
+                year: date.getFullYear(),
+                month: date.getMonth()+1,
+                day: date.getDate(),
+                hour: date.getHours(),
+                minute: date.getMinutes()
+            };
+
+            $scope.startYear = [ date.getFullYear(), date.getFullYear()+1, date.getFullYear()+2].map(function(year) {
+                return {abbrev: year};
+            });
+            $scope.startMonth = ('1 2 3 4 5 6 7 8 9 10 11 12 ').split(' ').map(function(month) {
+                return {abbrev: month};
+            });
+            $scope.startDay = ('1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ').split(' ').map(function(day) {
+                return {abbrev: day};
+            });
+            $scope.startHour = ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ').split(' ').map(function(hour) {
+                return {abbrev: hour};
+            });
+            $scope.startMinute = ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 '+
+            '24 25 26 27 27 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 '+
+            '48 49 50 51 52 53 54 55 56 57 58 59').split(' ').map(function(minute) {
+                return {abbrev: minute};
+            });
             $scope.newQuizTitle = '';
             var selected = [];
             var questionSet = [];
@@ -46,7 +72,15 @@
                         var qs = quiz === null ? null : quiz.questions;
                         if (quiz) {
                             if (quiz.time) {
-                                $scope.date = new Date(quiz.time.from);
+                                //$scope.date = new Date(quiz.time.from);
+                                var date = new Date(quiz.time.from);
+                                $scope.startDate = {
+                                    year: date.getFullYear(),
+                                    month: date.getMonth()+1,
+                                    day: date.getDate(),
+                                    hour: date.getHours(),
+                                    minute: date.getMinutes()
+                                };
                                 $scope.minute = (quiz.time.to - quiz.time.from) / 1000 / 60;
                             }
                         }
@@ -95,7 +129,14 @@
             };
             $scope.submit = function (title) {
                 var minute = $scope.minute;
-                var date = new Date($scope.date);
+                //var date = new Date($scope.date);
+                var date = new Date();
+                date.setFullYear($scope.startDate.year);
+                date.setMonth($scope.startDate.month-1);
+                date.setDate($scope.startDate.day);
+                date.setDate($scope.startDate.day);
+                date.setHours($scope.startDate.hour);
+                date.setMinutes($scope.startDate.minute);
                 console.log(+date);
                 var curdate = new Date();
                 if (title === "" || title === undefined)return showAlert("错误", "小测试标题不能为空");
