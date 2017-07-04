@@ -21,8 +21,15 @@
                 callback(res);
             });
         };
-        self.getFile = function (fileID, callback) {
-            window.open(StudentConstants.URL_FILE + fileID + '?token=' + Account.getToken());
+        self.getUrl = function (fileID ,author) {
+            let url =StudentConstants.URL_FILE + fileID + '?token=' + Account.getToken();
+            if(author)url+='&author='+author;
+            // console.log('url',url);
+            return url;
+        };
+        self.getFile = function (fileID, author) {
+            console.log(fileID,author,self.getUrl(fileID,author));
+            window.open(self.getUrl(fileID,author));
             // $http.get(TeacherConstants.URL_FILE+fileID, {
             //     headers: {'x-token': Account.getToken()}
             // }).then(function (res) {
@@ -30,6 +37,15 @@
             // }, function (res) {
             //     callback(res);
             // });
+        };
+        self.removeFile = function (fileID, callback) {
+            $http.delete(StudentConstants.URL_FILE + fileID, {
+                headers: {'x-token': Account.getToken()}
+            }).then(function (res) {
+                callback(null, res.data);
+            }, function (res) {
+                callback(res);
+            });
         };
         return self;
     }

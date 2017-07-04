@@ -1,4 +1,7 @@
 <!--{{files}}-->
+<md-list-item class="md-primary">
+    课程文件
+</md-list-item>
 <md-button ng-click="btnVideo(course._id)">
     <md-icon class="md-secondary material-icons">video_call</md-icon>
     <span>在当前课程视频聊天</span>
@@ -51,67 +54,60 @@
 <md-divider></md-divider>
 <md-divider></md-divider>
 
-<md-card ng-repeat="student in students track by $index">
-    <md-content>
-        <md-card-title>
-
-            <span>{{student.uid+' '+student.name}}</span>
-            <md-button ng-click="btnFetchFileByUid(student.uid,$index)">
-                <md-icon class="md-secondary material-icons">file_download</md-icon>
-                <span>获取</span>
-            </md-button>
-            <md-button ng-click="btnDownloadFileByUid(file.fileID)">
-                <md-icon class="md-secondary material-icons">file_download</md-icon>
-                <span>下载</span>
-            </md-button>
-        </md-card-title>
-        <md-card-actions layout="row" layout-xs="column" >
-            <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
-            <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
-            <!--<span>play</span>-->
-            <!--</md-button>-->
-            <md-card ng-repeat="file in studentsFiles[$index] " flex="100">
-                <md-content layout-padding>
-                    <md-card-title>
-                        {{file.name}}
-                    </md-card-title>
-
-                    <img ng-src="{{getSrc(file.fileID,student.uid)}}" ng-if="file.name.length>5&&
+<md-content ng-repeat="student in students track by $index" layout="column" layout-padding>
+    <md-list-item class="md-primary">
+        {{student.uid+' '+student.name}}
+    </md-list-item>
+    <md-content layout="row">
+    <md-button ng-click="btnFetchFileByUid(student.uid,$index)">
+        <md-icon class="md-secondary material-icons">file_download</md-icon>
+        <span>获取</span>
+    </md-button>
+    <md-button ng-click="btnDownloadFileByUid(file.fileID)">
+        <md-icon class="md-secondary material-icons">file_download</md-icon>
+        <span>下载</span>
+    </md-button>
+    </md-content>
+    </div>
+    </md-card-title>
+    <md-card-actions layout="column">
+        <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
+        <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
+        <!--<span>play</span>-->
+        <!--</md-button>-->
+        <md-card ng-repeat="file in studentsFiles[$index] " flex="100">
+            <md-content layout-padding>
+                <md-card-title>
+                    {{file.name}} by {{student.uid+' '+student.name}}
+                </md-card-title>
+                <img ng-src="{{getSrc(file.fileID,student.uid)}}" ng-if="file.name.length>5&&
         (file.name.substr(file.name.lenght-4)=='.png'||file.name.substr(file.name.lenght-4)=='jpg'||file.name.substr(file.name.lenght-4)=='.jpeg'||file.name.substr(file.name.lenght-4)=='.BMP')">
-                    </img>
-                    <video controls preload="metadata" ng-src="{{getSrc(file.fileID,student.uid)}}" controls ng-if="file.name.length>5&&
+                </img>
+                <video controls preload="metadata" ng-src="{{getSrc(file.fileID,student.uid)}}" controls ng-if="file.name.length>5&&
             (file.name.substr(file.name.lenght-4)=='.mp4'||file.name.substr(file.name.lenght-5)=='.webm')">
-                    </video>
-                    <br>
-                    <span ng-show="file.size/1024<1000">
+                </video>
+                <br>
+                <span ng-show="file.size/1024<1000">
         size:{{(file.size/1024).toFixed(3)}}KB<br>
         </span>
-                    <span ng-show="file.size/1024>=1000">
+                <span ng-show="file.size/1024>=1000">
         size:{{(file.size/1024/1024).toFixed(3)}}MB<br>
          </span>
-                    <span>
+                <span>
         createdTime:{{file.createdTime|date:'medium'}}
     </span>
-                    <md-card-actions layout="row" layout-xs="column" layout-align="end end">
-                        <div layout-xs="row">
-                            <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
-                            <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
-                            <!--<span>play</span>-->
-                            <!--</md-button>-->
-                            <md-button ng-click="btnDownloadFile(file.fileID)">
-                                <md-icon class="md-secondary material-icons">file_download</md-icon>
-                                <span>下载</span>
-                            </md-button>
-                            <md-button ng-click="btnRemoveFile(file)">
-                                <md-icon class="md-secondary material-icons">delete</md-icon>
-                                <span>删除</span>
-                            </md-button>
-                        </div>
-                    </md-card-actions>
-                </md-content>
-            </md-card>
+                <md-card-actions layout="column" layout-align="end end">
+                    <div layout-xs="row">
+                        <md-button ng-click="btnDownloadFile(file.fileID,student.uid)">
+                            <md-icon class="md-secondary material-icons">file_download</md-icon>
+                            <span>下载</span>
+                        </md-button>
+                    </div>
+                </md-card-actions>
+            </md-content>
+        </md-card>
 
 
-        </md-card-actions>
-    </md-content>
-</md-card>
+    </md-card-actions>
+</md-content>
+</md-content>

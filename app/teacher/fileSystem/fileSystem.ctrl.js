@@ -76,17 +76,9 @@
 
         };
 
-        $scope.btnPlayFile = function (fileID) {
+        $scope.btnDownloadFile = function (fileID,author) {
             console.log('btnDownloadFile');
-            teacherFileSystemFactory.getFile(fileID, function (err, res) {
-                if (err)return Account.showToast('err', 'kk')
-            })
-        };
-        $scope.btnDownloadFile = function (fileID) {
-            console.log('btnDownloadFile');
-            teacherFileSystemFactory.getFile(fileID, function (err, res) {
-                if (err)return Account.showToast('err', 'kk')
-            })
+            teacherFileSystemFactory.getFile(fileID,author);
         };
         $scope.getSrc = function (fileID,author) {
             return $sce.trustAsResourceUrl(teacherFileSystemFactory.getUrl(fileID,author))

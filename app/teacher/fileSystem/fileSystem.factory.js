@@ -47,18 +47,12 @@
         };
         self.getUrl = function (fileID ,author) {
             let url =TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken();
-            if(author)url+='&'+author;
+            if(author)url+='&author='+author;
+            console.log('url',url);
             return url;
         };
-        self.getFile = function (fileID, author,callback) {
+        self.getFile = function (fileID, author) {
             window.open(self.getUrl(fileID,author));
-            // $http.get(TeacherConstants.URL_FILE+fileID, {
-            //     headers: {'x-token': Account.getToken()}
-            // }).then(function (res) {
-            //     callback(null, res.data);
-            // }, function (res) {
-            //     callback(res);
-            // });
         };
         self.removeFile = function (fileID, callback) {
             $http.delete(TeacherConstants.URL_FILE + fileID, {
