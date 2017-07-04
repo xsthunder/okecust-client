@@ -4,15 +4,14 @@
 (function () {
     angular.module('teacher.nameList.add')
         .controller('nameListAddCtrl', ctrl);
-    function ctrl($scope, $log,$state, $mdDialog, headerFactory, TeacherCourse, teacherFactory) {
+    function ctrl($scope, $log, $state, $mdDialog, headerFactory, TeacherCourse, teacherFactory) {
         var showAlert = teacherFactory.showToast;
-        $scope.students = [];
-        $scope.nameList=[
+        $scope.studentTerm =
             {
-                id:'' ,
-                name:''
-            }
-        ];
+                id: '',
+                name: ''
+            };
+
 
         //TODO remove repeated codes
         function fixdata(data) {
@@ -29,7 +28,7 @@
             var files = e.target.files;
             var i, f;
             if (1 > files.length) {
-                return showAlert('cuowu','请选择一个文件');
+                return showAlert('cuowu', '请选择一个文件');
             }
             f = files[0];
             var reader = new FileReader();
@@ -73,10 +72,10 @@
                     }
                     var res = regex.exec(key);
                     if (!res) {
-                        return showAlert('cuowu','无法处理: ' + key);
+                        return showAlert('cuowu', '无法处理: ' + key);
                     }
                     if (3 !== res.length) {
-                        showAlert('cuowu','格式不对: ' + key);
+                        showAlert('cuowu', '格式不对: ' + key);
                         continue;
                     }
                     var keyOfRow = res[1];
@@ -90,33 +89,59 @@
                 }
                 console.log(sheetArray);
                 console.log(sheetArray[0][1]);
-                $scope.students=[];
+                $scope.students = [];
+                var invalidID = 0;
                 for (var key in sheetArray[0]) {
-                    console.log(key);
-                    console.log({
-                        id: sheetArray[0][key]+'',
-                        name: sheetArray[1][key]
-                    });
-                    $scope.students.push({
-                        id: sheetArray[0][key]+'',
-                        name: sheetArray[1][key]
-                    });
+                    // console.log(key);
+                    // console.log({
+                    //     id: sheetArray[0][key]+'',
+                    //     name: sheetArray[1][key]
+                    // });
+                    try {
+                        var tmp = parseInt(sheetArray[0][key]);
+                        if(isNaN(tmp))invalidID++;
+                        else if (tmp < 10000000 || tmp > 99999999) invalidID++;
+                        else {
+                            $scope.students.push({
+                                id: sheetArray[0][key] + '',
+                                name: sheetArray[1][key]
+                            });
+                        }
+                    }
+                    catch (err) {
+                        invalidID++;
+                    }
                 }
-                console.log($scope.students);
+                if (invalidID) showAlert('错误', invalidID + ' 项因为学号格式不对而被忽略');
             });
         }
+
         document.getElementById('xlsx').addEventListener('change', handleFile, false);
 
         $log.info('nameListAddCtrl init');
         $scope.submit = function () {
             console.log("init sumit");
-            var nameListArr = $scope.nameList.filter(function (each) {
-                if(each.id==''||each.name=='')return false;
-                else return true;
-            });
-            console.log(nameListArr);
-            nameListArr=nameListArr.concat($scope.students);
-            if(nameListArr.length==0)return showAlert('cuowu','没有读取到任何名单数据');
+            var each = $scope.studentTerm;
+            var nameListArr = [];
+
+            if ((each && each.id && each.name)) {
+                var flag = true;
+                try {
+                    var tmp = parseInt(each.id);
+                }
+                catch (err) {
+                    showAlert('', '输入栏的学号格式不正确');
+                    flag = false;
+                }
+                if (!tmp||isNaN(tmp)||tmp < 10000000 || tmp > 99999999) {
+                    flag = false;
+                    showAlert('', '输入栏的学号格式不正确');
+                }
+                if(flag)nameListArr.push(each);
+                else return showAlert('', '输入栏的学号格式不正确');
+            }
+            if($scope.students)nameListArr = nameListArr.concat($scope.students);
+            if (nameListArr && nameListArr.length == 0)return showAlert('cuowu', '没有读取到任何名单数据');
             $log.info(nameListArr);
             TeacherCourse.addStudentsIntoCourse(teacherFactory.getCurrentCourse()._id, nameListArr, function (error, res) {
                 $log.info(res);

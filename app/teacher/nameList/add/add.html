@@ -2,21 +2,21 @@
 <!--<br>-->
 <!--<br>-->
 <md-content layout-padding>
-    <div ng-repeat="each in nameList track by $index" layout="row" flex="100" flex-gt-xs="50" layout-padding>
+    <div layout="row" flex="100" flex-gt-xs="50" layout-padding>
         <md-input-container class="md-block" flex="auto">
             <label>学号</label>
-            <input ng-model="each.id">
+            <input ng-model="studentTerm.id">
         </md-input-container>
         <md-input-container class="md-block" flex="auto">
             <label>姓名</label>
-            <input ng-model="each.name">
+            <input ng-model="studentTerm.name">
         </md-input-container>
     </div>
 </md-content>
 
 <md-content layout-padding>
 <md-input class="md-block">
-    <label>选择一个xlsx文件（第一行列、第二列姓名）: </label>
+    <label>选择一个xlsx文件（第一列学号、第二列姓名）: </label>
     <input type="file" id="xlsx"/>
 </md-input>
 </md-content>
