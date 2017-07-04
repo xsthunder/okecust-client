@@ -5,7 +5,7 @@
     'use strict';
     angular.module('student.fileSystem')
         .controller('studentFileSystem', ctrl);
-    function ctrl(studentFileSystemFactory, StudentConstants , $scope, $sce, Account,studentFactory,$state ) {
+    function ctrl(studentFileSystemFactory, $http,StudentConstants , $scope, $sce, Account,studentFactory,$state ) {
         console.log('init sh file system');
         function freshData() {
             studentFileSystemFactory.getFiles(function (err, res) {
@@ -14,6 +14,12 @@
                 if(res.length==0)Account.showToast('', '暂时没有文件');
                 $scope.files = res;
             });
+            studentFileSystemFactory.getFiles(function (err, res) {
+                console.log('fileSystem fact ', err, res);
+                if (err)return Account.showToast('', '获取文件失败');
+                if(res.length==0)Account.showToast('', '暂时没有文件');
+                $scope.studentfiles = res;
+            },Account.getUid());
         }
         $scope.courseSelected = studentFactory.getCurrentCourseName();
 
@@ -49,7 +55,46 @@
         $scope.getSrc = function (fileID) {
             return $sce.trustAsResourceUrl(StudentConstants.URL_FILE + fileID + '?token=' + Account.getToken())
         };
+        document.getElementById("file").addEventListener('change',
+            function (e) {
+                $scope.uploading=true;
 
+                var files = e.target.files;
+                var file = files[0];
+                console.log(file);
+                var fd = new FormData();
+                fd.append('file', file);
+                fd.append('name', file.name);
+                $http({
+                    method: 'POST',
+                    url: StudentConstants.URL_FILES,
+                    data: fd,
+                    headers: {
+                        'x-token':Account.getToken(),
+                        'Content-Type': undefined},
+                    transformRequest: angular.identity
+                })
+                    .then(function (res) {
+
+                        freshData();
+                        $scope.uploading=false;
+
+                        return  Account.showToast('','文件上传成功');
+                    },function (res) {
+                        $scope.uploading=false;
+
+                        return  Account.showToast('','文件上传失败');
+
+                    });
+                // teacherFileSystemFactory.postFile(file, function (err, res) {
+                //     if (err)return Account.showToast('', '文件' + '上传失败');
+                //     else return Account.showToast('', '文件' + res.name + '上传成功');
+                // });
+
+
+                console.log(e);
+            }
+        );
 
 
     }

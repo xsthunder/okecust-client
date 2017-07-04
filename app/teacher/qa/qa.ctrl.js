@@ -7,7 +7,8 @@
             $scope.quiz = teacherQuizFactory.getCurrentQuiz();
         })
 
-        .controller('teacher.qa.ctrl', function ($scope, $mdDialog, teacherQuizFactory, $mdToast, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
+        .controller('teacher.qa.ctrl', function (Account,$scope, $mdDialog, teacherQuizFactory, $mdToast, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
+            var showAlert =Account.showAlert;
             var freshData = function () {
                 TeacherCourse.getQuizListFromCourse(teacherFactory.getCurrentCourse()._id, function (error, res) {
                     if (!error) {

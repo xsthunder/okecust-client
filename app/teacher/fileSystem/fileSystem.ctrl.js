@@ -5,9 +5,44 @@
     'use strict';
     angular.module('teacher.fileSystem')
         .controller('teacherFileSystem', ctrl);
-    function ctrl(teacherFileSystemFactory, TeacherConstants,teacherFactory, $scope, $sce, $http, Account,$mdDialog,TeacherHeaderFactory) {
+    function ctrl(teacherFileSystemFactory,TeacherCourse,$log, TeacherConstants,teacherFactory, $scope, $sce, $http, Account,$mdDialog,TeacherHeaderFactory) {
         console.log('init teacher file system');
+        var btnFetchFileByUid =function (uid,$index) {
+            teacherFileSystemFactory.getFiles(function (err, res) {
+                console.log('fileSystem fact ', err, res);
+                if (err)return Account.showToast('', '获取文件失败');
+                if(res.length==0)Account.showToast('', '暂时没有文件');
+                $scope.studentsFiles[$index] = res;
+            },uid);
+        };
+        $scope.btnFetchFileByUid=btnFetchFileByUid;
+        var getNameList = function () {
+            TeacherCourse.getCourseStudents(teacherFactory.getCurrentCourse()._id, function (error, res) {
+                if (error) {
+                    console.log(teacherFactory.getCurrentCourse()._id);
+                    if (teacherFactory.getCurrentCourse()._id !== undefined || teacherFactory.getCurrentCourse()._id === 0) {
+                        $scope.showFab = true;
+                        return showAlert("失败", "获取名单失败，可以尝试刷新");
+                    }
+                }
+                $log.info(res);
+                $scope.students = res;
+                $scope.studentsFiles = [];
+                $scope.studentsFiles.fill(undefined,res.length);
+                $scope.showFab = false;
 
+                if (res.length == 0){
+                    $scope.showFab = false;
+                    return showAlert('','本课程名单为空');
+                }
+
+                if (res === undefined) {
+                    showAlert('','读取名单数据失败，请重试');
+                    $scope.showFab = true;
+                }
+            });
+        };
+        getNameList();
         function freshData() {
             teacherFileSystemFactory.getFiles(function (err, res) {
                 console.log('fileSystem fact ', err, res);
@@ -53,8 +88,8 @@
                 if (err)return Account.showToast('err', 'kk')
             })
         };
-        $scope.getSrc = function (fileID) {
-            return $sce.trustAsResourceUrl(TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken())
+        $scope.getSrc = function (fileID,author) {
+            return $sce.trustAsResourceUrl(teacherFileSystemFactory.getUrl(fileID,author))
         };
 
         document.getElementById("file").addEventListener('change',

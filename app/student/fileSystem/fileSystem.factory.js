@@ -5,13 +5,16 @@
     'use strict';
     angular.module('student.fileSystem')
         .factory('studentFileSystemFactory', fact);
-    function fact($http, Account,StudentConstants) {
+    function fact($http, Account, StudentConstants) {
         var self = {};
 
-        self.getFiles = function (callback) {
-
+        self.getFiles = function (callback, author) {
+            console.log('author',author);
             $http.get(StudentConstants.URL_FILES, {
-                headers: {'x-token': Account.getToken()}
+                headers: {
+                    'x-token': Account.getToken(),
+                    'author':author
+                }
             }).then(function (res) {
                 callback(null, res.data);
             }, function (res) {

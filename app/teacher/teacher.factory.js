@@ -25,15 +25,15 @@ angular.module('teacher')
             self.URL_LIBRARIES = self.URL_BASE + '/libraries';
             self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
             var currentCourse = $cookies.getObject('currentCourse');
-            var courseID = currentCourse._id;
-            if (courseID) {
+            if (currentCourse&&currentCourse._id) {
+                let courseID=currentCourse._id;
                 self.URL_FILES = self.URL_BASE + '/courses/' + courseID + '/files';
                 self.URL_FILE = self.URL_BASE + '/courses/' + courseID + '/files/';
             }
-            else {
-                self.URL_FILES = self.URL_BASE + '/courses/' + teacherFactory.getCurrentCourse()._id + '/files';
-                self.URL_FILE = self.URL_BASE + '/courses/' + teacherFactory.getCurrentCourse()._id + '/files/';
-            }
+            // else {
+            //     self.URL_FILES = self.URL_BASE + '/courses/' + teacherFactory.getCurrentCourse()._id + '/files';
+            //     self.URL_FILE = self.URL_BASE + '/courses/' + teacherFactory.getCurrentCourse()._id + '/files/';
+            // }
         };
         return self;
     })

@@ -5,12 +5,15 @@
     'use strict';
     angular.module('teacher.fileSystem')
         .factory('teacherFileSystemFactory', fact);
-    function fact($http, TeacherConstants, Account) {
+    function fact($http, TeacherConstants, Account, TeacherCourse, teacherFactory) {
         var self = {};
-        self.getFiles = function (callback) {
+        self.getFiles = function (callback, uid) {
             TeacherConstants.freshTeacherConstant();
             $http.get(TeacherConstants.URL_FILES, {
-                headers: {'x-token': Account.getToken()}
+                headers: {
+                    'x-token': Account.getToken(),
+                    'author':uid
+                }
             }).then(function (res) {
                 callback(null, res.data);
             }, function (res) {
@@ -23,12 +26,12 @@
                 {
                     headers: {
                         'x-token': Account.getToken(),
-                        'Content-Type':undefined
+                        'Content-Type': undefined
                     },
 
-                    transformRequest:function (data) {
+                    transformRequest: function (data) {
                         var formData = new FormData();
-                        formData.append("name",file.name );
+                        formData.append("name", file.name);
                         formData.append("file", file);
                         return formData;
                     },
@@ -36,15 +39,19 @@
                         file: file
                     }
                 }
-
             ).then(function (res) {
                 callback(null, res.data);
             }, function (res) {
                 callback(res);
             });
         };
-        self.getFile = function (fileID, callback) {
-            window.open(TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken());
+        self.getUrl = function (fileID ,author) {
+            let url =TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken();
+            if(author)url+='&'+author;
+            return url;
+        };
+        self.getFile = function (fileID, author,callback) {
+            window.open(self.getUrl(fileID,author));
             // $http.get(TeacherConstants.URL_FILE+fileID, {
             //     headers: {'x-token': Account.getToken()}
             // }).then(function (res) {
