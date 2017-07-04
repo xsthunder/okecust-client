@@ -7,6 +7,7 @@
         .controller('teacherFileSystem', ctrl);
     function ctrl(teacherFileSystemFactory, TeacherConstants,teacherFactory, $scope, $sce, $http, Account,$mdDialog,TeacherHeaderFactory) {
         console.log('init teacher file system');
+
         function freshData() {
             teacherFileSystemFactory.getFiles(function (err, res) {
                 console.log('fileSystem fact ', err, res);

@@ -7,8 +7,8 @@
         .factory('teacherFileSystemFactory', fact);
     function fact($http, TeacherConstants, Account) {
         var self = {};
-
         self.getFiles = function (callback) {
+            TeacherConstants.freshTeacherConstant();
             $http.get(TeacherConstants.URL_FILES, {
                 headers: {'x-token': Account.getToken()}
             }).then(function (res) {
