@@ -26,7 +26,7 @@ angular.module('teacher')
             self.URL_QUIZZES = self.URL_BASE + '/quizzes/';
             var currentCourse = $cookies.getObject('currentCourse');
             if (currentCourse&&currentCourse._id) {
-                let courseID=currentCourse._id;
+                var courseID=currentCourse._id;
                 self.URL_FILES = self.URL_BASE + '/courses/' + courseID + '/files';
                 self.URL_FILE = self.URL_BASE + '/courses/' + courseID + '/files/';
             }

@@ -22,7 +22,7 @@
             });
         };
         self.getUrl = function (fileID ,author) {
-            let url =StudentConstants.URL_FILE + fileID + '?token=' + Account.getToken();
+            var url =StudentConstants.URL_FILE + fileID + '?token=' + Account.getToken();
             if(author)url+='&author='+author;
             // console.log('url',url);
             return url;

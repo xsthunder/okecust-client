@@ -46,7 +46,7 @@
             });
         };
         self.getUrl = function (fileID ,author) {
-            let url =TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken();
+            var url =TeacherConstants.URL_FILE + fileID + '?token=' + Account.getToken();
             if(author)url+='&author='+author;
             console.log('url',url);
             return url;
