@@ -21,6 +21,10 @@
             return o;
         }
 
+        function checkName(s) {
+            return /[A-Za-z0-9]+$/gi.test(s);
+        }
+
         var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
         /* set up drag-and-drop event */
         /* fixdata and rABS are defined in the drag and drop example */
@@ -98,15 +102,15 @@
                     //     name: sheetArray[1][key]
                     // });
                     try {
-                        var tmp = parseInt(sheetArray[0][key]);
-                        if(isNaN(tmp))invalidID++;
-                        else if (tmp < 10000000 || tmp > 99999999) invalidID++;
-                        else {
+                        sheetArray[0][key]+='';
+                        console.log(sheetArray[0][key].length>=8&&checkName(sheetArray[0][key]),typeof (sheetArray[0][key]),sheetArray[0][key])
+                        if (sheetArray[0][key].length>=8&&checkName(sheetArray[0][key])) {
                             $scope.students.push({
                                 id: sheetArray[0][key] + '',
                                 name: sheetArray[1][key]
                             });
                         }
+                        else invalidID++
                     }
                     catch (err) {
                         invalidID++;
@@ -126,21 +130,15 @@
 
             if ((each && each.id && each.name)) {
                 var flag = true;
-                try {
-                    var tmp = parseInt(each.id);
-                }
-                catch (err) {
-                    showAlert('', '输入栏的学号格式不正确');
-                    flag = false;
-                }
-                if (!tmp||isNaN(tmp)||tmp < 10000000 || tmp > 99999999) {
+                if (each.id.length < 8) {
                     flag = false;
                     showAlert('', '输入栏的学号格式不正确');
                 }
-                if(flag)nameListArr.push(each);
+                flag = flag&&checkName(each.id);
+                if (flag) nameListArr.push(each);
                 else return showAlert('', '输入栏的学号格式不正确');
             }
-            if($scope.students)nameListArr = nameListArr.concat($scope.students);
+            if ($scope.students) nameListArr = nameListArr.concat($scope.students);
             if (nameListArr && nameListArr.length == 0)return showAlert('cuowu', '没有读取到任何名单数据');
             $log.info(nameListArr);
             TeacherCourse.addStudentsIntoCourse(teacherFactory.getCurrentCourse()._id, nameListArr, function (error, res) {
