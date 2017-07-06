@@ -1,11 +1,15 @@
 <!--{{files}}-->
-<md-list-item class="md-primary">
-    课程文件
-</md-list-item>
-<md-button ng-click="btnVideo(course._id)">
-    <md-icon class="md-secondary material-icons">video_call</md-icon>
-    <span>在当前课程视频聊天</span>
-</md-button>
+<md-content layout-padding>
+    <md-button ng-click="btnVideo(course._id)">
+        <md-icon class="md-secondary material-icons">video_call</md-icon>
+        <span>在当前课程视频聊天</span>
+    </md-button>
+    <md-list-item class="md-primary" flex>
+        <div>
+            <span layout-align="end center">课程文件</span>
+        </div>
+    </md-list-item>
+</md-content>
 <md-content layout-padding>
     选择一个文件上传<input type="file" id="file">
     <md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
@@ -53,20 +57,26 @@
 
 <md-divider></md-divider>
 <md-divider></md-divider>
-
+<md-list-item class="md-primary">
+    学生文件
+</md-list-item>
+<md-button ng-click="btnPack()" ng-show="showbtnPack">
+    <md-icon class="md-secondary material-icons">dns</md-icon>
+    <span>打包</span>
+</md-button>
 <md-content ng-repeat="student in students track by $index" layout="column" layout-padding>
     <md-list-item class="md-primary">
         {{student.uid+' '+student.name}}
     </md-list-item>
     <md-content layout="row">
-    <md-button ng-click="btnFetchFileByUid(student.uid,$index)">
-        <md-icon class="md-secondary material-icons">file_download</md-icon>
-        <span>获取</span>
-    </md-button>
-    <md-button ng-click="btnDownloadFileByUid(file.fileID)">
-        <md-icon class="md-secondary material-icons">file_download</md-icon>
-        <span>下载</span>
-    </md-button>
+            <md-button ng-click="btnFetchFileByUid(student.uid,$index)">
+                <md-icon class="md-secondary material-icons">{{student.fetchFlag?"expand_less":"expand_more"}}</md-icon>
+                <span>{{student.fetchFlag?"折叠":"展开"}}</span>
+            </md-button>
+        <!--<md-button ng-click="btnDownloadFileByUid(file.fileID)">-->
+        <!--<md-icon class="md-secondary material-icons">file_download</md-icon>-->
+        <!--<span>下载</span>-->
+        <!--</md-button>-->
     </md-content>
     </div>
     </md-card-title>

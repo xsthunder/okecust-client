@@ -57,6 +57,7 @@
         };
         document.getElementById("file").addEventListener('change',
             function (e) {
+                $scope.uploading=true;
                 var files = e.target.files;
                 var file = files[0];
                 console.log(file);
