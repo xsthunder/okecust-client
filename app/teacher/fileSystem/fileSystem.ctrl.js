@@ -24,6 +24,7 @@
         };
         $scope.btnFetchFileByUid = btnFetchFileByUid;
         var getNameList = function () {
+			$scope.students=[];
             TeacherCourse.getCourseStudents(teacherFactory.getCurrentCourse()._id, function (error, res) {
                 if (error) {
                     console.log(teacherFactory.getCurrentCourse()._id);
@@ -35,7 +36,7 @@
                 $log.info(res);
                 $scope.students = res;
                 $scope.studentsFiles = [];
-                $scope.studentsFiles.fill(undefined, res.length);
+				for(var i = 0;i<res.length;i++)$scope.studentsFiles.push(new Array());
                 $scope.showFab = false;
 
                 if (res.length == 0) {
@@ -51,6 +52,9 @@
         };
         getNameList();
         function freshData() {
+			
+			getNameList();
+			$scope.files = [];
             teacherFileSystemFactory.getFiles(function (err, res) {
                 console.log('fileSystem fact ', err, res);
                 if (err)return Account.showToast('', '获取文件失败');
@@ -100,7 +104,7 @@
                 $scope.files.concat(res);
                 freshData();
                 var date = (new Date(res[0].createdTime));
-                showToast('', '打包成功' + ',正在刷新我的文件列表 ' + date.toLocaleTimeString());
+                showToast('', '打包成功' + ',在我的文件列表 ' + date.toLocaleTimeString());
                 $scope.showbtnPack = true;
             })
         };

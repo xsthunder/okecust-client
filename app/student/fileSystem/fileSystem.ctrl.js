@@ -22,7 +22,7 @@
                 $scope.studentfiles = res;
             }, Account.getUid());
         }
-
+		$scope.btnUpdate =freshData;
         $scope.courseSelected = studentFactory.getCurrentCourseName();
         $scope.backToClass = function () {
             $state.go('student.class');

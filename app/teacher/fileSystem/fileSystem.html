@@ -14,6 +14,7 @@
     选择一个文件上传<input type="file" id="file">
     <md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
 </md-content>
+<md-content layout-padding>
 <md-card ng-repeat="file in files">
     <md-content layout-padding>
         <md-card-title>
@@ -54,17 +55,19 @@
         </md-card-actions>
     </md-content>
 </md-card>
+</md-content>
+<md-divider></md-divider>
+<md-divider></md-divider>
 
-<md-divider></md-divider>
-<md-divider></md-divider>
+<md-content layout-padding>
 <md-list-item class="md-primary">
     学生文件
-</md-list-item>
-<md-button ng-click="btnPack()" ng-show="showbtnPack">
-    <md-icon class="md-secondary material-icons">dns</md-icon>
+	<md-button ng-click="btnPack()" ng-show="showbtnPack" class="md-raised md-primary">
+    <md-icon class="md-primary material-icons">dns</md-icon>
     <span>打包</span>
 </md-button>
-<md-content ng-repeat="student in students track by $index" layout="column" layout-padding>
+</md-list-item>
+<md-content ng-repeat="student in students track by $index" layout-padding>
     <md-list-item class="md-primary">
         {{student.uid+' '+student.name}}
     </md-list-item>
@@ -80,7 +83,7 @@
     </md-content>
     </div>
     </md-card-title>
-    <md-card-actions layout="column">
+    <md-card-actions >
         <!--<md-button ng-click="btnPlayFile(file.fileID)">-->
         <!--<md-icon class="md-secondary material-icons">delete</md-icon>-->
         <!--<span>play</span>-->

@@ -14,12 +14,17 @@
             </md-select>
         </div>
     </md-toolbar>
+	<md-content layout-padding>
     <md-button ng-click="btnVideo(course._id)">
         <md-icon class="md-secondary material-icons">video_call</md-icon>
         <span>在当前课程视频聊天</span>
     </md-button>
-    <md-subheader class="md-primary">
+    <md-subheader class="md-primary ">
         课程文件
+			<md-button ng-click="btnUpdate()" class ="md-raised md-primary" >
+			<md-icon class="material-icons">play_for_work</md-icon>
+			<span>刷新文件</span>
+				</md-button>
     </md-subheader>
     <md-card ng-repeat="file in files">
         <md-content layout-padding>
@@ -58,14 +63,15 @@
             </md-card-actions>
         </md-content>
     </md-card>
-    <md-content layout-padding>
-    选择一个文件上传<input type="file" id="file">
-    <md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
-    </md-content>
+
 
     <md-subheader class="md-primary">
         我的文件
     </md-subheader>
+	    <md-content layout-padding>
+    选择一个文件上传<input type="file" id="file">
+    <md-progress-circular md-mode="indeterminate" ng-show="uploading"></md-progress-circular>
+    </md-content>
     <md-card ng-repeat="file in studentfiles">
         <md-content layout-padding>
             <md-card-title>
@@ -102,5 +108,5 @@
             </md-card-actions>
         </md-content>
     </md-card>
-
+	</md-content>
 </md-content>
