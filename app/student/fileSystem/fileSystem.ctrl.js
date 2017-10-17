@@ -12,17 +12,37 @@
             studentFileSystemFactory.getFiles(function (err, res) {
                 console.log('fileSystem fact ', err, res);
                 if (err)return Account.showToast('', '获取文件失败');
-                if (res.length == 0) Account.showToast('', '暂时没有文件');
+                if (res.length == 0) Account.showToast('', '暂时没有课程文件');
                 $scope.files = res;
             });
             studentFileSystemFactory.getFiles(function (err, res) {
                 console.log('fileSystem fact ', err, res);
                 if (err)return Account.showToast('', '获取文件失败');
-                if (res.length == 0) Account.showToast('', '暂时没有文件');
+                if (res.length == 0) Account.showToast('', '暂时没有我的文件');
                 $scope.studentfiles = res;
             }, Account.getUid());
         }
-		$scope.btnUpdate =freshData;
+		$scope.btnUpdate =function(){
+				$scope.files=[];
+				studentFileSystemFactory.getFiles(function (err, res) {
+					console.log('fileSystem fact ', err, res);
+					if (err)return Account.showToast('', '获取文件失败');
+					$scope.files = res;
+					Account.showToast('', '刷新成功');
+					if (res.length == 0) Account.showToast('', '暂时没有课程文件');
+				});
+        };
+		$scope.btnMyUpdate =function(){
+             $scope.studentfiles = [];
+            studentFileSystemFactory.getFiles(function (err, res) {
+                console.log('fileSystem fact ', err, res);
+
+				if (err)return Account.showToast('', '获取文件失败');
+				$scope.studentfiles = res;
+				Account.showToast('', '刷新成功');
+				if (res.length == 0) Account.showToast('', '暂时没有我的文件');
+            }, Account.getUid());
+        };
         $scope.courseSelected = studentFactory.getCurrentCourseName();
         $scope.backToClass = function () {
             $state.go('student.class');
