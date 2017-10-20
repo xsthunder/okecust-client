@@ -16,6 +16,7 @@
             }
             Account.login($scope.username, $scope.password, function (err, res) {
                 if (null !== err) {
+					if(err.status == -1)return showAlert("无法登陆", "无法连接服务，请确认连接校园网，或者联系管理员");
                     return showAlert("无法登陆", '请检查账号或密码');
                 }
                 Account.setCredit(res);
