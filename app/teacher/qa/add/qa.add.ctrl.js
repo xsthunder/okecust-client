@@ -18,23 +18,22 @@
                 minute: date.getMinutes()
             };
 
-            $scope.startYear = [ date.getFullYear(), date.getFullYear()+1, date.getFullYear()+2].map(function(year) {
-                return {abbrev: year};
+			$scope.startYear=[date.getFullYear(),date.getFullYear()+1];
+            $scope.startMonth = ('1 2 3 4 5 6 7 8 9 10 11 12').split(' ').map(function(month) {
+                return Number(month);
             });
-            $scope.startMonth = ('1 2 3 4 5 6 7 8 9 10 11 12 ').split(' ').map(function(month) {
-                return {abbrev: month};
+            $scope.startDay = ('1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31').split(' ').map(function(day) {
+                return Number(day);
             });
-            $scope.startDay = ('1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ').split(' ').map(function(day) {
-                return {abbrev: day};
-            });
-            $scope.startHour = ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ').split(' ').map(function(hour) {
-                return {abbrev: hour};
+            $scope.startHour = ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23').split(' ').map(function(hour) {
+                return Number(hour);
             });
             $scope.startMinute = ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 '+
-            '24 25 26 27 27 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 '+
+            '24 25 26 27 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 '+
             '48 49 50 51 52 53 54 55 56 57 58 59').split(' ').map(function(minute) {
-                return {abbrev: minute};
+                return Number(minute);
             });
+			console.log($scope.startMinute);
             $scope.newQuizTitle = '';
             var selected = [];
             var questionSet = [];

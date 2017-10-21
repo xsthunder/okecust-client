@@ -8,17 +8,17 @@
         })
 
         .controller('teacher.qa.ctrl', function (Account,$scope, $mdDialog, teacherQuizFactory, $mdToast, $log, $state, TeacherCourse, teacherFactory, TeacherHeaderFactory) {
-            var showAlert =Account.showAlert;
+            var showToast =Account.showToast;
             var freshData = function () {
                 TeacherCourse.getQuizListFromCourse(teacherFactory.getCurrentCourse()._id, function (error, res) {
                     if (!error) {
                         $scope.QAitems = res;
                         $scope.showFab = true;
-                        if (res.length == 0)return showAlert('', '目前该课程还没有问答');
+                        if (res.length == 0)return showToast('', '目前该课程还没有问答');
                     }
                     else {
                         $scope.showFab = false;
-                        return showAlert('', '错误：没有选择课程');
+                        return showToast('', '错误：没有选择课程');
                     }
                 });
             };
@@ -55,10 +55,10 @@
                 $mdDialog.show(confirm).then(function () {
                     teacherQuizFactory.removeQuiz(quiz._id, function (error, res) {
                         if (error) {
-                            return showAlert("删除失败")
+                            return showToast("删除失败")
                         }
                         freshData();
-                        return showAlert("成功", "成功删除小测验：" + quiz.name);
+                        return showToast("成功", "成功删除小测验：" + quiz.name);
                     })
                 }, function () {
 
