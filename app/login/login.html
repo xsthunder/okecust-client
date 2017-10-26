@@ -20,8 +20,8 @@
       </md-input-container>
       </div>
       <div layout="row">
-        <md-button ng-click="login()" class="md-raised" type="submit" id="loginBtn" ng-show="!showQR">登陆</md-button>
-        <md-button class="md-raised md-warn" ng-click="switchQR()">二维码</md-button>
+        <md-button ng-click="login()" class="md-raised" type="submit" id="loginBtn" ng-show="!showQR">登录</md-button>
+        <md-button class="md-raised" ng-click="switchQR()">二维码</md-button>
       </div>
     </form>
     <img src="./src/qr.png" ng-show="showQR" alt="没有找到二维码"/>
@@ -30,7 +30,8 @@
 <md-content>
   <div layout="column" layout-align="space-between center">
     <div layout="row">
-      <a href="./src/help.html"><md-button ng-click="" class="md-raised" >说明文档</md-button></a>
+      <a href="./src/help.html"><md-button ng-click="" class="md-raised md-primary" >说明文档</md-button></a>
+      <md-button class="md-raised md-primary" ng-click="display_new()">更新信息</md-button>
     </div>
   </div>
 </md-content>

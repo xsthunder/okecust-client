@@ -5,9 +5,8 @@
     'use strict';
     angular.module('login')
         .controller('loginCtrl', ctrl);
-    function ctrl($scope, $mdDialog, $location, Account, $log, $state) {
+    function ctrl($scope, $mdDialog, $location, Account, $log, $state , $mdBottomSheet) {
         var showAlert = Account.showToast;
-
         $scope.username = '';
         $scope.password = '';
         $scope.login = function () {
@@ -41,6 +40,12 @@
         $scope.showQR = false;
         $scope.switchQR = function () {
             $scope.showQR = !$scope.showQR;
-        }
+        };
+        $scope.display_new = function () {
+            $mdBottomSheet.show({
+                templateUrl: 'whatsnew.html'
+            });
+        };
+        $scope.display_new();
     }
 })();
