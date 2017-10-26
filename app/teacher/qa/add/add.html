@@ -4,7 +4,7 @@
             <md-card ng-repeat="question in questions track by $index" ng-click="cardClick($index)" layout="row" title="选择此题">
                 <md-card-title>
                     <md-checkbox title="选择此题" aria-label="Checkbox" ng-model="selected[$index]"
-                                 ng-click="cardClick($index)">
+                                 ng-click="cardClick($index)" ng-disabled = "expire">
                     </md-checkbox>
                     <md-card-title-text>
                         <span class="md-headline">{{question.name}}</span>
@@ -30,42 +30,42 @@
             <!--<input type="datetime-local" name="date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2017-01-01T00:00:00" max="2030-12-31T00:00:00" required ng-model="date" id="user_date"/>-->
         <!--</md-input-container>-->
 
-        <md-input-container layout = "row">
-            <md-input-container class="md-block" flex-gt-sm>
+        <md-input-container layout = "row" >
+            <md-input-container class="md-block" flex-gt-sm >
                 <label>年份</label>
-                <md-select ng-model="startDate.year">
+                <md-select ng-model="startDate.year" ng-disabled = "expire">
                     <md-option ng-repeat="year in startYear" value="{{year}}">
                         {{year}}
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
+            <md-input-container class="md-block" flex-gt-sm >
                 <label>月份</label>
-                <md-select ng-model="startDate.month">
+                <md-select ng-model="startDate.month" ng-disabled = "expire">
                     <md-option ng-repeat="month in startMonth" value="{{month}}">
                         {{month}}
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
+            <md-input-container class="md-block" flex-gt-sm >
                 <label>日期</label>
-                <md-select ng-model="startDate.day">
+                <md-select ng-model="startDate.day" ng-disabled = "expire">
                     <md-option ng-repeat="day in startDay" value="{{day}}">
                         {{day}}
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
+            <md-input-container class="md-block" flex-gt-sm >
                 <label>小时</label>
-                <md-select ng-model="startDate.hour">
+                <md-select ng-model="startDate.hour" ng-disabled = "expire">
                     <md-option ng-repeat="hour in startHour" value="{{hour}}">
                         {{hour}}
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
+            <md-input-container class="md-block" flex-gt-sm >
                 <label>分钟</label>
-                <md-select ng-model="startDate.minute">
+                <md-select ng-model="startDate.minute" ng-disabled = "expire">
                     <md-option ng-repeat="minute in startMinute" value="{{minute}}">
                         {{minute}}
                     </md-option>

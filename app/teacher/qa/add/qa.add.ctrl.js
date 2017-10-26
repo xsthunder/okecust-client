@@ -39,7 +39,7 @@
             var questionSet = [];
             var quiz = teacherQuizFactory.getCurrentQuiz();
             var showAlert = teacherFactory.showToast;
-            showAlert('', '请注意，一旦开始时间过去，您将不能修改此问答的题目和开始时间');
+            showAlert('', '请注意，一旦开始时间过去，您将不能修改此问答的题目和开始时间，但可以修改持续时间和标题');
             TeacherCourse.getCorrespondingLibrary(teacherFactory.getCurrentCourse()._id, function (error, res) {
                 if (error) {
                     if (teacherFactory.getCurrentCourse()._id === 0)return showAlert("错误", "没有选择课程");
@@ -71,6 +71,10 @@
                         var qs = quiz === null ? null : quiz.questions;
                         if (quiz) {
                             if (quiz.time) {
+								if(quiz.time.from < +(new Date())){
+									$scope.expire = true;
+								}
+								else $scope.expire = false;
                                 //$scope.date = new Date(quiz.time.from);
                                 var date = new Date(quiz.time.from);
                                 $scope.startDate = {
@@ -124,7 +128,7 @@
             });
             //FIXME 去重复
             $scope.cardClick = function ($index) {
-                $scope.selected[$index] = !$scope.selected[$index];
+                if(!$scope.expire)$scope.selected[$index] = !$scope.selected[$index];
             };
             $scope.submit = function (title) {
                 var minute = $scope.minute;
@@ -152,6 +156,7 @@
                 for (i = 0; i < $scope.selected.length; i++) {
                     if ($scope.selected[i] === true) list.push($scope.questionSet[i]);
                 }
+				if(!list.length)return showAlert("","题目列表不能为空");
                 if (quiz !== null) teacherQuizFactory.updateQuiz({
                         '_id': quiz._id,
                         'name': title,
@@ -162,7 +167,8 @@
                         }
                     }
                     , function (error, res) {
-                        if (error) teacherFactory.showToast("", "测试已经开始，不能修改此问答");
+						console.log(error);
+                        if (error.status ) teacherFactory.showToast("", "修改问答失败");
                         else {
                             teacherFactory.showToast("hi", "修改成功");
                             $state.go('teacher.qa');
