@@ -102,8 +102,14 @@
                         return Account.showToast('', '文件上传成功');
                     }, function (res) {
                         $scope.uploading = false;
-
-                        return Account.showToast('', '文件上传失败');
+                        switch(res.status)
+                        {
+                            case 409:
+                                return Account.showToast('', '文件已存在');
+                                break;
+                            default:
+                                return Account.showToast('', '文件上传失败');
+                        }
 
                     });
                 // teacherFileSystemFactory.postFile(file, function (err, res) {
