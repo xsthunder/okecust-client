@@ -3,14 +3,16 @@
  */
 
 (function () {
+	
     angular.module('teacher.exam.multiply')
         .controller('multiplyCtrl', ctrl);
     function ctrl(multiplyFactory, $log, $scope, $mdDialog, TeacherCourse, teacherFactory, TeacherQuestionLibraryDetail) {
         $log.info('this is exam multiply ctrl');
 
         //FIXME 去重复
-        var contents=[];
-
+		$scope.contents = [];
+        $scope.type = true;
+		
         var showAlert = function (title, message) {
             // Appending dialog to document.body to cover sidenav in docs app
             // Modal dialogs should fully cover application
@@ -25,88 +27,144 @@
                     .ok('明白')
             );
         };
+		
+		//TODO remove repeated codes
+        function fixdata(data) {
+            var o = "", l = 0, w = 10240;
+            for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+            o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+            return o;
+        }
 
+        function checkName(s) {
+            return /[A-Za-z0-9]+$/gi.test(s);
+        }
 
-        var Instance = {
-            type: 1,
-            name: ""
-        };
-        $scope.splitName = "（\\d{1,2}）";
-        $scope.splitOption = "[A-Z].";
-        $scope.splitNameNum = 20;
-        $scope.splitOptionNum = 5;
-
-
-        $scope.split = function () {
-            var contents=[];
-            var splitNameNum = parseInt($scope.splitNameNum);
-            var splitOptionNum = parseInt($scope.splitOptionNum);
-            var text = $scope.text;
-            var splitName = new RegExp ($scope.splitName,'g');
-            var splitOption = new RegExp ($scope.splitOption,'g');
-            console.log("init split/");
-
-            if ($scope.splitName === "" || $scope.splitName === undefined ||
-                $scope.splitOption === "" || $scope.splitOption === undefined ||
-                $scope.text === "" || $scope.text === undefined ||
-                $scope.splitNameNum === "" || $scope.splitNameNum === undefined ||
-                $scope.splitOptionNum === "" || $scope.splitOptionNum === undefined
-            )  return showAlert("错误", "任意输入框不能为空");
-
-            if (splitNameNum < 1 || splitNameNum > 200)return showAlert("请输入有效最大题目数数字", "有效范围从1到200");
-            if (splitOptionNum < 1 || splitOptionNum > 50)return showAlert("请输入有效最大题目数数字", "有效范围从1到50");
-
-            console.log(text);
-            var questions = text.split(splitName, splitNameNum);
-            console.log(questions);
-
-
-            function trim(str){
-                return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
+        var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+        /* set up drag-and-drop event */
+        /* fixdata and rABS are defined in the drag and drop example */
+        function handleFile(e) {
+            var files = e.target.files;
+            var i, f;
+            if (1 > files.length) {
+                return showAlert('cuowu', '请选择一个文件');
             }
-
-
-            for (var i = 0; i < questions.length; i++) {
-                var question = questions[i].split(splitOption, splitOptionNum);
-                var content =  {
-                    type: 1,
-                    name: trim(question[0]),
-                    answers: [],
-                    extras: []
-                };
-                if(content.name==="")continue;
-                // console.log(i+"init content:");console.log(content);
-
-                for (var j = 1; j < question.length; j++) {
-                    console.log(i+"init content:");console.log(content);
-                    console.log(j+"init question");console.log(question);
-                    content.answers.push(false);
-                    content.extras.push(trim(question[j]));
+            f = files[0];
+            var reader = new FileReader();
+            var name = f.name;
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook;
+                if (rABS) {
+                    /* if binary string, read with type 'binary' */
+                    workbook = XLSX.read(data, {type: 'binary'});
+                } else {
+                    /* if array buffer, convert to base64 */
+                    var arr = fixdata(data);
+                    workbook = XLSX.read(btoa(arr), {type: 'base64'});
                 }
-                contents.push(content);
+                /* DO SOMETHING WITH workbook HERE */
+				if($scope.type)
+				{
+					handleWorkbook_choice(workbook);
+				}
+				else
+				{
+					handleWorkbook_blank(workbook);
+				}
+            };
+            reader.readAsBinaryString(f);
+        }
 
-            }
-            if(contents.length===0)return showAlert("错误","生成0题题目，请调整输入");
-            $scope.contents= contents;
-            console.log(contents);
-        };
+        /**
+         * Handle workbook.
+         */
+        function handleWorkbook_choice(workbook) {
+            var sheet_name_list = workbook.SheetNames;
+            sheet_name_list.forEach(function (y) {
+                /* iterate through sheets */
+                var worksheet = workbook.Sheets[y];
+				var table_data = XLSX.utils.sheet_to_json(worksheet, {header:1, raw:false});
+				var invalidID = 0;
+				for(i=1;i<table_data.length;i++)
+				{
+					var row=table_data[i];
+					if(row.length==6)
+					{
+						for(j=0;j<row.length;j++)
+						{
+							if(row[j]=="")
+							{
+								invalidID++;
+								continue;
+							}
+						}
+						var tmp_question = {
+							"type": 1,
+							"name": row[0],
+							"extras": [row[1], row[2], row[3], row[4]],
+							"answers": [false, false, false, false]
+							};
+						
+						if(row[5].charCodeAt(0)>=65 && row[5].charCodeAt(0)<=68)
+						{
+							tmp_question.answers[row[5].charCodeAt(0)-65]=true;
+							$scope.contents.push(tmp_question);
+						}
+						else
+						{
+							invalidID++;
+						}
+							
+					}
+					else
+					{
+						invalidID++;
+					}
+				}
+				if (invalidID) showAlert('错误', invalidID + ' 项因为格式不对而被忽略');
+            });
+			console.log($scope.contents);
+        }
 
-        $scope.questionInstance = Instance;
-        $scope.contents = contents;
-
-
-        $scope.btnRemoveContent = function (index) {
-            console.log("rmContent:"+index);
-            $scope.contents.splice(index,1);
-            console.log($scope.contents);
-        };
-        $scope.btnRemoveExtra=function (contentIndex,extraIndex) {
-            $scope.contents[contentIndex].answers.splice(extraIndex,1);
-            $scope.contents[contentIndex].extras.splice(extraIndex,1);
-            console.log(contentIndex+extraIndex);
-            console.log($scope.contents);
-        };
-
+		function handleWorkbook_blank(workbook) {
+            var sheet_name_list = workbook.SheetNames;
+            sheet_name_list.forEach(function (y) {
+                /* iterate through sheets */
+                var worksheet = workbook.Sheets[y];
+				var table_data = XLSX.utils.sheet_to_json(worksheet, {header:1, raw:false});
+				var invalidID = 0;
+				for(i=1;i<table_data.length;i++)
+				{
+					var row=table_data[i];
+					if(row.length==2)
+					{
+						for(j=0;j<row.length;j++)
+						{
+							if(row[j]=="")
+							{
+								invalidID++;
+								continue;
+							}
+						}
+						var tmp_question = {
+							"type": 2,
+							"name": row[0],
+							"answers": row[1]
+							};
+						$scope.contents.push(tmp_question);	
+					}
+					else
+					{
+						invalidID++;
+					}
+				}
+				if (invalidID) showAlert('错误', invalidID + ' 项因为格式不对而被忽略');
+            });
+        }
+		
+        document.getElementById('xlsx').addEventListener('change', handleFile, false);
+		
 
         var libId;
         $scope.submit = function () {
