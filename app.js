@@ -1,4 +1,5 @@
-angular
+(function(){
+    angular
     .module('myApp', [
         'ui.router',
         'ngMaterial',
@@ -7,8 +8,6 @@ angular
         'student',
         'teacher',
         'account.update'
-
-
     ])
     .config(function ($stateProvider) {
 
@@ -17,3 +16,5 @@ angular
         // Prevent OPTIONS http request.
         $sceDelegateProvider.resourceUrlWhitelist(['self', /^https?:\/\/127\\.0\\.0\\.1/]);
     }]);
+}
+)();

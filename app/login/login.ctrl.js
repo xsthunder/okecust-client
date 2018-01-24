@@ -46,6 +46,6 @@
                 templateUrl: 'whatsnew.html'
             });
         };
-        $scope.display_new();
+    //    $scope.display_new();
     }
 })();

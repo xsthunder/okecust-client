@@ -1,7 +1,11 @@
-<md-toolbar>
-  <h1 style="text-align: center">就叫课堂</h1>
+<md-toolbar style="background-image: url(./src/123.jpg)">
+  <h2 style="text-align: center">
+    <span style="color: GhostWhite ">就</span>
+    <span style="color: GhostWhite ">叫</span>
+    <span style="color: GhostWhite ">课</span>
+    <span style="color: GhostWhite ">堂</span>
+  </h2>
 </md-toolbar>
-<md-content>
   <div layout="column" layout-align="space-between center">
     <form>
       <div ng-show="!showQR">
@@ -18,21 +22,29 @@
           {{flag}}
         </div>
       </md-input-container>
-      </div>
-      <div layout="row">
-        <md-button ng-click="login()" class="md-raised" type="submit" id="loginBtn" ng-show="!showQR">登录</md-button>
-        <md-button class="md-raised" ng-click="switchQR()">二维码</md-button>
-      </div>
+      <md-input-container class="md-block">
+        <md-button ng-click="login()" class="md-raised" type="submit" id="loginBtn" ng-show="!showQR" style="width:100%">登录</md-button>
+      </md-input-container>
+    </div>
     </form>
     <img src="./src/qr.png" ng-show="showQR" alt="没有找到二维码"/>
   </div>
-</md-content>
-<md-content>
-  <div layout="column" layout-align="space-between center">
-    <div layout="row">
-      <a href="./src/help.html"><md-button ng-click="" class="md-raised md-primary" >说明文档</md-button></a>
-      <md-button class="md-raised md-primary" ng-click="display_new()">更新信息</md-button>
-    </div>
-  </div>
-</md-content>
+<div class="footer">
+  <span ng-click="switchQR()" style="cursor:pointer; color: blue">QR code</span> 
+  <a href="./src/help.html">Document</a>
+  <span  style="cursor:pointer; color: blue" ng-click="display_new()">Update logs</span>
+   <br>
+  Copyright © 2016-2018 就叫课堂 Team. All Rights Reserved. <br>
+  Developers: Yuan Yao, Jianjun zeng, Zhanbei Yu, Yifan Wang, Kui Xue <br>
+</div>
+<style>
+  .footer {
+    text-align: center;
+  position:fixed;
+  left:0;
+  bottom:0;
+  height:7em;
+  width:100%;
+}
+</style>
 
