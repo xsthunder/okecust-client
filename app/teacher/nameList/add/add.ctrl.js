@@ -7,6 +7,7 @@
     function ctrl($scope, $log,$state, $mdDialog, headerFactory, TeacherCourse, teacherFactory) {
         var showAlert = teacherFactory.showToast;
         $scope.students = [];
+        $scope.studentTerm = {id:'',name:''};
         $scope.nameList=[
             {
                 id:'' ,
@@ -110,14 +111,14 @@
         $log.info('nameListAddCtrl init');
         $scope.submit = function () {
             console.log("init sumit");
+            $scope.nameList.push($scope.studentTerm);
+            $log.info($scope.nameList,$scope.studentTerm);
             var nameListArr = $scope.nameList.filter(function (each) {
                 if(each.id==''||each.name=='')return false;
                 else return true;
             });
-            console.log(nameListArr);
             nameListArr=nameListArr.concat($scope.students);
             if(nameListArr.length==0)return showAlert('cuowu','没有读取到任何名单数据');
-            $log.info(nameListArr);
             TeacherCourse.addStudentsIntoCourse(teacherFactory.getCurrentCourse()._id, nameListArr, function (error, res) {
                 $log.info(res);
                 if (error) {

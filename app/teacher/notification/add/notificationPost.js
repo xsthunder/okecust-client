@@ -16,7 +16,7 @@
             var currentNotification = Account.getCurrentNotification();
             if (currentNotification) $scope.notification = currentNotification;
             $scope.submit = function (notification) {
-                if (!(notification.name && notification.description))return Account.showToast('', '任意栏不能为空');
+                if (!(notification.name))return Account.showToast('', '任意栏不能为空');
                 if (currentNotification) {
                     Account.updateNotification(getUrl(notification._id), notification, function (err, res) {
                         if (err)return Account.showToast('', '修改课程通知失败');

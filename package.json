@@ -28,8 +28,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server"
+    "start": "node index.js",
+    "test": "http-server"
   },
   "repository": {
     "type": "git",
